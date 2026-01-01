@@ -1,0 +1,612 @@
+[
+  {
+    "name": "Aerial Asphalt 01",
+    "material": "aerial_asphalt_01",
+    "type": "MeshPhysicalMaterial",
+    "map": "textures/diff/aerial_asphalt_01_diff_1k.jpg",
+    "metalness": 0.0,
+    "roughness": 0.9
+  ,"matscale":2},
+  {
+    "name": "Asphalt 01",
+    "material": "asphalt_01",
+    "type": "MeshPhysicalMaterial",
+    "map": "textures/diff/asphalt_01_diff_1k.jpg",
+    "metalness": 0.1,
+    "roughness": 0.85
+  ,"matscale":2},
+  {
+    "name": "Brushed Concrete 03",
+    "material": "brushed_concrete_03",
+    "type": "MeshPhysicalMaterial",
+    "map": "textures/diff/brushed_concrete_03_diff_1k.jpg",
+    "metalness": 0.0,
+    "roughness": 0.95
+  ,"matscale":2},
+  {
+    "name": "Brushed Concrete",
+    "material": "brushed_concrete",
+    "type": "MeshPhysicalMaterial",
+    "map": "textures/diff/brushed_concrete_diff_1k.jpg",
+    "metalness": 0.0,
+    "roughness": 0.92
+  ,"matscale":2},
+  {
+    "name": "Clean Pebbles",
+    "material": "clean_pebbles",
+    "type": "MeshPhysicalMaterial",
+    "map": "textures/diff/clean_pebbles_diff_1k.jpg",
+    "metalness": 0.0,
+    "roughness": 0.98
+  ,"matscale":2},
+  {
+    "name": "Concrete Floor 02",
+    "material": "concrete_floor_02",
+    "type": "MeshPhysicalMaterial",
+    "map": "textures/diff/concrete_floor_02_diff_1k.jpg",
+    "metalness": 0.0,
+    "roughness": 0.93
+  ,"matscale":2},
+  {
+    "name": "Concrete Floor 03",
+    "material": "concrete_floor_03",
+    "type": "MeshPhysicalMaterial",
+    "map": "textures/diff/concrete_floor_03_diff_1k.jpg",
+    "metalness": 0.0,
+    "roughness": 0.94
+  ,"matscale":2},
+  {
+    "name": "Concrete Floor Painted",
+    "material": "concrete_floor_painted",
+    "type": "MeshPhysicalMaterial",
+    "map": "textures/diff/concrete_floor_painted_diff_1k.jpg",
+    "metalness": 0.05,
+    "roughness": 0.8
+  ,"matscale":2},
+  {
+    "name": "Concrete Floor Worn 001",
+    "material": "concrete_floor_worn_001",
+    "type": "MeshPhysicalMaterial",
+    "map": "textures/diff/concrete_floor_worn_001_diff_1k.jpg",
+    "metalness": 0.0,
+    "roughness": 0.96
+  ,"matscale":2},
+  {
+    "name": "Concrete Moss",
+    "material": "concrete_moss",
+    "type": "MeshPhysicalMaterial",
+    "map": "textures/diff/concrete_moss_diff_1k.jpg",
+    "metalness": 0.0,
+    "roughness": 0.97
+  ,"matscale":2},
+  {
+    "name": "Concrete Pavement",
+    "material": "concrete_pavement",
+    "type": "MeshPhysicalMaterial",
+    "map": "textures/diff/concrete_pavement_diff_1k.jpg",
+    "metalness": 0.0,
+    "roughness": 0.92
+  ,"matscale":2},
+  {
+    "name": "Concrete Pavers",
+    "material": "concrete_pavers",
+    "type": "MeshPhysicalMaterial",
+    "map": "textures/diff/concrete_pavers_diff_1k.jpg",
+    "metalness": 0.0,
+    "roughness": 0.9
+  ,"matscale":2},
+  {
+    "name": "Concrete Rock Path",
+    "material": "concrete_rock_path",
+    "type": "MeshPhysicalMaterial",
+    "map": "textures/diff/concrete_rock_path_diff_1k.jpg",
+    "metalness": 0.0,
+    "roughness": 0.94
+  ,"matscale":2},
+  {
+    "name": "Cracked Concrete",
+    "material": "cracked_concrete",
+    "type": "MeshPhysicalMaterial",
+    "map": "textures/diff/cracked_concrete_diff_1k.jpg",
+    "metalness": 0.0,
+    "roughness": 0.95
+  ,"matscale":2},
+  {
+    "name": "Damaged Concrete Floor 02",
+    "material": "damaged_concrete_floor_02",
+    "type": "MeshPhysicalMaterial",
+    "map": "textures/diff/damaged_concrete_floor_02_diff_1k.jpg",
+    "metalness": 0.0,
+    "roughness": 0.96
+  ,"matscale":2},
+  {
+    "name": "Dark Wooden Planks",
+    "material": "dark_wooden_planks",
+    "type": "MeshPhysicalMaterial",
+    "map": "textures/diff/dark_wooden_planks_diff_1k.jpg",
+    "metalness": 0.0,
+    "roughness": 0.75
+  ,"matscale":2},
+  {
+    "name": "Diagonal Parquet",
+    "material": "diagonal_parquet",
+    "type": "MeshPhysicalMaterial",
+    "map": "textures/diff/diagonal_parquet_diff_1k.jpg",
+    "metalness": 0.0,
+    "roughness": 0.65
+  ,"matscale":2},
+  {
+    "name": "Dirt",
+    "material": "dirt",
+    "type": "MeshPhysicalMaterial",
+    "map": "textures/diff/dirt_diff_1k.jpg",
+    "metalness": 0.0,
+    "roughness": 1.0
+  ,"matscale":2},
+  {
+    "name": "Dry Riverbed Rock",
+    "material": "dry_riverbed_rock",
+    "type": "MeshPhysicalMaterial",
+    "map": "textures/diff/dry_riverbed_rock_diff_1k.jpg",
+    "metalness": 0.0,
+    "roughness": 0.98
+  ,"matscale":2},
+  {
+    "name": "Floor Pavement",
+    "material": "floor_pavement",
+    "type": "MeshPhysicalMaterial",
+    "map": "textures/diff/floor_pavement_diff_1k.jpg",
+    "metalness": 0.0,
+    "roughness": 0.9
+  ,"matscale":2},
+  {
+    "name": "Garage Floor",
+    "material": "garage_floor",
+    "type": "MeshPhysicalMaterial",
+    "map": "textures/diff/garage_floor_diff_1k.jpg",
+    "metalness": 0.0,
+    "roughness": 0.9
+  ,"matscale":2},
+  {
+    "name": "Granite Tile 02",
+    "material": "granite_tile_02",
+    "type": "MeshPhysicalMaterial",
+    "map": "textures/diff/granite_tile_02_diff_1k.jpg",
+    "metalness": 0.0,
+    "roughness": 0.7
+  ,"matscale":2},
+  {
+    "name": "Granite Tile",
+    "material": "granite_tile",
+    "type": "MeshPhysicalMaterial",
+    "map": "textures/diff/granite_tile_diff_1k.jpg",
+    "metalness": 0.0,
+    "roughness": 0.7
+  ,"matscale":2},
+  {
+    "name": "Granular Concrete",
+    "material": "granular_concrete",
+    "type": "MeshPhysicalMaterial",
+    "map": "textures/diff/granular_concrete_diff_1k.jpg",
+    "metalness": 0.0,
+    "roughness": 0.95
+  ,"matscale":2},
+  {
+    "name": "Gravel Concrete",
+    "material": "gravel_concrete",
+    "type": "MeshPhysicalMaterial",
+    "map": "textures/diff/gravel_concrete_diff_1k.jpg",
+    "metalness": 0.0,
+    "roughness": 0.96
+  ,"matscale":2},
+  {
+    "name": "Gravel Floor 02",
+    "material": "gravel_floor_02",
+    "type": "MeshPhysicalMaterial",
+    "map": "textures/diff/gravel_floor_02_diff_1k.jpg",
+    "metalness": 0.0,
+    "roughness": 0.97
+  ,"matscale":2},
+  {
+    "name": "Grey Cartago 01",
+    "material": "grey_cartago_01",
+    "type": "MeshPhysicalMaterial",
+    "map": "textures/diff/grey_cartago_01_diff_1k.jpg",
+    "metalness": 0.0,
+    "roughness": 0.85
+  ,"matscale":2},
+  {
+    "name": "Grey Cartago 03",
+    "material": "grey_cartago_03",
+    "type": "MeshPhysicalMaterial",
+    "map": "textures/diff/grey_cartago_03_diff_1k.jpg",
+    "metalness": 0.0,
+    "roughness": 0.85
+  ,"matscale":2},
+  {
+    "name": "Hangar Concrete Floor",
+    "material": "hangar_concrete_floor",
+    "type": "MeshPhysicalMaterial",
+    "map": "textures/diff/hangar_concrete_floor_diff_1k.jpg",
+    "metalness": 0.0,
+    "roughness": 0.93
+  ,"matscale":2},
+  {
+    "name": "Herringbone Brick 02",
+    "material": "herringbone_brick_02",
+    "type": "MeshPhysicalMaterial",
+    "map": "textures/diff/herringbone_brick_02_diff_1k.jpg",
+    "metalness": 0.0,
+    "roughness": 0.85
+  ,"matscale":2},
+  {
+    "name": "Herringbone Parquet",
+    "material": "herringbone_parquet",
+    "type": "MeshPhysicalMaterial",
+    "map": "textures/diff/herringbone_parquet_diff_1k.jpg",
+    "metalness": 0.0,
+    "roughness": 0.7
+  ,"matscale":2},
+  {
+    "name": "Herringbone Pavement",
+    "material": "herringbone_pavement",
+    "type": "MeshPhysicalMaterial",
+    "map": "textures/diff/herringbone_pavement_diff_1k.jpg",
+    "metalness": 0.0,
+    "roughness": 0.9
+  ,"matscale":2},
+  {
+    "name": "Hexagonal Concrete Paving",
+    "material": "hexagonal_concrete_paving",
+    "type": "MeshPhysicalMaterial",
+    "map": "textures/diff/hexagonal_concrete_paving_diff_1k.jpg",
+    "metalness": 0.0,
+    "roughness": 0.9
+  ,"matscale":2},
+  {
+    "name": "Interior Tiles",
+    "material": "interior_tiles",
+    "type": "MeshPhysicalMaterial",
+    "map": "textures/diff/interior_tiles_diff_1k.jpg",
+    "metalness": 0.0,
+    "roughness": 0.7
+  ,"matscale":2},
+  {
+    "name": "Laminate Floor 02",
+    "material": "laminate_floor_02",
+    "type": "MeshPhysicalMaterial",
+    "map": "textures/diff/laminate_floor_02_diff_1k.jpg",
+    "metalness": 0.0,
+    "roughness": 0.65
+  ,"matscale":2},
+  {
+    "name": "Laminate Floor 03",
+    "material": "laminate_floor_03",
+    "type": "MeshPhysicalMaterial",
+    "map": "textures/diff/laminate_floor_03_diff_1k.jpg",
+    "metalness": 0.0,
+    "roughness": 0.65
+  ,"matscale":2},
+  {
+    "name": "Laminate Floor",
+    "material": "laminate_floor",
+    "type": "MeshPhysicalMaterial",
+    "map": "textures/diff/laminate_floor_diff_1k.jpg",
+    "metalness": 0.0,
+    "roughness": 0.65
+  ,"matscale":2},
+  {
+    "name": "Leafy Grass",
+    "material": "leafy_grass",
+    "type": "MeshPhysicalMaterial",
+    "map": "textures/diff/leafy_grass_diff_1k.jpg",
+    "metalness": 0.0,
+    "roughness": 1.0
+  ,"matscale":2},
+  {
+    "name": "Long White Tiles",
+    "material": "long_white_tiles",
+    "type": "MeshPhysicalMaterial",
+    "map": "textures/diff/long_white_tiles_diff_1k.jpg",
+    "metalness": 0.0,
+    "roughness": 0.7
+  ,"matscale":2},
+  {
+    "name": "Marble 01",
+    "material": "marble_01",
+    "type": "MeshPhysicalMaterial",
+    "map": "textures/diff/marble_01_diff_1k.jpg",
+    "metalness": 0.0,
+    "roughness": 0.3,
+    "clearcoat": 0.8,
+    "clearcoatRoughness": 0.1
+  ,"matscale":2},
+  {
+    "name": "Metal Plate",
+    "material": "metal_plate",
+    "type": "MeshPhysicalMaterial",
+    "map": "textures/diff/metal_plate_diff_1k.jpg",
+    "metalness": 1.0,
+    "roughness": 0.3
+  ,"matscale":2},
+  {
+    "name": "Monastery Stone Floor",
+    "material": "monastery_stone_floor",
+    "type": "MeshPhysicalMaterial",
+    "map": "textures/diff/monastery_stone_floor_diff_1k.jpg",
+    "metalness": 0.0,
+    "roughness": 0.9
+  ,"matscale":2},
+  {
+    "name": "Oak Veneer 01",
+    "material": "oak_veneer_01",
+    "type": "MeshPhysicalMaterial",
+    "map": "textures/diff/oak_veneer_01_diff_1k.jpg",
+    "metalness": 0.0,
+    "roughness": 0.7
+  ,"matscale":2},
+  {
+    "name": "Painted Concrete",
+    "material": "painted_concrete",
+    "type": "MeshPhysicalMaterial",
+    "map": "textures/diff/painted_concrete_diff_1k.jpg",
+    "metalness": 0.05,
+    "roughness": 0.8
+  ,"matscale":2},
+  {
+    "name": "Patio Tiles",
+    "material": "patio_tiles",
+    "type": "MeshPhysicalMaterial",
+    "map": "textures/diff/patio_tiles_diff_1k.jpg",
+    "metalness": 0.0,
+    "roughness": 0.75
+  ,"matscale":2},
+  {
+    "name": "Patterned Brick Floor",
+    "material": "patterned_brick_floor",
+    "type": "MeshPhysicalMaterial",
+    "map": "textures/diff/patterned_brick_floor_diff_1k.jpg",
+    "metalness": 0.0,
+    "roughness": 0.85
+  ,"matscale":2},
+  {
+    "name": "Patterned Concrete Pavers 03",
+    "material": "patterned_concrete_pavers_03",
+    "type": "MeshPhysicalMaterial",
+    "map": "textures/diff/patterned_concrete_pavers_03_diff_1k.jpg",
+    "metalness": 0.0,
+    "roughness": 0.9
+  ,"matscale":2},
+  {
+    "name": "Patterned Paving 02",
+    "material": "patterned_paving_02",
+    "type": "MeshPhysicalMaterial",
+    "map": "textures/diff/patterned_paving_02_diff_1k.jpg",
+    "metalness": 0.0,
+    "roughness": 0.9
+  ,"matscale":2},
+  {
+    "name": "Patterned Slate Tiles",
+    "material": "patterned_slate_tiles",
+    "type": "MeshPhysicalMaterial",
+    "map": "textures/diff/patterned_slate_tiles_diff_1k.jpg",
+    "metalness": 0.0,
+    "roughness": 0.85
+  ,"matscale":2},
+  {
+    "name": "Pavement 02",
+    "material": "pavement_02",
+    "type": "MeshPhysicalMaterial",
+    "map": "textures/diff/pavement_02_diff_1k.jpg",
+    "metalness": 0.0,
+    "roughness": 0.92
+  ,"matscale":2},
+  {
+    "name": "Pavement 03",
+    "material": "pavement_03",
+    "type": "MeshPhysicalMaterial",
+    "map": "textures/diff/pavement_03_diff_1k.jpg",
+    "metalness": 0.0,
+    "roughness": 0.92
+  ,"matscale":2},
+  {
+    "name": "Pavement 06",
+    "material": "pavement_06",
+    "type": "MeshPhysicalMaterial",
+    "map": "textures/diff/pavement_06_diff_1k.jpg",
+    "metalness": 0.0,
+    "roughness": 0.9
+  ,"matscale":2},
+  {
+    "name": "Pebble Embedded Concrete",
+    "material": "pebble_embedded_concrete",
+    "type": "MeshPhysicalMaterial",
+    "map": "textures/diff/pebble_embedded_concrete_diff_1k.jpg",
+    "metalness": 0.0,
+    "roughness": 0.96
+  ,"matscale":2},
+  {
+    "name": "Plank Flooring 03",
+    "material": "plank_flooring_03",
+    "type": "MeshPhysicalMaterial",
+    "map": "textures/diff/plank_flooring_03_diff_1k.jpg",
+    "metalness": 0.0,
+    "roughness": 0.75
+  ,"matscale":2},
+  {
+    "name": "Plank Flooring",
+    "material": "plank_flooring",
+    "type": "MeshPhysicalMaterial",
+    "map": "textures/diff/plank_flooring_diff_1k.jpg",
+    "metalness": 0.0,
+    "roughness": 0.75
+  ,"matscale":2},
+  {
+    "name": "Rectangular Paving",
+    "material": "rectangular_paving",
+    "type": "MeshPhysicalMaterial",
+    "map": "textures/diff/rectangular_paving_diff_1k.jpg",
+    "metalness": 0.0,
+    "roughness": 0.9
+  ,"matscale":2},
+  {
+    "name": "Red Sandstone Pavement",
+    "material": "red_sandstone_pavement",
+    "type": "MeshPhysicalMaterial",
+    "map": "textures/diff/red_sandstone_pavement_diff_1k.jpg",
+    "metalness": 0.0,
+    "roughness": 0.9
+  ,"matscale":2},
+  {
+    "name": "Rock Tile Floor 02",
+    "material": "rock_tile_floor_02",
+    "type": "MeshPhysicalMaterial",
+    "map": "textures/diff/rock_tile_floor_02_diff_1k.jpg",
+    "metalness": 0.0,
+    "roughness": 0.92
+  ,"matscale":2},
+  {
+    "name": "Rock Tile Floor",
+    "material": "rock_tile_floor",
+    "type": "MeshPhysicalMaterial",
+    "map": "textures/diff/rock_tile_floor_diff_1k.jpg",
+    "metalness": 0.0,
+    "roughness": 0.92
+  ,"matscale":2},
+  {
+    "name": "Rock Wall 12",
+    "material": "rock_wall_12",
+    "type": "MeshPhysicalMaterial",
+    "map": "textures/diff/rock_wall_12_diff_1k.jpg",
+    "metalness": 0.0,
+    "roughness": 0.95
+  ,"matscale":2},
+  {
+    "name": "Rubberized Track",
+    "material": "rubberized_track",
+    "type": "MeshPhysicalMaterial",
+    "map": "textures/diff/rubberized_track_diff_1k.jpg",
+    "metalness": 0.0,
+    "roughness": 0.9
+  ,"matscale":2},
+  {
+    "name": "Rubble",
+    "material": "rubble",
+    "type": "MeshPhysicalMaterial",
+    "map": "textures/diff/rubble_diff_1k.jpg",
+    "metalness": 0.0,
+    "roughness": 1.0
+  ,"matscale":2},
+  {
+    "name": "Sand 03",
+    "material": "sand_03",
+    "type": "MeshPhysicalMaterial",
+    "map": "textures/diff/sand_03_diff_1k.jpg",
+    "metalness": 0.0,
+    "roughness": 1.0
+  ,"matscale":2},
+  {
+    "name": "Seaside Rock",
+    "material": "seaside_rock",
+    "type": "MeshPhysicalMaterial",
+    "map": "textures/diff/seaside_rock_diff_1k.jpg",
+    "metalness": 0.0,
+    "roughness": 0.97
+  ,"matscale":2},
+  {
+    "name": "Slab Tiles",
+    "material": "slab_tiles",
+    "type": "MeshPhysicalMaterial",
+    "map": "textures/diff/slab_tiles_diff_1k.jpg",
+    "metalness": 0.0,
+    "roughness": 0.8
+  ,"matscale":2},
+  {
+    "name": "Slate Floor 02",
+    "material": "slate_floor_02",
+    "type": "MeshPhysicalMaterial",
+    "map": "textures/diff/slate_floor_02_diff_1k.jpg",
+    "metalness": 0.0,
+    "roughness": 0.85
+  ,"matscale":2},
+  {
+    "name": "Slate Floor 03",
+    "material": "slate_floor_03",
+    "type": "MeshPhysicalMaterial",
+    "map": "textures/diff/slate_floor_03_diff_1k.jpg",
+    "metalness": 0.0,
+    "roughness": 0.85
+  ,"matscale":2},
+  {
+    "name": "Slate Floor",
+    "material": "slate_floor",
+    "type": "MeshPhysicalMaterial",
+    "map": "textures/diff/slate_floor_diff_1k.jpg",
+    "metalness": 0.0,
+    "roughness": 0.85
+  ,"matscale":2},
+  {
+    "name": "Smooth Concrete Floor",
+    "material": "smooth_concrete_floor",
+    "type": "MeshPhysicalMaterial",
+    "map": "textures/diff/smooth_concrete_floor_diff_1k.jpg",
+    "metalness": 0.0,
+    "roughness": 0.9
+  ,"matscale":2},
+  {
+    "name": "Square Cobblestone",
+    "material": "square_cobblestone",
+    "type": "MeshPhysicalMaterial",
+    "map": "textures/diff/square_cobblestone_diff_1k.jpg",
+    "metalness": 0.0,
+    "roughness": 0.95
+  ,"matscale":2},
+  {
+    "name": "Square Tiles 03",
+    "material": "square_tiles_03",
+    "type": "MeshPhysicalMaterial",
+    "map": "textures/diff/square_tiles_03_diff_1k.jpg",
+    "metalness": 0.0,
+    "roughness": 0.8
+  ,"matscale":2},
+  {
+    "name": "Stone Embedded Tiles",
+    "material": "stone_embedded_tiles",
+    "type": "MeshPhysicalMaterial",
+    "map": "textures/diff/stone_embedded_tiles_diff_1k.jpg",
+    "metalness": 0.0,
+    "roughness": 0.9
+  ,"matscale":2},
+  {
+    "name": "Stone Tiles",
+    "material": "stone_tiles",
+    "type": "MeshPhysicalMaterial",
+    "map": "textures/diff/stone_tiles_diff_1k.jpg",
+    "metalness": 0.0,
+    "roughness": 0.9
+  ,"matscale":2},
+  {
+    "name": "Wood Floor",
+    "material": "wood_floor",
+    "type": "MeshPhysicalMaterial",
+    "map": "textures/diff/wood_floor_diff_1k.jpg",
+    "metalness": 0.0,
+    "roughness": 0.75
+  ,"matscale":2},
+  {
+    "name": "Wood Planks Grey",
+    "material": "wood_planks_grey",
+    "type": "MeshPhysicalMaterial",
+    "map": "textures/diff/wood_planks_grey_diff_1k.jpg",
+    "metalness": 0.0,
+    "roughness": 0.8
+  ,"matscale":2},
+  {
+    "name": "Worn Brick Floor",
+    "material": "worn_brick_floor",
+    "type": "MeshPhysicalMaterial",
+    "map": "textures/diff/worn_brick_floor_diff_1k.jpg",
+    "metalness": 0.0,
+    "roughness": 0.9
+  }
+]

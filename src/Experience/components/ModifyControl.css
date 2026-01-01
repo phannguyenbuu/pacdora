@@ -1,0 +1,35 @@
+/* BoxGenerator.css */
+.MuiPaper-root {
+  background: #ffffff;
+}
+
+.MuiTabs-root {
+  min-height: auto;
+}
+
+.MuiTab-root {
+  min-height: 36px;
+  font-size: 0.75rem;
+  text-transform: none;
+  font-weight: 500;
+}
+
+.Mui-selected {
+  color: #6366f1 !important;
+}
+
+.MuiTabs-indicator {
+  background-color: #6366f1;
+  height: 2px;
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+  .MuiPaper-root:first-child {
+    width: 280px;
+  }
+  
+  .MuiPaper-root:last-child {
+    width: 240px;
+  }
+}

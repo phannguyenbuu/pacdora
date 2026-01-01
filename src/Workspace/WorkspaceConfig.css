@@ -1,0 +1,190 @@
+/* CarConfigurator.css */
+.configurator-container {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  background: #ddd;
+  overflow: hidden;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.car-3d-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.panel {
+  position: absolute;
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+  color: white;
+  z-index: 10;
+  transition: all 0.3s ease;
+  min-width: 160px;
+}
+
+.panel:hover {
+  border-color: rgba(255, 255, 255, 0.3);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6);
+  transform: translateY(-2px);
+}
+
+.panel-content {
+  font-size: 14px;
+}
+
+.panel h3 {
+  margin: 0 0 12px 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: #ff4d4d;
+}
+
+.panel p {
+  margin: 4px 0;
+  opacity: 0.9;
+}
+
+.color-picker {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.color-option {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.color-option:hover {
+  transform: scale(1.1);
+  border-color: white;
+}
+
+.color-option.red { background: #ff4d4d; }
+.color-option.black { background: #1a1a1a; }
+.color-option.blue { background: #4d79ff; }
+
+.price {
+  font-size: 24px;
+  font-weight: 700;
+  color: #ffd700;
+  margin-top: 8px;
+}
+
+select {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  color: white;
+  padding: 8px 12px;
+  font-size: 14px;
+}
+
+select:focus {
+  outline: none;
+  border-color: #ff4d4d;
+  box-shadow: 0 0 0 2px rgba(255, 77, 77, 0.2);
+}
+
+button {
+  width: 100%;
+  padding: 12px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.save-btn {
+  background: linear-gradient(135deg, #ff4d4d, #cc0000);
+  color: white;
+}
+
+.save-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(255, 77, 77, 0.4);
+}
+
+.share-btn {
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.share-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* Panel Positions - Matching the screenshot layout */
+.panel-top-left {
+  top: 40px;
+  left: 40px;
+  width: 220px;
+  height: 140px;
+}
+
+.panel-left-bottom {
+  bottom: 40px;
+  left: 40px;
+  width: 220px;
+  height: 180px;
+}
+
+.panel-middle-top {
+  top: 40px;
+  left: 50%;
+  transform: translateX(-70%);
+  width: 200px;
+  height: 120px;
+}
+
+.panel-middle-bottom {
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 220px;
+  height: 160px;
+}
+
+.panel-top-right {
+  top: 40px;
+  right: 40px;
+  width: 180px;
+  height: 120px;
+}
+
+.panel-bottom-right {
+  bottom: 40px;
+  right: 40px;
+  width: 180px;
+  height: 140px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1200px) {
+  .panel {
+    min-width: 140px;
+  }
+  
+  .panel-top-left,
+  .panel-left-bottom {
+    width: 180px;
+  }
+}
