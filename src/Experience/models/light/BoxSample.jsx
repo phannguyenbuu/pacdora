@@ -2,81 +2,11 @@ import React, { useRef } from "react";
 import { useGLTF } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import * as THREE from "three";
-import { ConstructionOutlined } from "@mui/icons-material";
+import { useUploadTextureStore } from "../../../stores/uploadTextureStore";
 
 const isChild = (child, s) => {
   return child.name === s || child.name.startsWith(s + "_");
 };
-
-const createNestedFoldGroup = (sceneClone, config, progress, reversed = false) => {
-  const prefix = config.prefix;
-  
-  // 🔥 BƯỚC 1: Tạo sub-groups với isChild() FULL VARIANTS
-  const gr1 = createFoldGroup(sceneClone, { prefix, pivot: prefix + '2' }, progress * 0.6);  // [D1*,D2*]
-  const gr3 = createFoldGroup(sceneClone, { prefix, pivot: prefix + '6' }, progress * 0.6);  // [D7*,D6*]
-  
-  // 🔥 BƯỚC 2: Tìm D3*, D5*, D4* với isChild()
-  const meshes = { D3: [], D5: [], D4: [] };
-  let pivotWorldPos = null;
-  
-  sceneClone.traverse((child) => {
-    if (child.isMesh) {
-      if (isChild(child, prefix + '3')) {  // D3, D3_1, D3_2...
-        meshes.D3.push(child);
-      }
-      if (isChild(child, prefix + '5')) {  // D5, D5_1, D5_2...
-        meshes.D5.push(child);
-      }
-      if (isChild(child, prefix + '4')) {  // D4, D4_1, D4_2...
-        meshes.D4.push(child);
-        if (!pivotWorldPos) pivotWorldPos = child.getWorldPosition(new THREE.Vector3()).clone();
-      }
-    }
-  });
-  
-  // 🔥 BƯỚC 3: Nested groups [gr1,D3*] & [gr3,D5*]
-  const gr2 = new THREE.Group();  // [gr1,D3*]
-  const gr4 = new THREE.Group();  // [gr3,D5*]
-  
-  // D3* → gr2
-  meshes.D3.forEach(d3Mesh => {
-    if (pivotWorldPos) {
-      d3Mesh.position.copy(d3Mesh.getWorldPosition(new THREE.Vector3()).sub(pivotWorldPos));
-      d3Mesh.rotation.z = -progress * Math.PI / 3;
-      gr2.add(d3Mesh);
-    }
-  });
-  gr2.add(gr1);
-  gr2.rotation.z = -progress * Math.PI / 4;
-  
-  // D5* → gr4  
-  meshes.D5.forEach(d5Mesh => {
-    if (pivotWorldPos) {
-      d5Mesh.position.copy(d5Mesh.getWorldPosition(new THREE.Vector3()).sub(pivotWorldPos));
-      d5Mesh.rotation.z = progress * Math.PI / 3;
-      gr4.add(d5Mesh);
-    }
-  });
-  gr4.add(gr3);
-  gr4.rotation.z = progress * Math.PI / 4;
-  
-  // 🔥 BƯỚC 4: FINAL [gr2,D4*,gr4]
-  const finalGroup = new THREE.Group();
-  finalGroup.position.copy(pivotWorldPos);
-  
-  // D4* FIXED PIVOT
-  meshes.D4.forEach(d4Mesh => {
-    d4Mesh.position.set(0, 0, 0);
-    finalGroup.add(d4Mesh);
-  });
-  
-  finalGroup.add(gr2);
-  finalGroup.add(gr4);
-  // finalGroup.rotation.y = reversed ? -progress * Math.PI / 2 : progress * Math.PI / 2;
-  
-  return finalGroup;
-};
-
 
 
 
@@ -186,14 +116,6 @@ const collectMeshes = (scene, nameList) => {
 
 
 
-const createPivotBox = (sizeX, sizeY, sizeZ, color) => {
-  const geometry = new THREE.BoxGeometry(sizeX, sizeY, sizeZ);
-  const material = new THREE.MeshBasicMaterial({ color, wireframe: true });
-  const box = new THREE.Mesh(geometry, material);
-  box.layers.set(0); // Render layer
-  return box;
-};
-
 const createThreeStageFoldGroup = (sceneClone, prefixList, progress, reversed = false) => {
   const meshesList = prefixList.map(prefix =>
     collectMeshes(sceneClone, [prefix + '1', prefix + '2', prefix + '3'])
@@ -279,13 +201,40 @@ export default function Model({ progress = 0, scale = 0.05, ...props }) {
   const gltf = useGLTF("/box-sample/150010.glb");
   const group = useRef();
 
-
+  const { getCurrentTexture } = useUploadTextureStore();
 
 useFrame(() => {
   if (!group.current || !gltf.scene) return;
 
+  // Thêm vào useFrame, sau apply texture
+
+
   group.current.clear();
   const sceneClone = gltf.scene.clone(true);
+
+
+  const texture = getCurrentTexture();
+  
+    if (texture) {
+      sceneClone.traverse((child) => {
+        if (child.isMesh) {
+          const nameOK = child.name.includes('_1');
+        
+          if (nameOK) {
+            child.material = child.material.clone();
+            child.material.map = texture;
+            child.material.needsUpdate = true;
+            child.material.envMapIntensity=1.5;
+            // console.log(`🎨 Applied to: "${child.name}"`);
+          }
+        }
+      });
+    }
+
+    // if (texture) {
+    //   console.log('🎨 Applied texture to', sceneClone.children.length, 'meshes');
+    // }
+
   
   // 🔥 8-STAGE ULTRA-DETAILED PROGRESS
   const stage1 = Math.min(progress / 0.125, 1);  // 0-12.5%: sideF

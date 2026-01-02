@@ -1,0 +1,29 @@
+.panel-upload {
+  grid-area: upload;
+  background: linear-gradient(135deg, #ffffff 0%, #acacac 100%);
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.upload-btn {
+  width: 100%;
+  padding: 15px 20px; /* Lớn hơn */
+  background: #ccc;
+  color:#333;
+  border: none;
+  border-radius: 12px;
+  font-size: 14px; /* Lớn hơn */
+  
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(100, 100, 100, 0.4);
+}
+
+.upload-hint {
+  color: #6b7280;
+  font-size: 14px;
+  margin-top: 15px;
+  text-align: center;
+  font-style: italic;
+}
+

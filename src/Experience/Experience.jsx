@@ -14,9 +14,12 @@ import { useExperienceStore } from "../stores/experienceStore";
 import { useThree } from "@react-three/fiber";
 
 import { Button, notification } from 'antd';
+import WorkspaceConfig from "./components/WorkspaceConfig";
 import ReactDOM from 'react-dom';
 
 import Slider from '@mui/material/Slider';
+
+import KonvaTextureEditor from "./components/KonvaTextureEditor";
 
 const isMB = () => {
   return window.innerWidth < 768;
@@ -201,10 +204,23 @@ const Experience = () => {
         <Environment 
           preset="studio"
           background={false}
-          environmentIntensity={0.25}  // Giảm sáng (0-2)
+          environmentIntensity={0.1}  // Giảm sáng (0-2)
           blur={0.5}                  // Làm mờ nhẹ
         />
+
+
+        <directionalLight 
+  position={[1, 1, 0.5]}      // Góc sáng 45°
+  intensity={1.5}             // Sáng mạnh
+  castShadow
+  shadow-mapSize-width={2048}
+  shadow-mapSize-height={2048}
+/>
         
+        <directionalLight 
+  position={[-1, -1, -0.5]}   // Đèn phụ đối diện
+  intensity={0.8}
+/>
         
         <OrthographicCamera
           ref={cameraRef}
@@ -225,11 +241,12 @@ const Experience = () => {
         />
 
       </Canvas>
-{/* 
-      <div style={{ position: 'fixed', left: 200,  bottom: 50,
+
+      <div style={{ position: 'fixed', left: 20,  top: 50,
            color: 'black', zIndex:99 }}>
-          <ModifyControls setCapture={setCapture}/>
-      </div> */}
+          <KonvaTextureEditor svgPath="/box-sample/150010.svg"/>
+          <WorkspaceConfig/>
+      </div>
       <Slider 
       value={foldProgress}
       onChange={(_, v) => setFoldProgress(v)}

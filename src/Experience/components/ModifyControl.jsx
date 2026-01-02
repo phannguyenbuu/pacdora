@@ -23,6 +23,10 @@ import {
   ZoomOut as ZoomOutIcon,
   Print as PrintIcon
 } from '@mui/icons-material';
+
+
+import WorkspaceConfig from './WorkspaceConfig';
+
 import './ModifyControl.css';
 
 

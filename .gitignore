@@ -65,9 +65,6 @@ jspm_packages/
 # Storybook
 .stories/
 
-# Three.js / R3F builds
-/public/models/*.gltf
-/public/box-sample/
 
 # IDE
 .vscode/
