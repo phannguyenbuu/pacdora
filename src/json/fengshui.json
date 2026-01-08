@@ -1,0 +1,22 @@
+{
+  "Kim": {
+    "valid": "Tây (bản mệnh Kim, màu trắng, xám, bạc, chất liệu kim loại), Tây Bắc (bản mệnh Kim, màu trắng, xám, bạc, chất liệu kim loại), Tây Nam (hành Thổ tương sinh, màu vàng đất, nâu), Đông Bắc (hành Thổ tương sinh, màu vàng đất, nâu)",
+    "invalid": "Nam (hành Hỏa khắc Kim, màu đỏ, cam, chất liệu lửa, gỗ)"
+  },
+  "Mộc": {
+    "valid": "Đông (bản mệnh Mộc, màu xanh lá cây, chất liệu gỗ), Đông Nam (bản mệnh Mộc, màu xanh lá cây, chất liệu gỗ), Bắc (hành Thủy tương sinh, màu xanh nước biển, đen, chất liệu thủy tinh)",
+    "invalid": "Tây (hành Kim khắc Mộc, màu trắng, xám, kim loại)"
+  },
+  "Thủy": {
+    "valid": "Bắc (bản mệnh Thủy, màu xanh nước biển, đen, chất liệu thủy tinh), Đông Nam (hành Mộc tương sinh, màu xanh lá cây, chất liệu gỗ), Tây Bắc (hành Kim tương sinh, màu trắng, bạc, kim loại)",
+    "invalid": "Nam (hành Hỏa khắc Thủy, màu đỏ, cam, lửa)"
+  },
+  "Hỏa": {
+    "valid": "Nam (bản mệnh Hỏa, màu đỏ, cam, tía, chất liệu lửa), Đông (hành Mộc tương sinh, màu xanh lá cây, gỗ)",
+    "invalid": "Tây Bắc, Tây (hành Kim khắc Hỏa, màu trắng, kim loại)"
+  },
+  "Thổ": {
+    "valid": "Tây Nam (bản mệnh Thổ, màu vàng đất, nâu, chất liệu đất), Đông Bắc (bản mệnh Thổ, màu vàng đất, nâu), Nam (hành Hỏa tương sinh, màu đỏ, lửa)",
+    "invalid": "Đông, Đông Nam (hành Mộc khắc Thổ, màu xanh lá, gỗ)"
+  }
+}

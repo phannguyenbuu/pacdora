@@ -1,0 +1,99 @@
+[
+  {
+    "activeRoom": "bed_1",
+    "path": "Bed_11.json",
+    "label": "BED 1",
+    "shortLabel": "bed_1",
+    "icon": "/images/sofa.svg",
+    "gradient": "radial-gradient(circle at 30% 30%, #a8edea 0%, #fed6e3 50%, #ff8a80 100%)"
+  },
+  {
+    "activeRoom": "bed_2", 
+    "path": "Bed_36.json",
+    "label": "BED 2",
+    "shortLabel": "bed_2",
+    "icon": "/images/bed.svg",
+    "gradient": "radial-gradient(circle at 30% 30%, #ff9a9e 0%, #fecfef 50%, #fecfef 100%)"
+  },
+  {
+    "activeRoom": "bed_3",
+    "path": "Bed_37.json",
+    "label": "BED 3",
+    "shortLabel": "bed_3",
+    "icon": "/images/sofa.svg",
+    "gradient": "radial-gradient(circle at 30% 30%, #a8edea 0%, #fed6e3 50%, #ff8a80 100%)"
+  },
+  {
+    "activeRoom": "cabinet", 
+    "path": "Cabinet_39.json",
+    "label": "cabinet",
+    "shortLabel": "cabinet",
+    "icon": "/images/bed.svg",
+    "gradient": "radial-gradient(circle at 30% 30%, #ff9a9e 0%, #fecfef 50%, #fecfef 100%)"
+  },
+   {
+    "activeRoom": "chair_sofa_1",
+    "path": "Chair_26.json",
+    "label": "sofa 1",
+    "shortLabel": "chair_sofa_1",
+    "icon": "/images/sofa.svg",
+    "gradient": "radial-gradient(circle at 30% 30%, #a8edea 0%, #fed6e3 50%, #ff8a80 100%)"
+  },
+  {
+    "activeRoom": "chair_sofa_2",
+    "path": "Chair_29.json",
+    "label": "sofa 2",
+    "shortLabel": "chair_sofa_2",
+    "icon": "/images/sofa.svg",
+    "gradient": "radial-gradient(circle at 30% 30%, #a8edea 0%, #fed6e3 50%, #ff8a80 100%)"
+  },
+  {
+    "activeRoom": "lamp", 
+    "path": "Lamp_38.json",
+    "label": "lamp",
+    "shortLabel": "lamp",
+    "icon": "/images/bed.svg",
+    "gradient": "radial-gradient(circle at 30% 30%, #ff9a9e 0%, #fecfef 50%, #fecfef 100%)"
+  },
+  {
+    "activeRoom": "table_1",
+    "path": "Table_09.json",
+    "label": "table 1",
+    "shortLabel": "table_1",
+    "icon": "/images/sofa.svg",
+    "gradient": "radial-gradient(circle at 30% 30%, #a8edea 0%, #fed6e3 50%, #ff8a80 100%)"
+  },
+  {
+    "activeRoom": "table_2", 
+    "path": "Table_16.json",
+    "label": "table 2",
+    "shortLabel": "table_2",
+    "icon": "/images/bed.svg",
+    "gradient": "radial-gradient(circle at 30% 30%, #ff9a9e 0%, #fecfef 50%, #fecfef 100%)"
+  },
+   {
+    "activeRoom": "table_3",
+    "path": "Table_21.json",
+    "label": "table 3",
+    "shortLabel": "table_3",
+    "icon": "/images/sofa.svg",
+    "gradient": "radial-gradient(circle at 30% 30%, #a8edea 0%, #fed6e3 50%, #ff8a80 100%)"
+  },
+  {
+    "activeRoom": "table_4", 
+    "path": "Table_25.json",
+    "label": "TABLE 4",
+    "shortLabel": "table_4",
+    "icon": "/images/bed.svg",
+    "gradient": "radial-gradient(circle at 30% 30%, #ff9a9e 0%, #fecfef 50%, #fecfef 100%)"
+  },
+  
+  {
+    "activeRoom": "media", 
+    "path": "TV_35.json",
+    "label": "media",
+    "shortLabel": "media",
+    "icon": "/images/bed.svg",
+    "gradient": "radial-gradient(circle at 30% 30%, #ff9a9e 0%, #fecfef 50%, #fecfef 100%)"
+  }
+]

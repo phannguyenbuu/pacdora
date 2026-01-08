@@ -1,0 +1,82 @@
+{
+  "resizeRules": {
+    "B1": {
+      "type": "full",
+      "direction": "left",
+      "deltaMultiplier": 0.5
+    },
+    "B3": {
+      "type": "full", 
+      "direction": "right",
+      "deltaMultiplier": 0.5
+    },
+    
+    "A1": {
+      "type": "full",
+      "direction": "left", 
+      "deltaMultiplier": 0.5
+    },
+    "A3": {
+      "type": "full",
+      "direction": "right",
+      "deltaMultiplier": 0.5
+    },
+    
+    "C1": {
+      "type": "full",
+      "direction": "left", 
+      "deltaMultiplier": 0.5
+    },
+    "C3": {
+      "type": "full",
+      "direction": "right",
+      "deltaMultiplier": 0.5
+    },
+    
+    "D1": {
+      "type": "full",
+      "positiveDelta": 0.5,
+      "negativeDelta": 0.5
+    },
+    
+    "D2": {
+      "type": "full",
+      "positiveDelta": 0.5,
+      "negativeDelta": -0.5
+    },
+    
+    "D3": {
+      "type": "full",
+      "positiveDelta": 0.5,
+      "negativeDelta": -0.5
+    },
+    
+    "E1": {
+      "type": "full",
+      "positiveDelta": 0.5,
+      "negativeDelta": -0.5
+    },
+    
+     "E2": {
+      "type": "full",
+      "positiveDelta": 0.5,
+      "negativeDelta": -0.5
+    },
+    "E3": {
+      "type": "full",
+      "positiveDelta": 0.5,
+      "negativeDelta": -0.5
+    },
+    
+    "F1": {
+      "type": "full",
+      "direction": "left",
+      "deltaMultiplier": -0.5
+    },
+    "F3": {
+      "type": "full",
+      "direction": "right",
+      "deltaMultiplier": 0.5
+    }
+  }
+}

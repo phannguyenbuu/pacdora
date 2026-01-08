@@ -15,18 +15,18 @@ export default function Model({ ...props }) {
   const lightRefs = useRef([]);
   const targetRefs = useRef([]);
   const {wallType01, wallType02, wallMtl01, wallMtl02, floorMtl,
-    roomWidth, roomLength, roomHeight, roomDoor, setRoomDoor} = usePointer();
+    boxWidth, boxLength, boxHeight, boxDepth, setboxDepth} = usePointer();
     const [doorInfor, setRoomInfor] = useState({x:0,z:0,r:0});
   const subw = 1.28;
 
   useEffect(()=>{
-      const w = roomWidth - 0.3 * roomWidth/5;
-      const l = roomLength - 0.3 * roomLength/5;
+      const w = boxWidth - 0.3 * boxWidth/5;
+      const l = boxLength - 0.3 * boxLength/5;
       // Chu vi hình chữ nhật
       const perimeter = 2 * (w + l);
   
-      // Khoảng cách theo chu vi ứng với roomDoor
-      const dist = roomDoor * perimeter;
+      // Khoảng cách theo chu vi ứng với boxDepth
+      const dist = boxDepth * perimeter;
   
       // Tính tọa độ dọc theo chu vi hình chữ nhật
       let x = 0, z = 0, rotation = 0;
@@ -54,7 +54,7 @@ export default function Model({ ...props }) {
       }
   
       setRoomInfor({x:z - l/2,z:x - w/2,r:rotation / 180 * Math.PI + Math.PI/2});
-    },[roomWidth,roomLength, roomDoor]);
+    },[boxWidth,boxLength, boxDepth]);
   
   useEffect(() => {
     if (lightRefs.current.length && targetRefs.current.length) {
@@ -67,8 +67,8 @@ export default function Model({ ...props }) {
     }
   }, []);
 
-  let positionsY = [-roomWidth / 3, 0, roomWidth / 3];
-  let positionsX = [-roomLength / 3, 0, roomLength / 3];
+  let positionsY = [-boxWidth / 3, 0, boxWidth / 3];
+  let positionsX = [-boxLength / 3, 0, boxLength / 3];
 
 
   useEffect(() => {
@@ -78,55 +78,55 @@ export default function Model({ ...props }) {
         light.target.updateMatrixWorld();
       }
     });
-  }, [roomWidth, roomLength]);
+  }, [boxWidth, boxLength]);
 
 
   const wallObjects1 = useMemo(() => (
     <group>
       <Curtain 
         key="curtain-01"  uniqueKey="curtain-01"
-        position={[-roomLength / 2, 0, 0]} 
+        position={[-boxLength / 2, 0, 0]} 
         rotation={[0, Math.PI / 2, 0]} 
-        scale={[roomWidth / 5, 1, 1]} 
+        scale={[boxWidth / 5, 1, 1]} 
         visible={wallType01?.type === "glasswall"}
         
       />
-      <Wall uvs = {[roomWidth,1,roomHeight]}
+      <Wall uvs = {[boxWidth,1,boxHeight]}
         key="wall-01" 
         width={5} height={3.6} length={0.2}
-        position={[-roomLength / 2, 0, 0]} 
+        position={[-boxLength / 2, 0, 0]} 
         rotation={[0, Math.PI / 2, 0]} 
-        scale={[roomWidth / 5, 1, 1]} 
+        scale={[boxWidth / 5, 1, 1]} 
         visible={wallType01?.type !== "glasswall"}
         mtl = {wallMtl01}
       />
     </group>
-  ), [wallMtl01, wallType01?.type, roomWidth, roomHeight, roomLength]);
+  ), [wallMtl01, wallType01?.type, boxWidth, boxHeight, boxLength]);
 
   const wallObjects2 = useMemo(() => (
     <group>
       <Curtain 
         key="curtain-02"  uniqueKey="curtain-02"
-        position={[0, 0, -roomWidth / 2]} 
-        scale={[roomLength/ 5,1,1]} 
+        position={[0, 0, -boxWidth / 2]} 
+        scale={[boxLength/ 5,1,1]} 
         visible={wallType02?.type === "glasswall"}
       />
-      <Wall uvs = {[roomWidth,1,roomHeight]}
+      <Wall uvs = {[boxWidth,1,boxHeight]}
         key="wall-02" 
         width={5} height={3.6} length={0.2}
-        position={[0, 0, -roomWidth / 2]} 
-        scale={[roomLength/ 5,1,1]} 
+        position={[0, 0, -boxWidth / 2]} 
+        scale={[boxLength/ 5,1,1]} 
         visible={wallType02?.type !== "glasswall"}
         mtl = {wallMtl02}
       />
     </group>
-  ), [wallMtl02, wallType02?.type, roomWidth, roomLength, roomHeight]);  // ✅ Dependencies cụ thể
+  ), [wallMtl02, wallType02?.type, boxWidth, boxLength, boxHeight]);  // ✅ Dependencies cụ thể
 
   const floorObject = useMemo(() => (
-    <Wall uvs = {[roomHeight,roomWidth,roomLength]}
-            width={roomLength} height={0.2} length={roomWidth}
+    <Wall uvs = {[boxHeight,boxWidth,boxLength]}
+            width={boxLength} height={0.2} length={boxWidth}
           position={[0, -0.2, 0]} mtl = {floorMtl}/>
-  ),[floorMtl, roomWidth, roomLength, roomHeight]);
+  ),[floorMtl, boxWidth, boxLength, boxHeight]);
 
   return (
     <group {...props}>

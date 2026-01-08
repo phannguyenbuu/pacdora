@@ -39,17 +39,32 @@ const KonvaTextureEditor = ({ svgPath = null }) => {
     // window.dispatchEvent(new CustomEvent('forceTextureUpdate'));
   }, [updateTextureFromCanvas]);
 
+
+
+const retryCountRef = useRef(0);
+const maxRetries = 5;
   // 🔥 FIXED: FULL CANVAS FIT (cover entire 512x512)
   // 🔥 BULLETPROOF SVG LOAD với RETRY + LOGS
 const loadSvgFromPath = useCallback(async () => {
   console.log('🔍 CHECK:', { svgPath, refReady: !!svgImageRef.current });
   
-  // RETRY nếu ref chưa ready
   if (!svgPath || !svgImageRef.current) {
-    console.warn('⏳ SVG waiting ref... retry 200ms');
-    setTimeout(() => loadSvgFromPath(), 200);
-    return;
+    if (retryCountRef.current < maxRetries) {
+      retryCountRef.current++;
+      console.warn(`⏳ SVG retry ${retryCountRef.current}/${maxRetries}... 200ms`);
+      setTimeout(() => {
+        retryCountRef.current--;  // Reset sau timeout
+        loadSvgFromPath();
+      }, 200);
+      return;
+    } else {
+      console.error('❌ MAX RETRIES REACHED - SVG SKIP');
+      return;
+    }
   }
+
+  retryCountRef.current = 0;
+
 
   try {
     console.log('🌐 Fetching:', svgPath);
@@ -112,6 +127,14 @@ const loadSvgFromPath = useCallback(async () => {
       }
     }
   }, [svgPath, ]);
+
+  // ✅ HOẶC dùng retry effect riêng (nếu cần)
+  useEffect(() => {
+    if (svgPath) {
+      const timer = setTimeout(() => loadSvgFromPath(), 100);  // Debounce 100ms
+      return () => clearTimeout(timer);
+    }
+  }, [svgPath, loadSvgFromPath]);
 
   // REST OF COMPONENT (giữ nguyên)
   useEffect(() => {

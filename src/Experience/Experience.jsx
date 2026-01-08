@@ -5,7 +5,7 @@ import gsap from "gsap";
 import Scene from "./Scene";
 import { Canvas } from "@react-three/fiber";
 import { Html } from '@react-three/drei';
-import { OrthographicCamera, Box, OrbitControls} from "@react-three/drei";
+import { OrthographicCamera, PerspectiveCamera, Box, OrbitControls} from "@react-three/drei";
 import { Environment } from '@react-three/drei';
 
 import { useToggleRoomStore } from "../stores/toggleRoomStore";
@@ -222,14 +222,14 @@ const Experience = () => {
   intensity={0.8}
 />
         
-        <OrthographicCamera
+       <PerspectiveCamera
           ref={cameraRef}
           makeDefault
-          position={cameraPositions.dark.position}
-          rotation={[
-            -0.6, -0.7, -0.4,
-          ]}
-          zoom={zoomValues.default}
+          position={cameraPositions.dark.position}  // Giữ nguyên, ví dụ [-12, 12, 0] hoặc tương tự
+          rotation={[-0.6, -0.7, -0.4]}
+          fov={45}  // Tương đương zoom={zoomValues.default} ~1.0-1.5 ortho
+          near={0.1}
+          far={100}
         />
         
         <OrbitControls/>
@@ -244,7 +244,7 @@ const Experience = () => {
 
       <div style={{ position: 'fixed', left: 20,  top: 50,
            color: 'black', zIndex:99 }}>
-          <KonvaTextureEditor svgPath="/box-sample/150010.svg"/>
+          {/* <KonvaTextureEditor svgPath="/box-sample/150010.svg"/> */}
           <WorkspaceConfig/>
       </div>
       <Slider 

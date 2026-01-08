@@ -1,0 +1,24 @@
+{
+  "wall": {
+    "swatches": [
+      { "id": 1, "label": "Wall-1", "typeField": "wallType01", "mtlField": "wallMtl01", "hasType": true },
+      { "id": 2, "label": "Wall-2", "typeField": "wallType02", "mtlField": "wallMtl02", "hasType": true },
+      { "id": 3, "label": "Floor", "mtlField": "floorMtl", "hasType": false, "isFloor": true }
+    ],
+    "block_types": [
+      { "name": "Wall", "type": "wall" },
+      { "name": "GlassWall", "type": "glasswall" }
+    ],
+    "onChange": null
+  },
+  "roof": {
+    "swatches": [
+      { "id": 1, "label": "Roof-1", "typeField": "roofType01", "mtlField": "roofMtl01", "hasType": true }
+    ],
+    "block_types": [
+      { "name": "Tile", "type": "tile" },
+      { "name": "Metal", "type": "metal" }
+    ],
+    "onChange": (values) => console.log("Custom roof handler:", values)
+  }
+}

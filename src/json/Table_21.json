@@ -1,0 +1,914 @@
+[
+  {
+    "type": "table",
+    "file": "/models/Table_21/group01_vray.glb",
+    "preview": "/preview/Table_21/group01_vray.png",
+    "name": "Table group01_vray",
+    "cost": 6451000,
+    "color": "bw"
+  },
+  {
+    "type": "table",
+    "file": "/models/Table_21/group03_vray.glb",
+    "preview": "/preview/Table_21/group03_vray.png",
+    "name": "Table group03_vray",
+    "cost": 6211000,
+    "color": "bw"
+  },
+  {
+    "type": "table",
+    "file": "/models/Table_21/group04_vray.glb",
+    "preview": "/preview/Table_21/group04_vray.png",
+    "name": "Table group04_vray",
+    "cost": 17699000,
+    "color": "bw"
+  },
+  {
+    "type": "table",
+    "file": "/models/Table_21/group06_vray.glb",
+    "preview": "/preview/Table_21/group06_vray.png",
+    "name": "Table group06_vray",
+    "cost": 6425000,
+    "color": "bw"
+  },
+  {
+    "type": "table",
+    "file": "/models/Table_21/group07_vray.glb",
+    "preview": "/preview/Table_21/group07_vray.png",
+    "name": "Table group07_vray",
+    "cost": 7880000,
+    "color": "bw"
+  },
+  {
+    "type": "table",
+    "file": "/models/Table_21/group08_vray.glb",
+    "preview": "/preview/Table_21/group08_vray.png",
+    "name": "Table group08_vray",
+    "cost": 7036000,
+    "color": "bw"
+  },
+  {
+    "type": "table",
+    "file": "/models/Table_21/group09_vray.glb",
+    "preview": "/preview/Table_21/group09_vray.png",
+    "name": "Table group09_vray",
+    "cost": 11383000,
+    "color": "bw"
+  },
+  {
+    "type": "table",
+    "file": "/models/Table_21/group10_vray.glb",
+    "preview": "/preview/Table_21/group10_vray.png",
+    "name": "Table group10_vray",
+    "cost": 5641000,
+    "color": "bw"
+  },
+  {
+    "type": "table",
+    "file": "/models/Table_21/group11_vray.glb",
+    "preview": "/preview/Table_21/group11_vray.png",
+    "name": "Table group11_vray",
+    "cost": 5583000,
+    "color": "bw"
+  },
+  {
+    "type": "table",
+    "file": "/models/Table_21/group12_vray.glb",
+    "preview": "/preview/Table_21/group12_vray.png",
+    "name": "Table group12_vray",
+    "cost": 17971000,
+    "color": "bw"
+  },
+  {
+    "type": "table",
+    "file": "/models/Table_21/group14_vray.glb",
+    "preview": "/preview/Table_21/group14_vray.png",
+    "name": "Table group14_vray",
+    "cost": 10784000,
+    "color": "bw"
+  },
+  {
+    "type": "table",
+    "file": "/models/Table_21/group15_vray.glb",
+    "preview": "/preview/Table_21/group15_vray.png",
+    "name": "Table group15_vray",
+    "cost": 13041000,
+    "color": "bw"
+  },
+  {
+    "type": "table",
+    "file": "/models/Table_21/group16_vray.glb",
+    "preview": "/preview/Table_21/group16_vray.png",
+    "name": "Table group16_vray",
+    "cost": 18298000,
+    "color": "bw"
+  },
+  {
+    "type": "table",
+    "file": "/models/Table_21/group17_vray.glb",
+    "preview": "/preview/Table_21/group17_vray.png",
+    "name": "Table group17_vray",
+    "cost": 5916000,
+    "color": "bw"
+  },
+  {
+    "type": "table",
+    "file": "/models/Table_21/group18_vray.glb",
+    "preview": "/preview/Table_21/group18_vray.png",
+    "name": "Table group18_vray",
+    "cost": 4851000,
+    "color": "bw"
+  },
+  {
+    "type": "table",
+    "file": "/models/Table_21/group19_vray.glb",
+    "preview": "/preview/Table_21/group19_vray.png",
+    "name": "Table group19_vray",
+    "cost": 16885000,
+    "color": "bw"
+  },
+  {
+    "type": "table",
+    "file": "/models/Table_21/group20_vray.glb",
+    "preview": "/preview/Table_21/group20_vray.png",
+    "name": "Table group20_vray",
+    "cost": 8476000,
+    "color": "bw"
+  },
+  {
+    "type": "table",
+    "file": "/models/Table_21/model002_vray.glb",
+    "preview": "/preview/Table_21/model002_vray.png",
+    "name": "Table model002_vray",
+    "cost": 12621000,
+    "color": "bw"
+  },
+  {
+    "type": "table",
+    "file": "/models/Table_21/model003_vray.glb",
+    "preview": "/preview/Table_21/model003_vray.png",
+    "name": "Table model003_vray",
+    "cost": 3380000,
+    "color": "bw"
+  },
+  {
+    "type": "table",
+    "file": "/models/Table_21/model004_vray.glb",
+    "preview": "/preview/Table_21/model004_vray.png",
+    "name": "Table model004_vray",
+    "cost": 10172000,
+    "color": "bw"
+  },
+  {
+    "type": "table",
+    "file": "/models/Table_21/model005_vray.glb",
+    "preview": "/preview/Table_21/model005_vray.png",
+    "name": "Table model005_vray",
+    "cost": 16243000,
+    "color": "bw"
+  },
+  {
+    "type": "table",
+    "file": "/models/Table_21/model009_vray.glb",
+    "preview": "/preview/Table_21/model009_vray.png",
+    "name": "Table model009_vray",
+    "cost": 17032000,
+    "color": "bw"
+  },
+  {
+    "type": "table",
+    "file": "/models/Table_21/model012_vray.glb",
+    "preview": "/preview/Table_21/model012_vray.png",
+    "name": "Table model012_vray",
+    "cost": 19060000,
+    "color": "bw"
+  },
+  {
+    "type": "table",
+    "file": "/models/Table_21/model013_vray.glb",
+    "preview": "/preview/Table_21/model013_vray.png",
+    "name": "Table model013_vray",
+    "cost": 6805000,
+    "color": "bw"
+  },
+  {
+    "type": "table",
+    "file": "/models/Table_21/model014_vray.glb",
+    "preview": "/preview/Table_21/model014_vray.png",
+    "name": "Table model014_vray",
+    "cost": 14552000,
+    "color": "bw"
+  },
+  {
+    "type": "table",
+    "file": "/models/Table_21/model015_vray.glb",
+    "preview": "/preview/Table_21/model015_vray.png",
+    "name": "Table model015_vray",
+    "cost": 3878000,
+    "color": "bw"
+  },
+  {
+    "type": "table",
+    "file": "/models/Table_21/model016_vray.glb",
+    "preview": "/preview/Table_21/model016_vray.png",
+    "name": "Table model016_vray",
+    "cost": 1530000,
+    "color": "bw"
+  },
+  {
+    "type": "table",
+    "file": "/models/Table_21/model017_vray.glb",
+    "preview": "/preview/Table_21/model017_vray.png",
+    "name": "Table model017_vray",
+    "cost": 7474000,
+    "color": "bw"
+  },
+  {
+    "type": "table",
+    "file": "/models/Table_21/model018_vray.glb",
+    "preview": "/preview/Table_21/model018_vray.png",
+    "name": "Table model018_vray",
+    "cost": 15440000,
+    "color": "bw"
+  },
+  {
+    "type": "table",
+    "file": "/models/Table_21/model019_vray.glb",
+    "preview": "/preview/Table_21/model019_vray.png",
+    "name": "Table model019_vray",
+    "cost": 6305000,
+    "color": "bw"
+  },
+  {
+    "type": "table",
+    "file": "/models/Table_21/model020_vray.glb",
+    "preview": "/preview/Table_21/model020_vray.png",
+    "name": "Table model020_vray",
+    "cost": 8216000,
+    "color": "bw"
+  },
+  {
+    "type": "table",
+    "file": "/models/Table_21/model022_vray.glb",
+    "preview": "/preview/Table_21/model022_vray.png",
+    "name": "Table model022_vray",
+    "cost": 15452000,
+    "color": "bw"
+  },
+  {
+    "type": "table",
+    "file": "/models/Table_21/model023_vray.glb",
+    "preview": "/preview/Table_21/model023_vray.png",
+    "name": "Table model023_vray",
+    "cost": 9437000,
+    "color": "bw"
+  },
+  {
+    "type": "table",
+    "file": "/models/Table_21/model024_vray.glb",
+    "preview": "/preview/Table_21/model024_vray.png",
+    "name": "Table model024_vray",
+    "cost": 9867000,
+    "color": "bw"
+  },
+  {
+    "type": "table",
+    "file": "/models/Table_21/model025_vray.glb",
+    "preview": "/preview/Table_21/model025_vray.png",
+    "name": "Table model025_vray",
+    "cost": 4452000,
+    "color": "bw"
+  },
+  {
+    "type": "table",
+    "file": "/models/Table_21/model026_vray.glb",
+    "preview": "/preview/Table_21/model026_vray.png",
+    "name": "Table model026_vray",
+    "cost": 16241000,
+    "color": "bw"
+  },
+  {
+    "type": "table",
+    "file": "/models/Table_21/model027_vray.glb",
+    "preview": "/preview/Table_21/model027_vray.png",
+    "name": "Table model027_vray",
+    "cost": 4636000,
+    "color": "bw"
+  },
+  {
+    "type": "table",
+    "file": "/models/Table_21/model028_vray.glb",
+    "preview": "/preview/Table_21/model028_vray.png",
+    "name": "Table model028_vray",
+    "cost": 18725000,
+    "color": "bw"
+  },
+  {
+    "type": "table",
+    "file": "/models/Table_21/model030_vray.glb",
+    "preview": "/preview/Table_21/model030_vray.png",
+    "name": "Table model030_vray",
+    "cost": 1592000,
+    "color": "bw"
+  },
+  {
+    "type": "table",
+    "file": "/models/Table_21/model031_vray.glb",
+    "preview": "/preview/Table_21/model031_vray.png",
+    "name": "Table model031_vray",
+    "cost": 4720000,
+    "color": "bw"
+  },
+  {
+    "type": "table",
+    "file": "/models/Table_21/model032_vray.glb",
+    "preview": "/preview/Table_21/model032_vray.png",
+    "name": "Table model032_vray",
+    "cost": 10135000,
+    "color": "bw"
+  },
+  {
+    "type": "table",
+    "file": "/models/Table_21/model033_vray.glb",
+    "preview": "/preview/Table_21/model033_vray.png",
+    "name": "Table model033_vray",
+    "cost": 5925000,
+    "color": "bw"
+  },
+  {
+    "type": "table",
+    "file": "/models/Table_21/model034_vray.glb",
+    "preview": "/preview/Table_21/model034_vray.png",
+    "name": "Table model034_vray",
+    "cost": 17265000,
+    "color": "bw"
+  },
+  {
+    "type": "table",
+    "file": "/models/Table_21/model035_vray.glb",
+    "preview": "/preview/Table_21/model035_vray.png",
+    "name": "Table model035_vray",
+    "cost": 9458000,
+    "color": "bw"
+  },
+  {
+    "type": "table",
+    "file": "/models/Table_21/model036_vray.glb",
+    "preview": "/preview/Table_21/model036_vray.png",
+    "name": "Table model036_vray",
+    "cost": 8221000,
+    "color": "bw"
+  },
+  {
+    "type": "table",
+    "file": "/models/Table_21/model037_vray.glb",
+    "preview": "/preview/Table_21/model037_vray.png",
+    "name": "Table model037_vray",
+    "cost": 14577000,
+    "color": "bw"
+  },
+  {
+    "type": "table",
+    "file": "/models/Table_21/model038_vray.glb",
+    "preview": "/preview/Table_21/model038_vray.png",
+    "name": "Table model038_vray",
+    "cost": 9412000,
+    "color": "bw"
+  },
+  {
+    "type": "table",
+    "file": "/models/Table_21/model039_vray.glb",
+    "preview": "/preview/Table_21/model039_vray.png",
+    "name": "Table model039_vray",
+    "cost": 9513000,
+    "color": "bw"
+  },
+  {
+    "type": "table",
+    "file": "/models/Table_21/model040_vray.glb",
+    "preview": "/preview/Table_21/model040_vray.png",
+    "name": "Table model040_vray",
+    "cost": 18153000,
+    "color": "bw"
+  },
+  {
+    "type": "table",
+    "file": "/models/Table_21/model042_vray.glb",
+    "preview": "/preview/Table_21/model042_vray.png",
+    "name": "Table model042_vray",
+    "cost": 7250000,
+    "color": "bw"
+  },
+  {
+    "type": "table",
+    "file": "/models/Table_21/model043_vray.glb",
+    "preview": "/preview/Table_21/model043_vray.png",
+    "name": "Table model043_vray",
+    "cost": 2751000,
+    "color": "bw"
+  },
+  {
+    "type": "table",
+    "file": "/models/Table_21/model044_vray.glb",
+    "preview": "/preview/Table_21/model044_vray.png",
+    "name": "Table model044_vray",
+    "cost": 10946000,
+    "color": "bw"
+  },
+  {
+    "type": "table",
+    "file": "/models/Table_21/model045_vray.glb",
+    "preview": "/preview/Table_21/model045_vray.png",
+    "name": "Table model045_vray",
+    "cost": 12288000,
+    "color": "bw"
+  },
+  {
+    "type": "table",
+    "file": "/models/Table_21/model046_vray.glb",
+    "preview": "/preview/Table_21/model046_vray.png",
+    "name": "Table model046_vray",
+    "cost": 3080000,
+    "color": "bw"
+  },
+  {
+    "type": "table",
+    "file": "/models/Table_21/model047_vray.glb",
+    "preview": "/preview/Table_21/model047_vray.png",
+    "name": "Table model047_vray",
+    "cost": 9703000,
+    "color": "bw"
+  },
+  {
+    "type": "table",
+    "file": "/models/Table_21/model048_vray.glb",
+    "preview": "/preview/Table_21/model048_vray.png",
+    "name": "Table model048_vray",
+    "cost": 1886000,
+    "color": "bw"
+  },
+  {
+    "type": "table",
+    "file": "/models/Table_21/model049_vray.glb",
+    "preview": "/preview/Table_21/model049_vray.png",
+    "name": "Table model049_vray",
+    "cost": 1654000,
+    "color": "bw"
+  },
+  {
+    "type": "table",
+    "file": "/models/Table_21/model050_vray.glb",
+    "preview": "/preview/Table_21/model050_vray.png",
+    "name": "Table model050_vray",
+    "cost": 16300000,
+    "color": "bw"
+  },
+  {
+    "type": "table",
+    "file": "/models/Table_21/model052_vray.glb",
+    "preview": "/preview/Table_21/model052_vray.png",
+    "name": "Table model052_vray",
+    "cost": 15784000,
+    "color": "bw"
+  },
+  {
+    "type": "table",
+    "file": "/models/Table_21/model053_vray.glb",
+    "preview": "/preview/Table_21/model053_vray.png",
+    "name": "Table model053_vray",
+    "cost": 14520000,
+    "color": "bw"
+  },
+  {
+    "type": "table",
+    "file": "/models/Table_21/model054_vray.glb",
+    "preview": "/preview/Table_21/model054_vray.png",
+    "name": "Table model054_vray",
+    "cost": 9057000,
+    "color": "bw"
+  },
+  {
+    "type": "table",
+    "file": "/models/Table_21/model055_vray.glb",
+    "preview": "/preview/Table_21/model055_vray.png",
+    "name": "Table model055_vray",
+    "cost": 1614000,
+    "color": "bw"
+  },
+  {
+    "type": "table",
+    "file": "/models/Table_21/model056_vray.glb",
+    "preview": "/preview/Table_21/model056_vray.png",
+    "name": "Table model056_vray",
+    "cost": 3081000,
+    "color": "bw"
+  },
+  {
+    "type": "table",
+    "file": "/models/Table_21/model057_vray.glb",
+    "preview": "/preview/Table_21/model057_vray.png",
+    "name": "Table model057_vray",
+    "cost": 3790000,
+    "color": "bw"
+  },
+  {
+    "type": "table",
+    "file": "/models/Table_21/model058_vray.glb",
+    "preview": "/preview/Table_21/model058_vray.png",
+    "name": "Table model058_vray",
+    "cost": 13907000,
+    "color": "bw"
+  },
+  {
+    "type": "table",
+    "file": "/models/Table_21/model059_vray.glb",
+    "preview": "/preview/Table_21/model059_vray.png",
+    "name": "Table model059_vray",
+    "cost": 11396000,
+    "color": "bw"
+  },
+  {
+    "type": "table",
+    "file": "/models/Table_21/model060_vray.glb",
+    "preview": "/preview/Table_21/model060_vray.png",
+    "name": "Table model060_vray",
+    "cost": 1164000,
+    "color": "bw"
+  },
+  {
+    "type": "table",
+    "file": "/models/Table_21/model061_vray.glb",
+    "preview": "/preview/Table_21/model061_vray.png",
+    "name": "Table model061_vray",
+    "cost": 7830000,
+    "color": "bw"
+  },
+  {
+    "type": "table",
+    "file": "/models/Table_21/model062_vray.glb",
+    "preview": "/preview/Table_21/model062_vray.png",
+    "name": "Table model062_vray",
+    "cost": 7060000,
+    "color": "bw"
+  },
+  {
+    "type": "table",
+    "file": "/models/Table_21/model063_vray.glb",
+    "preview": "/preview/Table_21/model063_vray.png",
+    "name": "Table model063_vray",
+    "cost": 16534000,
+    "color": "bw"
+  },
+  {
+    "type": "table",
+    "file": "/models/Table_21/model064_vray.glb",
+    "preview": "/preview/Table_21/model064_vray.png",
+    "name": "Table model064_vray",
+    "cost": 12352000,
+    "color": "bw"
+  },
+  {
+    "type": "table",
+    "file": "/models/Table_21/model065_vray.glb",
+    "preview": "/preview/Table_21/model065_vray.png",
+    "name": "Table model065_vray",
+    "cost": 19257000,
+    "color": "bw"
+  },
+  {
+    "type": "table",
+    "file": "/models/Table_21/model066_vray.glb",
+    "preview": "/preview/Table_21/model066_vray.png",
+    "name": "Table model066_vray",
+    "cost": 16628000,
+    "color": "bw"
+  },
+  {
+    "type": "table",
+    "file": "/models/Table_21/model067_vray.glb",
+    "preview": "/preview/Table_21/model067_vray.png",
+    "name": "Table model067_vray",
+    "cost": 2254000,
+    "color": "bw"
+  },
+  {
+    "type": "table",
+    "file": "/models/Table_21/model069_vray.glb",
+    "preview": "/preview/Table_21/model069_vray.png",
+    "name": "Table model069_vray",
+    "cost": 4986000,
+    "color": "bw"
+  },
+  {
+    "type": "table",
+    "file": "/models/Table_21/model070_vray.glb",
+    "preview": "/preview/Table_21/model070_vray.png",
+    "name": "Table model070_vray",
+    "cost": 10688000,
+    "color": "bw"
+  },
+  {
+    "type": "table",
+    "file": "/models/Table_21/model071_vray.glb",
+    "preview": "/preview/Table_21/model071_vray.png",
+    "name": "Table model071_vray",
+    "cost": 18106000,
+    "color": "bw"
+  },
+  {
+    "type": "table",
+    "file": "/models/Table_21/model072_vray.glb",
+    "preview": "/preview/Table_21/model072_vray.png",
+    "name": "Table model072_vray",
+    "cost": 6441000,
+    "color": "bw"
+  },
+  {
+    "type": "table",
+    "file": "/models/Table_21/model073_vray.glb",
+    "preview": "/preview/Table_21/model073_vray.png",
+    "name": "Table model073_vray",
+    "cost": 10345000,
+    "color": "bw"
+  },
+  {
+    "type": "table",
+    "file": "/models/Table_21/model074_vray.glb",
+    "preview": "/preview/Table_21/model074_vray.png",
+    "name": "Table model074_vray",
+    "cost": 13127000,
+    "color": "bw"
+  },
+  {
+    "type": "table",
+    "file": "/models/Table_21/model077_vray.glb",
+    "preview": "/preview/Table_21/model077_vray.png",
+    "name": "Table model077_vray",
+    "cost": 5379000,
+    "color": "bw"
+  },
+  {
+    "type": "table",
+    "file": "/models/Table_21/model078_vray.glb",
+    "preview": "/preview/Table_21/model078_vray.png",
+    "name": "Table model078_vray",
+    "cost": 10742000,
+    "color": "bw"
+  },
+  {
+    "type": "table",
+    "file": "/models/Table_21/model079_vray.glb",
+    "preview": "/preview/Table_21/model079_vray.png",
+    "name": "Table model079_vray",
+    "cost": 13470000,
+    "color": "bw"
+  },
+  {
+    "type": "table",
+    "file": "/models/Table_21/model080_vray.glb",
+    "preview": "/preview/Table_21/model080_vray.png",
+    "name": "Table model080_vray",
+    "cost": 2630000,
+    "color": "bw"
+  },
+  {
+    "type": "table",
+    "file": "/models/Table_21/model081_vray.glb",
+    "preview": "/preview/Table_21/model081_vray.png",
+    "name": "Table model081_vray",
+    "cost": 8592000,
+    "color": "bw"
+  },
+  {
+    "type": "table",
+    "file": "/models/Table_21/model082_vray.glb",
+    "preview": "/preview/Table_21/model082_vray.png",
+    "name": "Table model082_vray",
+    "cost": 3816000,
+    "color": "bw"
+  },
+  {
+    "type": "table",
+    "file": "/models/Table_21/model083_vray.glb",
+    "preview": "/preview/Table_21/model083_vray.png",
+    "name": "Table model083_vray",
+    "cost": 11919000,
+    "color": "bw"
+  },
+  {
+    "type": "table",
+    "file": "/models/Table_21/model084_vray.glb",
+    "preview": "/preview/Table_21/model084_vray.png",
+    "name": "Table model084_vray",
+    "cost": 14073000,
+    "color": "bw"
+  },
+  {
+    "type": "table",
+    "file": "/models/Table_21/model085_vray.glb",
+    "preview": "/preview/Table_21/model085_vray.png",
+    "name": "Table model085_vray",
+    "cost": 3148000,
+    "color": "bw"
+  },
+  {
+    "type": "table",
+    "file": "/models/Table_21/model086_vray.glb",
+    "preview": "/preview/Table_21/model086_vray.png",
+    "name": "Table model086_vray",
+    "cost": 3312000,
+    "color": "bw"
+  },
+  {
+    "type": "table",
+    "file": "/models/Table_21/model087_vray.glb",
+    "preview": "/preview/Table_21/model087_vray.png",
+    "name": "Table model087_vray",
+    "cost": 1139000,
+    "color": "bw"
+  },
+  {
+    "type": "table",
+    "file": "/models/Table_21/model088_vray.glb",
+    "preview": "/preview/Table_21/model088_vray.png",
+    "name": "Table model088_vray",
+    "cost": 13859000,
+    "color": "bw"
+  },
+  {
+    "type": "table",
+    "file": "/models/Table_21/model089_vray.glb",
+    "preview": "/preview/Table_21/model089_vray.png",
+    "name": "Table model089_vray",
+    "cost": 7862000,
+    "color": "bw"
+  },
+  {
+    "type": "table",
+    "file": "/models/Table_21/model090_vray.glb",
+    "preview": "/preview/Table_21/model090_vray.png",
+    "name": "Table model090_vray",
+    "cost": 5404000,
+    "color": "bw"
+  },
+  {
+    "type": "table",
+    "file": "/models/Table_21/model091_vray.glb",
+    "preview": "/preview/Table_21/model091_vray.png",
+    "name": "Table model091_vray",
+    "cost": 18473000,
+    "color": "bw"
+  },
+  {
+    "type": "table",
+    "file": "/models/Table_21/model092_vray.glb",
+    "preview": "/preview/Table_21/model092_vray.png",
+    "name": "Table model092_vray",
+    "cost": 2159000,
+    "color": "bw"
+  },
+  {
+    "type": "table",
+    "file": "/models/Table_21/model093_vray.glb",
+    "preview": "/preview/Table_21/model093_vray.png",
+    "name": "Table model093_vray",
+    "cost": 1524000,
+    "color": "bw"
+  },
+  {
+    "type": "table",
+    "file": "/models/Table_21/model095_vray.glb",
+    "preview": "/preview/Table_21/model095_vray.png",
+    "name": "Table model095_vray",
+    "cost": 12858000,
+    "color": "bw"
+  },
+  {
+    "type": "table",
+    "file": "/models/Table_21/model097_vray.glb",
+    "preview": "/preview/Table_21/model097_vray.png",
+    "name": "Table model097_vray",
+    "cost": 9590000,
+    "color": "bw"
+  },
+  {
+    "type": "table",
+    "file": "/models/Table_21/model098_vray.glb",
+    "preview": "/preview/Table_21/model098_vray.png",
+    "name": "Table model098_vray",
+    "cost": 11414000,
+    "color": "bw"
+  },
+  {
+    "type": "table",
+    "file": "/models/Table_21/model099_vray.glb",
+    "preview": "/preview/Table_21/model099_vray.png",
+    "name": "Table model099_vray",
+    "cost": 6231000,
+    "color": "bw"
+  },
+  {
+    "type": "table",
+    "file": "/models/Table_21/model102_vray.glb",
+    "preview": "/preview/Table_21/model102_vray.png",
+    "name": "Table model102_vray",
+    "cost": 13289000,
+    "color": "bw"
+  },
+  {
+    "type": "table",
+    "file": "/models/Table_21/model104_vray.glb",
+    "preview": "/preview/Table_21/model104_vray.png",
+    "name": "Table model104_vray",
+    "cost": 6967000,
+    "color": "bw"
+  },
+  {
+    "type": "table",
+    "file": "/models/Table_21/model105_vray.glb",
+    "preview": "/preview/Table_21/model105_vray.png",
+    "name": "Table model105_vray",
+    "cost": 16706000,
+    "color": "bw"
+  },
+  {
+    "type": "table",
+    "file": "/models/Table_21/model106_vray.glb",
+    "preview": "/preview/Table_21/model106_vray.png",
+    "name": "Table model106_vray",
+    "cost": 16976000,
+    "color": "bw"
+  },
+  {
+    "type": "table",
+    "file": "/models/Table_21/model107_vray.glb",
+    "preview": "/preview/Table_21/model107_vray.png",
+    "name": "Table model107_vray",
+    "cost": 4195000,
+    "color": "bw"
+  },
+  {
+    "type": "table",
+    "file": "/models/Table_21/model108_vray.glb",
+    "preview": "/preview/Table_21/model108_vray.png",
+    "name": "Table model108_vray",
+    "cost": 9948000,
+    "color": "bw"
+  },
+  {
+    "type": "table",
+    "file": "/models/Table_21/model109_vray.glb",
+    "preview": "/preview/Table_21/model109_vray.png",
+    "name": "Table model109_vray",
+    "cost": 8243000,
+    "color": "bw"
+  },
+  {
+    "type": "table",
+    "file": "/models/Table_21/model110_vray.glb",
+    "preview": "/preview/Table_21/model110_vray.png",
+    "name": "Table model110_vray",
+    "cost": 11791000,
+    "color": "bw"
+  },
+  {
+    "type": "table",
+    "file": "/models/Table_21/model111_vray.glb",
+    "preview": "/preview/Table_21/model111_vray.png",
+    "name": "Table model111_vray",
+    "cost": 6842000,
+    "color": "bw"
+  },
+  {
+    "type": "table",
+    "file": "/models/Table_21/model112_vray.glb",
+    "preview": "/preview/Table_21/model112_vray.png",
+    "name": "Table model112_vray",
+    "cost": 5157000,
+    "color": "bw"
+  },
+  {
+    "type": "table",
+    "file": "/models/Table_21/model113_vray.glb",
+    "preview": "/preview/Table_21/model113_vray.png",
+    "name": "Table model113_vray",
+    "cost": 15283000,
+    "color": "bw"
+  },
+  {
+    "type": "table",
+    "file": "/models/Table_21/model114_vray.glb",
+    "preview": "/preview/Table_21/model114_vray.png",
+    "name": "Table model114_vray",
+    "cost": 12475000,
+    "color": "bw"
+  },
+  {
+    "type": "table",
+    "file": "/models/Table_21/model115_vray.glb",
+    "preview": "/preview/Table_21/model115_vray.png",
+    "name": "Table model115_vray",
+    "cost": 11421000,
+    "color": "bw"
+  }
+]

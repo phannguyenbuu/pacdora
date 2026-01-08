@@ -1,0 +1,1074 @@
+[
+  {
+    "type": "lamp",
+    "file": "/models/Lamp_38/001_vray.glb",
+    "preview": "/preview/Lamp_38/001_vray.png",
+    "name": "Lamp 001_vray",
+    "cost": 12859000,
+    "color": "bw"
+  },
+  {
+    "type": "lamp",
+    "file": "/models/Lamp_38/002_vray.glb",
+    "preview": "/preview/Lamp_38/002_vray.png",
+    "name": "Lamp 002_vray",
+    "cost": 17184000,
+    "color": "bw"
+  },
+  {
+    "type": "lamp",
+    "file": "/models/Lamp_38/003_vray.glb",
+    "preview": "/preview/Lamp_38/003_vray.png",
+    "name": "Lamp 003_vray",
+    "cost": 2004000,
+    "color": "bw"
+  },
+  {
+    "type": "lamp",
+    "file": "/models/Lamp_38/004_vray.glb",
+    "preview": "/preview/Lamp_38/004_vray.png",
+    "name": "Lamp 004_vray",
+    "cost": 3324000,
+    "color": "bw"
+  },
+  {
+    "type": "lamp",
+    "file": "/models/Lamp_38/005_vray.glb",
+    "preview": "/preview/Lamp_38/005_vray.png",
+    "name": "Lamp 005_vray",
+    "cost": 15362000,
+    "color": "bw"
+  },
+  {
+    "type": "lamp",
+    "file": "/models/Lamp_38/006_vray.glb",
+    "preview": "/preview/Lamp_38/006_vray.png",
+    "name": "Lamp 006_vray",
+    "cost": 3820000,
+    "color": "bw"
+  },
+  {
+    "type": "lamp",
+    "file": "/models/Lamp_38/007_vray.glb",
+    "preview": "/preview/Lamp_38/007_vray.png",
+    "name": "Lamp 007_vray",
+    "cost": 4103000,
+    "color": "bw"
+  },
+  {
+    "type": "lamp",
+    "file": "/models/Lamp_38/008_vray.glb",
+    "preview": "/preview/Lamp_38/008_vray.png",
+    "name": "Lamp 008_vray",
+    "cost": 19094000,
+    "color": "bw"
+  },
+  {
+    "type": "lamp",
+    "file": "/models/Lamp_38/009_vray.glb",
+    "preview": "/preview/Lamp_38/009_vray.png",
+    "name": "Lamp 009_vray",
+    "cost": 10954000,
+    "color": "bw"
+  },
+  {
+    "type": "lamp",
+    "file": "/models/Lamp_38/010_vray.glb",
+    "preview": "/preview/Lamp_38/010_vray.png",
+    "name": "Lamp 010_vray",
+    "cost": 3410000,
+    "color": "bw"
+  },
+  {
+    "type": "lamp",
+    "file": "/models/Lamp_38/011_vray.glb",
+    "preview": "/preview/Lamp_38/011_vray.png",
+    "name": "Lamp 011_vray",
+    "cost": 2233000,
+    "color": "bw"
+  },
+  {
+    "type": "lamp",
+    "file": "/models/Lamp_38/012_vray.glb",
+    "preview": "/preview/Lamp_38/012_vray.png",
+    "name": "Lamp 012_vray",
+    "cost": 8581000,
+    "color": "bw"
+  },
+  {
+    "type": "lamp",
+    "file": "/models/Lamp_38/013_vray.glb",
+    "preview": "/preview/Lamp_38/013_vray.png",
+    "name": "Lamp 013_vray",
+    "cost": 17841000,
+    "color": "bw"
+  },
+  {
+    "type": "lamp",
+    "file": "/models/Lamp_38/014_vray.glb",
+    "preview": "/preview/Lamp_38/014_vray.png",
+    "name": "Lamp 014_vray",
+    "cost": 4542000,
+    "color": "bw"
+  },
+  {
+    "type": "lamp",
+    "file": "/models/Lamp_38/015_vray.glb",
+    "preview": "/preview/Lamp_38/015_vray.png",
+    "name": "Lamp 015_vray",
+    "cost": 15421000,
+    "color": "bw"
+  },
+  {
+    "type": "lamp",
+    "file": "/models/Lamp_38/016_vray.glb",
+    "preview": "/preview/Lamp_38/016_vray.png",
+    "name": "Lamp 016_vray",
+    "cost": 7210000,
+    "color": "bw"
+  },
+  {
+    "type": "lamp",
+    "file": "/models/Lamp_38/017_vray.glb",
+    "preview": "/preview/Lamp_38/017_vray.png",
+    "name": "Lamp 017_vray",
+    "cost": 4343000,
+    "color": "bw"
+  },
+  {
+    "type": "lamp",
+    "file": "/models/Lamp_38/018_vray.glb",
+    "preview": "/preview/Lamp_38/018_vray.png",
+    "name": "Lamp 018_vray",
+    "cost": 17811000,
+    "color": "bw"
+  },
+  {
+    "type": "lamp",
+    "file": "/models/Lamp_38/019_vray.glb",
+    "preview": "/preview/Lamp_38/019_vray.png",
+    "name": "Lamp 019_vray",
+    "cost": 14529000,
+    "color": "bw"
+  },
+  {
+    "type": "lamp",
+    "file": "/models/Lamp_38/020_vray.glb",
+    "preview": "/preview/Lamp_38/020_vray.png",
+    "name": "Lamp 020_vray",
+    "cost": 13838000,
+    "color": "bw"
+  },
+  {
+    "type": "lamp",
+    "file": "/models/Lamp_38/021_vray.glb",
+    "preview": "/preview/Lamp_38/021_vray.png",
+    "name": "Lamp 021_vray",
+    "cost": 15568000,
+    "color": "bw"
+  },
+  {
+    "type": "lamp",
+    "file": "/models/Lamp_38/022_vray.glb",
+    "preview": "/preview/Lamp_38/022_vray.png",
+    "name": "Lamp 022_vray",
+    "cost": 1103000,
+    "color": "bw"
+  },
+  {
+    "type": "lamp",
+    "file": "/models/Lamp_38/023_vray.glb",
+    "preview": "/preview/Lamp_38/023_vray.png",
+    "name": "Lamp 023_vray",
+    "cost": 1127000,
+    "color": "bw"
+  },
+  {
+    "type": "lamp",
+    "file": "/models/Lamp_38/024_vray.glb",
+    "preview": "/preview/Lamp_38/024_vray.png",
+    "name": "Lamp 024_vray",
+    "cost": 19563000,
+    "color": "bw"
+  },
+  {
+    "type": "lamp",
+    "file": "/models/Lamp_38/025_vray.glb",
+    "preview": "/preview/Lamp_38/025_vray.png",
+    "name": "Lamp 025_vray",
+    "cost": 7481000,
+    "color": "bw"
+  },
+  {
+    "type": "lamp",
+    "file": "/models/Lamp_38/026_vray.glb",
+    "preview": "/preview/Lamp_38/026_vray.png",
+    "name": "Lamp 026_vray",
+    "cost": 3249000,
+    "color": "bw"
+  },
+  {
+    "type": "lamp",
+    "file": "/models/Lamp_38/027_vray.glb",
+    "preview": "/preview/Lamp_38/027_vray.png",
+    "name": "Lamp 027_vray",
+    "cost": 8967000,
+    "color": "bw"
+  },
+  {
+    "type": "lamp",
+    "file": "/models/Lamp_38/028_vray.glb",
+    "preview": "/preview/Lamp_38/028_vray.png",
+    "name": "Lamp 028_vray",
+    "cost": 13828000,
+    "color": "bw"
+  },
+  {
+    "type": "lamp",
+    "file": "/models/Lamp_38/029_vray.glb",
+    "preview": "/preview/Lamp_38/029_vray.png",
+    "name": "Lamp 029_vray",
+    "cost": 14246000,
+    "color": "bw"
+  },
+  {
+    "type": "lamp",
+    "file": "/models/Lamp_38/030_vray.glb",
+    "preview": "/preview/Lamp_38/030_vray.png",
+    "name": "Lamp 030_vray",
+    "cost": 1410000,
+    "color": "bw"
+  },
+  {
+    "type": "lamp",
+    "file": "/models/Lamp_38/031_vray.glb",
+    "preview": "/preview/Lamp_38/031_vray.png",
+    "name": "Lamp 031_vray",
+    "cost": 7292000,
+    "color": "bw"
+  },
+  {
+    "type": "lamp",
+    "file": "/models/Lamp_38/032_vray.glb",
+    "preview": "/preview/Lamp_38/032_vray.png",
+    "name": "Lamp 032_vray",
+    "cost": 6195000,
+    "color": "bw"
+  },
+  {
+    "type": "lamp",
+    "file": "/models/Lamp_38/033_vray.glb",
+    "preview": "/preview/Lamp_38/033_vray.png",
+    "name": "Lamp 033_vray",
+    "cost": 13374000,
+    "color": "bw"
+  },
+  {
+    "type": "lamp",
+    "file": "/models/Lamp_38/034_vray.glb",
+    "preview": "/preview/Lamp_38/034_vray.png",
+    "name": "Lamp 034_vray",
+    "cost": 15779000,
+    "color": "bw"
+  },
+  {
+    "type": "lamp",
+    "file": "/models/Lamp_38/035_vray.glb",
+    "preview": "/preview/Lamp_38/035_vray.png",
+    "name": "Lamp 035_vray",
+    "cost": 8661000,
+    "color": "bw"
+  },
+  {
+    "type": "lamp",
+    "file": "/models/Lamp_38/036_vray.glb",
+    "preview": "/preview/Lamp_38/036_vray.png",
+    "name": "Lamp 036_vray",
+    "cost": 1138000,
+    "color": "bw"
+  },
+  {
+    "type": "lamp",
+    "file": "/models/Lamp_38/037_vray.glb",
+    "preview": "/preview/Lamp_38/037_vray.png",
+    "name": "Lamp 037_vray",
+    "cost": 13350000,
+    "color": "bw"
+  },
+  {
+    "type": "lamp",
+    "file": "/models/Lamp_38/038_vray.glb",
+    "preview": "/preview/Lamp_38/038_vray.png",
+    "name": "Lamp 038_vray",
+    "cost": 17519000,
+    "color": "bw"
+  },
+  {
+    "type": "lamp",
+    "file": "/models/Lamp_38/039_vray.glb",
+    "preview": "/preview/Lamp_38/039_vray.png",
+    "name": "Lamp 039_vray",
+    "cost": 12502000,
+    "color": "bw"
+  },
+  {
+    "type": "lamp",
+    "file": "/models/Lamp_38/040_vray.glb",
+    "preview": "/preview/Lamp_38/040_vray.png",
+    "name": "Lamp 040_vray",
+    "cost": 1858000,
+    "color": "bw"
+  },
+  {
+    "type": "lamp",
+    "file": "/models/Lamp_38/041_vray.glb",
+    "preview": "/preview/Lamp_38/041_vray.png",
+    "name": "Lamp 041_vray",
+    "cost": 15153000,
+    "color": "bw"
+  },
+  {
+    "type": "lamp",
+    "file": "/models/Lamp_38/042_vray.glb",
+    "preview": "/preview/Lamp_38/042_vray.png",
+    "name": "Lamp 042_vray",
+    "cost": 12984000,
+    "color": "bw"
+  },
+  {
+    "type": "lamp",
+    "file": "/models/Lamp_38/043_vray.glb",
+    "preview": "/preview/Lamp_38/043_vray.png",
+    "name": "Lamp 043_vray",
+    "cost": 2326000,
+    "color": "bw"
+  },
+  {
+    "type": "lamp",
+    "file": "/models/Lamp_38/044_vray.glb",
+    "preview": "/preview/Lamp_38/044_vray.png",
+    "name": "Lamp 044_vray",
+    "cost": 7806000,
+    "color": "bw"
+  },
+  {
+    "type": "lamp",
+    "file": "/models/Lamp_38/045_vray.glb",
+    "preview": "/preview/Lamp_38/045_vray.png",
+    "name": "Lamp 045_vray",
+    "cost": 17118000,
+    "color": "bw"
+  },
+  {
+    "type": "lamp",
+    "file": "/models/Lamp_38/046_vray.glb",
+    "preview": "/preview/Lamp_38/046_vray.png",
+    "name": "Lamp 046_vray",
+    "cost": 6798000,
+    "color": "bw"
+  },
+  {
+    "type": "lamp",
+    "file": "/models/Lamp_38/047_vray.glb",
+    "preview": "/preview/Lamp_38/047_vray.png",
+    "name": "Lamp 047_vray",
+    "cost": 16931000,
+    "color": "bw"
+  },
+  {
+    "type": "lamp",
+    "file": "/models/Lamp_38/048_vray.glb",
+    "preview": "/preview/Lamp_38/048_vray.png",
+    "name": "Lamp 048_vray",
+    "cost": 14329000,
+    "color": "bw"
+  },
+  {
+    "type": "lamp",
+    "file": "/models/Lamp_38/049_vray.glb",
+    "preview": "/preview/Lamp_38/049_vray.png",
+    "name": "Lamp 049_vray",
+    "cost": 17386000,
+    "color": "bw"
+  },
+  {
+    "type": "lamp",
+    "file": "/models/Lamp_38/050_vray.glb",
+    "preview": "/preview/Lamp_38/050_vray.png",
+    "name": "Lamp 050_vray",
+    "cost": 12604000,
+    "color": "bw"
+  },
+  {
+    "type": "lamp",
+    "file": "/models/Lamp_38/051_vray.glb",
+    "preview": "/preview/Lamp_38/051_vray.png",
+    "name": "Lamp 051_vray",
+    "cost": 7944000,
+    "color": "bw"
+  },
+  {
+    "type": "lamp",
+    "file": "/models/Lamp_38/052_vray.glb",
+    "preview": "/preview/Lamp_38/052_vray.png",
+    "name": "Lamp 052_vray",
+    "cost": 9473000,
+    "color": "bw"
+  },
+  {
+    "type": "lamp",
+    "file": "/models/Lamp_38/053_vray.glb",
+    "preview": "/preview/Lamp_38/053_vray.png",
+    "name": "Lamp 053_vray",
+    "cost": 3554000,
+    "color": "bw"
+  },
+  {
+    "type": "lamp",
+    "file": "/models/Lamp_38/054_vray.glb",
+    "preview": "/preview/Lamp_38/054_vray.png",
+    "name": "Lamp 054_vray",
+    "cost": 10596000,
+    "color": "bw"
+  },
+  {
+    "type": "lamp",
+    "file": "/models/Lamp_38/055_vray.glb",
+    "preview": "/preview/Lamp_38/055_vray.png",
+    "name": "Lamp 055_vray",
+    "cost": 4073000,
+    "color": "bw"
+  },
+  {
+    "type": "lamp",
+    "file": "/models/Lamp_38/056_vray.glb",
+    "preview": "/preview/Lamp_38/056_vray.png",
+    "name": "Lamp 056_vray",
+    "cost": 8030000,
+    "color": "bw"
+  },
+  {
+    "type": "lamp",
+    "file": "/models/Lamp_38/057_vray.glb",
+    "preview": "/preview/Lamp_38/057_vray.png",
+    "name": "Lamp 057_vray",
+    "cost": 17011000,
+    "color": "bw"
+  },
+  {
+    "type": "lamp",
+    "file": "/models/Lamp_38/058_vray.glb",
+    "preview": "/preview/Lamp_38/058_vray.png",
+    "name": "Lamp 058_vray",
+    "cost": 6076000,
+    "color": "bw"
+  },
+  {
+    "type": "lamp",
+    "file": "/models/Lamp_38/059_vray.glb",
+    "preview": "/preview/Lamp_38/059_vray.png",
+    "name": "Lamp 059_vray",
+    "cost": 8395000,
+    "color": "bw"
+  },
+  {
+    "type": "lamp",
+    "file": "/models/Lamp_38/060_vray.glb",
+    "preview": "/preview/Lamp_38/060_vray.png",
+    "name": "Lamp 060_vray",
+    "cost": 18965000,
+    "color": "bw"
+  },
+  {
+    "type": "lamp",
+    "file": "/models/Lamp_38/061_vray.glb",
+    "preview": "/preview/Lamp_38/061_vray.png",
+    "name": "Lamp 061_vray",
+    "cost": 5147000,
+    "color": "bw"
+  },
+  {
+    "type": "lamp",
+    "file": "/models/Lamp_38/062_vray.glb",
+    "preview": "/preview/Lamp_38/062_vray.png",
+    "name": "Lamp 062_vray",
+    "cost": 11554000,
+    "color": "bw"
+  },
+  {
+    "type": "lamp",
+    "file": "/models/Lamp_38/063_vray.glb",
+    "preview": "/preview/Lamp_38/063_vray.png",
+    "name": "Lamp 063_vray",
+    "cost": 8973000,
+    "color": "bw"
+  },
+  {
+    "type": "lamp",
+    "file": "/models/Lamp_38/064_vray.glb",
+    "preview": "/preview/Lamp_38/064_vray.png",
+    "name": "Lamp 064_vray",
+    "cost": 4171000,
+    "color": "bw"
+  },
+  {
+    "type": "lamp",
+    "file": "/models/Lamp_38/065_vray.glb",
+    "preview": "/preview/Lamp_38/065_vray.png",
+    "name": "Lamp 065_vray",
+    "cost": 11201000,
+    "color": "bw"
+  },
+  {
+    "type": "lamp",
+    "file": "/models/Lamp_38/066_vray.glb",
+    "preview": "/preview/Lamp_38/066_vray.png",
+    "name": "Lamp 066_vray",
+    "cost": 18991000,
+    "color": "bw"
+  },
+  {
+    "type": "lamp",
+    "file": "/models/Lamp_38/067_vray.glb",
+    "preview": "/preview/Lamp_38/067_vray.png",
+    "name": "Lamp 067_vray",
+    "cost": 7123000,
+    "color": "bw"
+  },
+  {
+    "type": "lamp",
+    "file": "/models/Lamp_38/068_vray.glb",
+    "preview": "/preview/Lamp_38/068_vray.png",
+    "name": "Lamp 068_vray",
+    "cost": 2190000,
+    "color": "bw"
+  },
+  {
+    "type": "lamp",
+    "file": "/models/Lamp_38/069_vray.glb",
+    "preview": "/preview/Lamp_38/069_vray.png",
+    "name": "Lamp 069_vray",
+    "cost": 13896000,
+    "color": "bw"
+  },
+  {
+    "type": "lamp",
+    "file": "/models/Lamp_38/070_vray.glb",
+    "preview": "/preview/Lamp_38/070_vray.png",
+    "name": "Lamp 070_vray",
+    "cost": 19701000,
+    "color": "bw"
+  },
+  {
+    "type": "lamp",
+    "file": "/models/Lamp_38/071_vray.glb",
+    "preview": "/preview/Lamp_38/071_vray.png",
+    "name": "Lamp 071_vray",
+    "cost": 16236000,
+    "color": "bw"
+  },
+  {
+    "type": "lamp",
+    "file": "/models/Lamp_38/072_vray.glb",
+    "preview": "/preview/Lamp_38/072_vray.png",
+    "name": "Lamp 072_vray",
+    "cost": 10504000,
+    "color": "bw"
+  },
+  {
+    "type": "lamp",
+    "file": "/models/Lamp_38/073_vray.glb",
+    "preview": "/preview/Lamp_38/073_vray.png",
+    "name": "Lamp 073_vray",
+    "cost": 13760000,
+    "color": "bw"
+  },
+  {
+    "type": "lamp",
+    "file": "/models/Lamp_38/074_vray.glb",
+    "preview": "/preview/Lamp_38/074_vray.png",
+    "name": "Lamp 074_vray",
+    "cost": 4642000,
+    "color": "bw"
+  },
+  {
+    "type": "lamp",
+    "file": "/models/Lamp_38/075_vray.glb",
+    "preview": "/preview/Lamp_38/075_vray.png",
+    "name": "Lamp 075_vray",
+    "cost": 2687000,
+    "color": "bw"
+  },
+  {
+    "type": "lamp",
+    "file": "/models/Lamp_38/076_vray.glb",
+    "preview": "/preview/Lamp_38/076_vray.png",
+    "name": "Lamp 076_vray",
+    "cost": 17217000,
+    "color": "bw"
+  },
+  {
+    "type": "lamp",
+    "file": "/models/Lamp_38/077_vray.glb",
+    "preview": "/preview/Lamp_38/077_vray.png",
+    "name": "Lamp 077_vray",
+    "cost": 7063000,
+    "color": "bw"
+  },
+  {
+    "type": "lamp",
+    "file": "/models/Lamp_38/078_vray.glb",
+    "preview": "/preview/Lamp_38/078_vray.png",
+    "name": "Lamp 078_vray",
+    "cost": 10554000,
+    "color": "bw"
+  },
+  {
+    "type": "lamp",
+    "file": "/models/Lamp_38/079_vray.glb",
+    "preview": "/preview/Lamp_38/079_vray.png",
+    "name": "Lamp 079_vray",
+    "cost": 11314000,
+    "color": "bw"
+  },
+  {
+    "type": "lamp",
+    "file": "/models/Lamp_38/080_vray.glb",
+    "preview": "/preview/Lamp_38/080_vray.png",
+    "name": "Lamp 080_vray",
+    "cost": 7120000,
+    "color": "bw"
+  },
+  {
+    "type": "lamp",
+    "file": "/models/Lamp_38/081_vray.glb",
+    "preview": "/preview/Lamp_38/081_vray.png",
+    "name": "Lamp 081_vray",
+    "cost": 2691000,
+    "color": "bw"
+  },
+  {
+    "type": "lamp",
+    "file": "/models/Lamp_38/082_vray.glb",
+    "preview": "/preview/Lamp_38/082_vray.png",
+    "name": "Lamp 082_vray",
+    "cost": 14096000,
+    "color": "bw"
+  },
+  {
+    "type": "lamp",
+    "file": "/models/Lamp_38/083_vray.glb",
+    "preview": "/preview/Lamp_38/083_vray.png",
+    "name": "Lamp 083_vray",
+    "cost": 18256000,
+    "color": "bw"
+  },
+  {
+    "type": "lamp",
+    "file": "/models/Lamp_38/084_vray.glb",
+    "preview": "/preview/Lamp_38/084_vray.png",
+    "name": "Lamp 084_vray",
+    "cost": 15946000,
+    "color": "bw"
+  },
+  {
+    "type": "lamp",
+    "file": "/models/Lamp_38/085_vray.glb",
+    "preview": "/preview/Lamp_38/085_vray.png",
+    "name": "Lamp 085_vray",
+    "cost": 17334000,
+    "color": "bw"
+  },
+  {
+    "type": "lamp",
+    "file": "/models/Lamp_38/086_vray.glb",
+    "preview": "/preview/Lamp_38/086_vray.png",
+    "name": "Lamp 086_vray",
+    "cost": 19781000,
+    "color": "bw"
+  },
+  {
+    "type": "lamp",
+    "file": "/models/Lamp_38/087_vray.glb",
+    "preview": "/preview/Lamp_38/087_vray.png",
+    "name": "Lamp 087_vray",
+    "cost": 2361000,
+    "color": "bw"
+  },
+  {
+    "type": "lamp",
+    "file": "/models/Lamp_38/088_vray.glb",
+    "preview": "/preview/Lamp_38/088_vray.png",
+    "name": "Lamp 088_vray",
+    "cost": 1596000,
+    "color": "bw"
+  },
+  {
+    "type": "lamp",
+    "file": "/models/Lamp_38/089_vray.glb",
+    "preview": "/preview/Lamp_38/089_vray.png",
+    "name": "Lamp 089_vray",
+    "cost": 4552000,
+    "color": "bw"
+  },
+  {
+    "type": "lamp",
+    "file": "/models/Lamp_38/090_vray.glb",
+    "preview": "/preview/Lamp_38/090_vray.png",
+    "name": "Lamp 090_vray",
+    "cost": 14652000,
+    "color": "bw"
+  },
+  {
+    "type": "lamp",
+    "file": "/models/Lamp_38/091_vray.glb",
+    "preview": "/preview/Lamp_38/091_vray.png",
+    "name": "Lamp 091_vray",
+    "cost": 12042000,
+    "color": "bw"
+  },
+  {
+    "type": "lamp",
+    "file": "/models/Lamp_38/092_vray.glb",
+    "preview": "/preview/Lamp_38/092_vray.png",
+    "name": "Lamp 092_vray",
+    "cost": 11723000,
+    "color": "bw"
+  },
+  {
+    "type": "lamp",
+    "file": "/models/Lamp_38/093_vray.glb",
+    "preview": "/preview/Lamp_38/093_vray.png",
+    "name": "Lamp 093_vray",
+    "cost": 2644000,
+    "color": "bw"
+  },
+  {
+    "type": "lamp",
+    "file": "/models/Lamp_38/094_vray.glb",
+    "preview": "/preview/Lamp_38/094_vray.png",
+    "name": "Lamp 094_vray",
+    "cost": 1664000,
+    "color": "bw"
+  },
+  {
+    "type": "lamp",
+    "file": "/models/Lamp_38/095_vray.glb",
+    "preview": "/preview/Lamp_38/095_vray.png",
+    "name": "Lamp 095_vray",
+    "cost": 6179000,
+    "color": "bw"
+  },
+  {
+    "type": "lamp",
+    "file": "/models/Lamp_38/096_vray.glb",
+    "preview": "/preview/Lamp_38/096_vray.png",
+    "name": "Lamp 096_vray",
+    "cost": 19110000,
+    "color": "bw"
+  },
+  {
+    "type": "lamp",
+    "file": "/models/Lamp_38/097_vray.glb",
+    "preview": "/preview/Lamp_38/097_vray.png",
+    "name": "Lamp 097_vray",
+    "cost": 4255000,
+    "color": "bw"
+  },
+  {
+    "type": "lamp",
+    "file": "/models/Lamp_38/098_vray.glb",
+    "preview": "/preview/Lamp_38/098_vray.png",
+    "name": "Lamp 098_vray",
+    "cost": 13748000,
+    "color": "bw"
+  },
+  {
+    "type": "lamp",
+    "file": "/models/Lamp_38/099_vray.glb",
+    "preview": "/preview/Lamp_38/099_vray.png",
+    "name": "Lamp 099_vray",
+    "cost": 16459000,
+    "color": "bw"
+  },
+  {
+    "type": "lamp",
+    "file": "/models/Lamp_38/100_vray.glb",
+    "preview": "/preview/Lamp_38/100_vray.png",
+    "name": "Lamp 100_vray",
+    "cost": 11595000,
+    "color": "bw"
+  },
+  {
+    "type": "lamp",
+    "file": "/models/Lamp_38/101_vray.glb",
+    "preview": "/preview/Lamp_38/101_vray.png",
+    "name": "Lamp 101_vray",
+    "cost": 8354000,
+    "color": "bw"
+  },
+  {
+    "type": "lamp",
+    "file": "/models/Lamp_38/102_vray.glb",
+    "preview": "/preview/Lamp_38/102_vray.png",
+    "name": "Lamp 102_vray",
+    "cost": 5326000,
+    "color": "bw"
+  },
+  {
+    "type": "lamp",
+    "file": "/models/Lamp_38/103_vray.glb",
+    "preview": "/preview/Lamp_38/103_vray.png",
+    "name": "Lamp 103_vray",
+    "cost": 12759000,
+    "color": "bw"
+  },
+  {
+    "type": "lamp",
+    "file": "/models/Lamp_38/104_vray.glb",
+    "preview": "/preview/Lamp_38/104_vray.png",
+    "name": "Lamp 104_vray",
+    "cost": 16215000,
+    "color": "bw"
+  },
+  {
+    "type": "lamp",
+    "file": "/models/Lamp_38/105_vray.glb",
+    "preview": "/preview/Lamp_38/105_vray.png",
+    "name": "Lamp 105_vray",
+    "cost": 5777000,
+    "color": "bw"
+  },
+  {
+    "type": "lamp",
+    "file": "/models/Lamp_38/106_vray.glb",
+    "preview": "/preview/Lamp_38/106_vray.png",
+    "name": "Lamp 106_vray",
+    "cost": 1296000,
+    "color": "bw"
+  },
+  {
+    "type": "lamp",
+    "file": "/models/Lamp_38/107_vray.glb",
+    "preview": "/preview/Lamp_38/107_vray.png",
+    "name": "Lamp 107_vray",
+    "cost": 18465000,
+    "color": "bw"
+  },
+  {
+    "type": "lamp",
+    "file": "/models/Lamp_38/108_vray.glb",
+    "preview": "/preview/Lamp_38/108_vray.png",
+    "name": "Lamp 108_vray",
+    "cost": 16061000,
+    "color": "bw"
+  },
+  {
+    "type": "lamp",
+    "file": "/models/Lamp_38/109_vray.glb",
+    "preview": "/preview/Lamp_38/109_vray.png",
+    "name": "Lamp 109_vray",
+    "cost": 19536000,
+    "color": "bw"
+  },
+  {
+    "type": "lamp",
+    "file": "/models/Lamp_38/110_vray.glb",
+    "preview": "/preview/Lamp_38/110_vray.png",
+    "name": "Lamp 110_vray",
+    "cost": 10922000,
+    "color": "bw"
+  },
+  {
+    "type": "lamp",
+    "file": "/models/Lamp_38/111_vray.glb",
+    "preview": "/preview/Lamp_38/111_vray.png",
+    "name": "Lamp 111_vray",
+    "cost": 7184000,
+    "color": "bw"
+  },
+  {
+    "type": "lamp",
+    "file": "/models/Lamp_38/112_vray.glb",
+    "preview": "/preview/Lamp_38/112_vray.png",
+    "name": "Lamp 112_vray",
+    "cost": 6989000,
+    "color": "bw"
+  },
+  {
+    "type": "lamp",
+    "file": "/models/Lamp_38/113_vray.glb",
+    "preview": "/preview/Lamp_38/113_vray.png",
+    "name": "Lamp 113_vray",
+    "cost": 6536000,
+    "color": "bw"
+  },
+  {
+    "type": "lamp",
+    "file": "/models/Lamp_38/114_vray.glb",
+    "preview": "/preview/Lamp_38/114_vray.png",
+    "name": "Lamp 114_vray",
+    "cost": 4509000,
+    "color": "bw"
+  },
+  {
+    "type": "lamp",
+    "file": "/models/Lamp_38/115_vray.glb",
+    "preview": "/preview/Lamp_38/115_vray.png",
+    "name": "Lamp 115_vray",
+    "cost": 11653000,
+    "color": "bw"
+  },
+  {
+    "type": "lamp",
+    "file": "/models/Lamp_38/116_vray.glb",
+    "preview": "/preview/Lamp_38/116_vray.png",
+    "name": "Lamp 116_vray",
+    "cost": 14505000,
+    "color": "bw"
+  },
+  {
+    "type": "lamp",
+    "file": "/models/Lamp_38/117_vray.glb",
+    "preview": "/preview/Lamp_38/117_vray.png",
+    "name": "Lamp 117_vray",
+    "cost": 4637000,
+    "color": "bw"
+  },
+  {
+    "type": "lamp",
+    "file": "/models/Lamp_38/118_vray.glb",
+    "preview": "/preview/Lamp_38/118_vray.png",
+    "name": "Lamp 118_vray",
+    "cost": 18294000,
+    "color": "bw"
+  },
+  {
+    "type": "lamp",
+    "file": "/models/Lamp_38/119_vray.glb",
+    "preview": "/preview/Lamp_38/119_vray.png",
+    "name": "Lamp 119_vray",
+    "cost": 17164000,
+    "color": "bw"
+  },
+  {
+    "type": "lamp",
+    "file": "/models/Lamp_38/120_vray.glb",
+    "preview": "/preview/Lamp_38/120_vray.png",
+    "name": "Lamp 120_vray",
+    "cost": 4676000,
+    "color": "bw"
+  },
+  {
+    "type": "lamp",
+    "file": "/models/Lamp_38/121_vray.glb",
+    "preview": "/preview/Lamp_38/121_vray.png",
+    "name": "Lamp 121_vray",
+    "cost": 14938000,
+    "color": "bw"
+  },
+  {
+    "type": "lamp",
+    "file": "/models/Lamp_38/122_vray.glb",
+    "preview": "/preview/Lamp_38/122_vray.png",
+    "name": "Lamp 122_vray",
+    "cost": 11819000,
+    "color": "bw"
+  },
+  {
+    "type": "lamp",
+    "file": "/models/Lamp_38/123_vray.glb",
+    "preview": "/preview/Lamp_38/123_vray.png",
+    "name": "Lamp 123_vray",
+    "cost": 7655000,
+    "color": "bw"
+  },
+  {
+    "type": "lamp",
+    "file": "/models/Lamp_38/124_vray.glb",
+    "preview": "/preview/Lamp_38/124_vray.png",
+    "name": "Lamp 124_vray",
+    "cost": 7244000,
+    "color": "bw"
+  },
+  {
+    "type": "lamp",
+    "file": "/models/Lamp_38/125_vray.glb",
+    "preview": "/preview/Lamp_38/125_vray.png",
+    "name": "Lamp 125_vray",
+    "cost": 15143000,
+    "color": "bw"
+  },
+  {
+    "type": "lamp",
+    "file": "/models/Lamp_38/126_vray.glb",
+    "preview": "/preview/Lamp_38/126_vray.png",
+    "name": "Lamp 126_vray",
+    "cost": 5974000,
+    "color": "bw"
+  },
+  {
+    "type": "lamp",
+    "file": "/models/Lamp_38/127_vray.glb",
+    "preview": "/preview/Lamp_38/127_vray.png",
+    "name": "Lamp 127_vray",
+    "cost": 14259000,
+    "color": "bw"
+  },
+  {
+    "type": "lamp",
+    "file": "/models/Lamp_38/128_vray.glb",
+    "preview": "/preview/Lamp_38/128_vray.png",
+    "name": "Lamp 128_vray",
+    "cost": 3807000,
+    "color": "bw"
+  },
+  {
+    "type": "lamp",
+    "file": "/models/Lamp_38/129_vray.glb",
+    "preview": "/preview/Lamp_38/129_vray.png",
+    "name": "Lamp 129_vray",
+    "cost": 8017000,
+    "color": "bw"
+  },
+  {
+    "type": "lamp",
+    "file": "/models/Lamp_38/130_vray.glb",
+    "preview": "/preview/Lamp_38/130_vray.png",
+    "name": "Lamp 130_vray",
+    "cost": 19114000,
+    "color": "bw"
+  },
+  {
+    "type": "lamp",
+    "file": "/models/Lamp_38/131_vray.glb",
+    "preview": "/preview/Lamp_38/131_vray.png",
+    "name": "Lamp 131_vray",
+    "cost": 14213000,
+    "color": "bw"
+  },
+  {
+    "type": "lamp",
+    "file": "/models/Lamp_38/132_vray.glb",
+    "preview": "/preview/Lamp_38/132_vray.png",
+    "name": "Lamp 132_vray",
+    "cost": 5682000,
+    "color": "bw"
+  },
+  {
+    "type": "lamp",
+    "file": "/models/Lamp_38/133_vray.glb",
+    "preview": "/preview/Lamp_38/133_vray.png",
+    "name": "Lamp 133_vray",
+    "cost": 5831000,
+    "color": "bw"
+  },
+  {
+    "type": "lamp",
+    "file": "/models/Lamp_38/134_vray.glb",
+    "preview": "/preview/Lamp_38/134_vray.png",
+    "name": "Lamp 134_vray",
+    "cost": 4995000,
+    "color": "bw"
+  }
+]

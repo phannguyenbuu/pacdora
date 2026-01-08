@@ -16,7 +16,7 @@
     "roughness": 0.85
   ,"matscale":2},
   {
-    "name": "Brushed Concrete 03",
+    "name": "Brushed/Concrete 03",
     "material": "brushed_concrete_03",
     "type": "MeshPhysicalMaterial",
     "map": "textures/diff/brushed_concrete_03_diff_1k.jpg",
@@ -24,7 +24,7 @@
     "roughness": 0.95
   ,"matscale":2},
   {
-    "name": "Brushed Concrete",
+    "name": "Brushed/Concrete",
     "material": "brushed_concrete",
     "type": "MeshPhysicalMaterial",
     "map": "textures/diff/brushed_concrete_diff_1k.jpg",
@@ -40,7 +40,7 @@
     "roughness": 0.98
   ,"matscale":2},
   {
-    "name": "Concrete Floor 02",
+    "name": "Concrete/Floor 02",
     "material": "concrete_floor_02",
     "type": "MeshPhysicalMaterial",
     "map": "textures/diff/concrete_floor_02_diff_1k.jpg",
@@ -48,7 +48,7 @@
     "roughness": 0.93
   ,"matscale":2},
   {
-    "name": "Concrete Floor 03",
+    "name": "Concrete/Floor 03",
     "material": "concrete_floor_03",
     "type": "MeshPhysicalMaterial",
     "map": "textures/diff/concrete_floor_03_diff_1k.jpg",
@@ -56,7 +56,7 @@
     "roughness": 0.94
   ,"matscale":2},
   {
-    "name": "Concrete Floor Painted",
+    "name": "Concrete/Floor Painted",
     "material": "concrete_floor_painted",
     "type": "MeshPhysicalMaterial",
     "map": "textures/diff/concrete_floor_painted_diff_1k.jpg",
@@ -64,7 +64,7 @@
     "roughness": 0.8
   ,"matscale":2},
   {
-    "name": "Concrete Floor Worn 001",
+    "name": "Concrete/Floor Worn 001",
     "material": "concrete_floor_worn_001",
     "type": "MeshPhysicalMaterial",
     "map": "textures/diff/concrete_floor_worn_001_diff_1k.jpg",
@@ -72,7 +72,7 @@
     "roughness": 0.96
   ,"matscale":2},
   {
-    "name": "Concrete Moss",
+    "name": "Concrete/Moss",
     "material": "concrete_moss",
     "type": "MeshPhysicalMaterial",
     "map": "textures/diff/concrete_moss_diff_1k.jpg",
@@ -80,7 +80,7 @@
     "roughness": 0.97
   ,"matscale":2},
   {
-    "name": "Concrete Pavement",
+    "name": "Concrete/Pavement",
     "material": "concrete_pavement",
     "type": "MeshPhysicalMaterial",
     "map": "textures/diff/concrete_pavement_diff_1k.jpg",
@@ -88,7 +88,7 @@
     "roughness": 0.92
   ,"matscale":2},
   {
-    "name": "Concrete Pavers",
+    "name": "Concrete/Pavers",
     "material": "concrete_pavers",
     "type": "MeshPhysicalMaterial",
     "map": "textures/diff/concrete_pavers_diff_1k.jpg",
@@ -96,7 +96,7 @@
     "roughness": 0.9
   ,"matscale":2},
   {
-    "name": "Concrete Rock Path",
+    "name": "Concrete/Rock Path",
     "material": "concrete_rock_path",
     "type": "MeshPhysicalMaterial",
     "map": "textures/diff/concrete_rock_path_diff_1k.jpg",
@@ -104,7 +104,7 @@
     "roughness": 0.94
   ,"matscale":2},
   {
-    "name": "Cracked Concrete",
+    "name": "Concrete/Cracked Concrete",
     "material": "cracked_concrete",
     "type": "MeshPhysicalMaterial",
     "map": "textures/diff/cracked_concrete_diff_1k.jpg",
@@ -112,7 +112,7 @@
     "roughness": 0.95
   ,"matscale":2},
   {
-    "name": "Damaged Concrete Floor 02",
+    "name": "Concrete/Damaged Concrete Floor 02",
     "material": "damaged_concrete_floor_02",
     "type": "MeshPhysicalMaterial",
     "map": "textures/diff/damaged_concrete_floor_02_diff_1k.jpg",
@@ -120,7 +120,7 @@
     "roughness": 0.96
   ,"matscale":2},
   {
-    "name": "Dark Wooden Planks",
+    "name": "Wood/Dark Wooden Planks",
     "material": "dark_wooden_planks",
     "type": "MeshPhysicalMaterial",
     "map": "textures/diff/dark_wooden_planks_diff_1k.jpg",

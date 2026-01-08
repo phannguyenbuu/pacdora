@@ -1,0 +1,770 @@
+[
+  {
+    "type": "bed",
+    "file": "/models/Bed_36/001.glb",
+    "preview": "/preview/Bed_36/001.png",
+    "name": "Bed 001",
+    "cost": 15232000,
+    "color": "bw"
+  },
+  {
+    "type": "bed",
+    "file": "/models/Bed_36/002.glb",
+    "preview": "/preview/Bed_36/002.png",
+    "name": "Bed 002",
+    "cost": 10514000,
+    "color": "bw"
+  },
+  {
+    "type": "bed",
+    "file": "/models/Bed_36/003.glb",
+    "preview": "/preview/Bed_36/003.png",
+    "name": "Bed 003",
+    "cost": 3728000,
+    "color": "bw"
+  },
+  {
+    "type": "bed",
+    "file": "/models/Bed_36/004.glb",
+    "preview": "/preview/Bed_36/004.png",
+    "name": "Bed 004",
+    "cost": 14939000,
+    "color": "bw"
+  },
+  {
+    "type": "bed",
+    "file": "/models/Bed_36/005.glb",
+    "preview": "/preview/Bed_36/005.png",
+    "name": "Bed 005",
+    "cost": 9556000,
+    "color": "bw"
+  },
+  {
+    "type": "bed",
+    "file": "/models/Bed_36/006.glb",
+    "preview": "/preview/Bed_36/006.png",
+    "name": "Bed 006",
+    "cost": 10687000,
+    "color": "bw"
+  },
+  {
+    "type": "bed",
+    "file": "/models/Bed_36/007.glb",
+    "preview": "/preview/Bed_36/007.png",
+    "name": "Bed 007",
+    "cost": 10716000,
+    "color": "bw"
+  },
+  {
+    "type": "bed",
+    "file": "/models/Bed_36/008.glb",
+    "preview": "/preview/Bed_36/008.png",
+    "name": "Bed 008",
+    "cost": 12431000,
+    "color": "bw"
+  },
+  {
+    "type": "bed",
+    "file": "/models/Bed_36/009.glb",
+    "preview": "/preview/Bed_36/009.png",
+    "name": "Bed 009",
+    "cost": 14452000,
+    "color": "bw"
+  },
+  {
+    "type": "bed",
+    "file": "/models/Bed_36/010.glb",
+    "preview": "/preview/Bed_36/010.png",
+    "name": "Bed 010",
+    "cost": 5789000,
+    "color": "bw"
+  },
+  {
+    "type": "bed",
+    "file": "/models/Bed_36/011.glb",
+    "preview": "/preview/Bed_36/011.png",
+    "name": "Bed 011",
+    "cost": 9970000,
+    "color": "bw"
+  },
+  {
+    "type": "bed",
+    "file": "/models/Bed_36/012.glb",
+    "preview": "/preview/Bed_36/012.png",
+    "name": "Bed 012",
+    "cost": 13008000,
+    "color": "bw"
+  },
+  {
+    "type": "bed",
+    "file": "/models/Bed_36/013.glb",
+    "preview": "/preview/Bed_36/013.png",
+    "name": "Bed 013",
+    "cost": 8780000,
+    "color": "bw"
+  },
+  {
+    "type": "bed",
+    "file": "/models/Bed_36/014.glb",
+    "preview": "/preview/Bed_36/014.png",
+    "name": "Bed 014",
+    "cost": 18345000,
+    "color": "bw"
+  },
+  {
+    "type": "bed",
+    "file": "/models/Bed_36/015.glb",
+    "preview": "/preview/Bed_36/015.png",
+    "name": "Bed 015",
+    "cost": 11400000,
+    "color": "bw"
+  },
+  {
+    "type": "bed",
+    "file": "/models/Bed_36/016.glb",
+    "preview": "/preview/Bed_36/016.png",
+    "name": "Bed 016",
+    "cost": 1533000,
+    "color": "bw"
+  },
+  {
+    "type": "bed",
+    "file": "/models/Bed_36/017.glb",
+    "preview": "/preview/Bed_36/017.png",
+    "name": "Bed 017",
+    "cost": 1951000,
+    "color": "bw"
+  },
+  {
+    "type": "bed",
+    "file": "/models/Bed_36/018.glb",
+    "preview": "/preview/Bed_36/018.png",
+    "name": "Bed 018",
+    "cost": 11140000,
+    "color": "bw"
+  },
+  {
+    "type": "bed",
+    "file": "/models/Bed_36/019.glb",
+    "preview": "/preview/Bed_36/019.png",
+    "name": "Bed 019",
+    "cost": 12426000,
+    "color": "bw"
+  },
+  {
+    "type": "bed",
+    "file": "/models/Bed_36/020.glb",
+    "preview": "/preview/Bed_36/020.png",
+    "name": "Bed 020",
+    "cost": 5761000,
+    "color": "bw"
+  },
+  {
+    "type": "bed",
+    "file": "/models/Bed_36/021.glb",
+    "preview": "/preview/Bed_36/021.png",
+    "name": "Bed 021",
+    "cost": 3786000,
+    "color": "bw"
+  },
+  {
+    "type": "bed",
+    "file": "/models/Bed_36/022.glb",
+    "preview": "/preview/Bed_36/022.png",
+    "name": "Bed 022",
+    "cost": 19100000,
+    "color": "bw"
+  },
+  {
+    "type": "bed",
+    "file": "/models/Bed_36/023.glb",
+    "preview": "/preview/Bed_36/023.png",
+    "name": "Bed 023",
+    "cost": 1178000,
+    "color": "bw"
+  },
+  {
+    "type": "bed",
+    "file": "/models/Bed_36/024.glb",
+    "preview": "/preview/Bed_36/024.png",
+    "name": "Bed 024",
+    "cost": 1908000,
+    "color": "bw"
+  },
+  {
+    "type": "bed",
+    "file": "/models/Bed_36/025.glb",
+    "preview": "/preview/Bed_36/025.png",
+    "name": "Bed 025",
+    "cost": 12153000,
+    "color": "bw"
+  },
+  {
+    "type": "bed",
+    "file": "/models/Bed_36/026.glb",
+    "preview": "/preview/Bed_36/026.png",
+    "name": "Bed 026",
+    "cost": 9205000,
+    "color": "bw"
+  },
+  {
+    "type": "bed",
+    "file": "/models/Bed_36/027.glb",
+    "preview": "/preview/Bed_36/027.png",
+    "name": "Bed 027",
+    "cost": 2830000,
+    "color": "bw"
+  },
+  {
+    "type": "bed",
+    "file": "/models/Bed_36/028.glb",
+    "preview": "/preview/Bed_36/028.png",
+    "name": "Bed 028",
+    "cost": 18314000,
+    "color": "bw"
+  },
+  {
+    "type": "bed",
+    "file": "/models/Bed_36/029.glb",
+    "preview": "/preview/Bed_36/029.png",
+    "name": "Bed 029",
+    "cost": 10228000,
+    "color": "bw"
+  },
+  {
+    "type": "bed",
+    "file": "/models/Bed_36/030.glb",
+    "preview": "/preview/Bed_36/030.png",
+    "name": "Bed 030",
+    "cost": 6661000,
+    "color": "bw"
+  },
+  {
+    "type": "bed",
+    "file": "/models/Bed_36/031.glb",
+    "preview": "/preview/Bed_36/031.png",
+    "name": "Bed 031",
+    "cost": 6161000,
+    "color": "bw"
+  },
+  {
+    "type": "bed",
+    "file": "/models/Bed_36/032.glb",
+    "preview": "/preview/Bed_36/032.png",
+    "name": "Bed 032",
+    "cost": 4916000,
+    "color": "bw"
+  },
+  {
+    "type": "bed",
+    "file": "/models/Bed_36/033.glb",
+    "preview": "/preview/Bed_36/033.png",
+    "name": "Bed 033",
+    "cost": 17699000,
+    "color": "bw"
+  },
+  {
+    "type": "bed",
+    "file": "/models/Bed_36/034.glb",
+    "preview": "/preview/Bed_36/034.png",
+    "name": "Bed 034",
+    "cost": 14196000,
+    "color": "bw"
+  },
+  {
+    "type": "bed",
+    "file": "/models/Bed_36/035.glb",
+    "preview": "/preview/Bed_36/035.png",
+    "name": "Bed 035",
+    "cost": 7214000,
+    "color": "bw"
+  },
+  {
+    "type": "bed",
+    "file": "/models/Bed_36/036.glb",
+    "preview": "/preview/Bed_36/036.png",
+    "name": "Bed 036",
+    "cost": 15935000,
+    "color": "bw"
+  },
+  {
+    "type": "bed",
+    "file": "/models/Bed_36/037.glb",
+    "preview": "/preview/Bed_36/037.png",
+    "name": "Bed 037",
+    "cost": 15841000,
+    "color": "bw"
+  },
+  {
+    "type": "bed",
+    "file": "/models/Bed_36/038.glb",
+    "preview": "/preview/Bed_36/038.png",
+    "name": "Bed 038",
+    "cost": 19708000,
+    "color": "bw"
+  },
+  {
+    "type": "bed",
+    "file": "/models/Bed_36/039.glb",
+    "preview": "/preview/Bed_36/039.png",
+    "name": "Bed 039",
+    "cost": 19240000,
+    "color": "bw"
+  },
+  {
+    "type": "bed",
+    "file": "/models/Bed_36/040.glb",
+    "preview": "/preview/Bed_36/040.png",
+    "name": "Bed 040",
+    "cost": 7456000,
+    "color": "bw"
+  },
+  {
+    "type": "bed",
+    "file": "/models/Bed_36/041.glb",
+    "preview": "/preview/Bed_36/041.png",
+    "name": "Bed 041",
+    "cost": 11905000,
+    "color": "bw"
+  },
+  {
+    "type": "bed",
+    "file": "/models/Bed_36/042.glb",
+    "preview": "/preview/Bed_36/042.png",
+    "name": "Bed 042",
+    "cost": 14345000,
+    "color": "bw"
+  },
+  {
+    "type": "bed",
+    "file": "/models/Bed_36/043.glb",
+    "preview": "/preview/Bed_36/043.png",
+    "name": "Bed 043",
+    "cost": 12218000,
+    "color": "bw"
+  },
+  {
+    "type": "bed",
+    "file": "/models/Bed_36/044.glb",
+    "preview": "/preview/Bed_36/044.png",
+    "name": "Bed 044",
+    "cost": 5552000,
+    "color": "bw"
+  },
+  {
+    "type": "bed",
+    "file": "/models/Bed_36/045.glb",
+    "preview": "/preview/Bed_36/045.png",
+    "name": "Bed 045",
+    "cost": 2758000,
+    "color": "bw"
+  },
+  {
+    "type": "bed",
+    "file": "/models/Bed_36/046.glb",
+    "preview": "/preview/Bed_36/046.png",
+    "name": "Bed 046",
+    "cost": 7871000,
+    "color": "bw"
+  },
+  {
+    "type": "bed",
+    "file": "/models/Bed_36/047.glb",
+    "preview": "/preview/Bed_36/047.png",
+    "name": "Bed 047",
+    "cost": 5279000,
+    "color": "bw"
+  },
+  {
+    "type": "bed",
+    "file": "/models/Bed_36/048.glb",
+    "preview": "/preview/Bed_36/048.png",
+    "name": "Bed 048",
+    "cost": 13121000,
+    "color": "bw"
+  },
+  {
+    "type": "bed",
+    "file": "/models/Bed_36/049.glb",
+    "preview": "/preview/Bed_36/049.png",
+    "name": "Bed 049",
+    "cost": 9190000,
+    "color": "bw"
+  },
+  {
+    "type": "bed",
+    "file": "/models/Bed_36/050.glb",
+    "preview": "/preview/Bed_36/050.png",
+    "name": "Bed 050",
+    "cost": 15514000,
+    "color": "bw"
+  },
+  {
+    "type": "bed",
+    "file": "/models/Bed_36/051.glb",
+    "preview": "/preview/Bed_36/051.png",
+    "name": "Bed 051",
+    "cost": 16849000,
+    "color": "bw"
+  },
+  {
+    "type": "bed",
+    "file": "/models/Bed_36/052.glb",
+    "preview": "/preview/Bed_36/052.png",
+    "name": "Bed 052",
+    "cost": 10906000,
+    "color": "bw"
+  },
+  {
+    "type": "bed",
+    "file": "/models/Bed_36/053.glb",
+    "preview": "/preview/Bed_36/053.png",
+    "name": "Bed 053",
+    "cost": 15323000,
+    "color": "bw"
+  },
+  {
+    "type": "bed",
+    "file": "/models/Bed_36/054.glb",
+    "preview": "/preview/Bed_36/054.png",
+    "name": "Bed 054",
+    "cost": 6116000,
+    "color": "bw"
+  },
+  {
+    "type": "bed",
+    "file": "/models/Bed_36/055.glb",
+    "preview": "/preview/Bed_36/055.png",
+    "name": "Bed 055",
+    "cost": 18412000,
+    "color": "bw"
+  },
+  {
+    "type": "bed",
+    "file": "/models/Bed_36/056.glb",
+    "preview": "/preview/Bed_36/056.png",
+    "name": "Bed 056",
+    "cost": 6379000,
+    "color": "bw"
+  },
+  {
+    "type": "bed",
+    "file": "/models/Bed_36/057.glb",
+    "preview": "/preview/Bed_36/057.png",
+    "name": "Bed 057",
+    "cost": 6007000,
+    "color": "bw"
+  },
+  {
+    "type": "bed",
+    "file": "/models/Bed_36/058.glb",
+    "preview": "/preview/Bed_36/058.png",
+    "name": "Bed 058",
+    "cost": 11694000,
+    "color": "bw"
+  },
+  {
+    "type": "bed",
+    "file": "/models/Bed_36/059.glb",
+    "preview": "/preview/Bed_36/059.png",
+    "name": "Bed 059",
+    "cost": 11485000,
+    "color": "bw"
+  },
+  {
+    "type": "bed",
+    "file": "/models/Bed_36/060.glb",
+    "preview": "/preview/Bed_36/060.png",
+    "name": "Bed 060",
+    "cost": 16064000,
+    "color": "bw"
+  },
+  {
+    "type": "bed",
+    "file": "/models/Bed_36/061.glb",
+    "preview": "/preview/Bed_36/061.png",
+    "name": "Bed 061",
+    "cost": 10240000,
+    "color": "bw"
+  },
+  {
+    "type": "bed",
+    "file": "/models/Bed_36/062.glb",
+    "preview": "/preview/Bed_36/062.png",
+    "name": "Bed 062",
+    "cost": 8803000,
+    "color": "bw"
+  },
+  {
+    "type": "bed",
+    "file": "/models/Bed_36/063.glb",
+    "preview": "/preview/Bed_36/063.png",
+    "name": "Bed 063",
+    "cost": 11571000,
+    "color": "bw"
+  },
+  {
+    "type": "bed",
+    "file": "/models/Bed_36/064.glb",
+    "preview": "/preview/Bed_36/064.png",
+    "name": "Bed 064",
+    "cost": 3807000,
+    "color": "bw"
+  },
+  {
+    "type": "bed",
+    "file": "/models/Bed_36/065.glb",
+    "preview": "/preview/Bed_36/065.png",
+    "name": "Bed 065",
+    "cost": 3820000,
+    "color": "bw"
+  },
+  {
+    "type": "bed",
+    "file": "/models/Bed_36/066.glb",
+    "preview": "/preview/Bed_36/066.png",
+    "name": "Bed 066",
+    "cost": 13496000,
+    "color": "bw"
+  },
+  {
+    "type": "bed",
+    "file": "/models/Bed_36/067.glb",
+    "preview": "/preview/Bed_36/067.png",
+    "name": "Bed 067",
+    "cost": 15480000,
+    "color": "bw"
+  },
+  {
+    "type": "bed",
+    "file": "/models/Bed_36/068.glb",
+    "preview": "/preview/Bed_36/068.png",
+    "name": "Bed 068",
+    "cost": 11494000,
+    "color": "bw"
+  },
+  {
+    "type": "bed",
+    "file": "/models/Bed_36/069.glb",
+    "preview": "/preview/Bed_36/069.png",
+    "name": "Bed 069",
+    "cost": 13956000,
+    "color": "bw"
+  },
+  {
+    "type": "bed",
+    "file": "/models/Bed_36/070.glb",
+    "preview": "/preview/Bed_36/070.png",
+    "name": "Bed 070",
+    "cost": 17724000,
+    "color": "bw"
+  },
+  {
+    "type": "bed",
+    "file": "/models/Bed_36/071.glb",
+    "preview": "/preview/Bed_36/071.png",
+    "name": "Bed 071",
+    "cost": 6049000,
+    "color": "bw"
+  },
+  {
+    "type": "bed",
+    "file": "/models/Bed_36/072.glb",
+    "preview": "/preview/Bed_36/072.png",
+    "name": "Bed 072",
+    "cost": 10603000,
+    "color": "bw"
+  },
+  {
+    "type": "bed",
+    "file": "/models/Bed_36/073.glb",
+    "preview": "/preview/Bed_36/073.png",
+    "name": "Bed 073",
+    "cost": 15790000,
+    "color": "bw"
+  },
+  {
+    "type": "bed",
+    "file": "/models/Bed_36/074.glb",
+    "preview": "/preview/Bed_36/074.png",
+    "name": "Bed 074",
+    "cost": 7423000,
+    "color": "bw"
+  },
+  {
+    "type": "bed",
+    "file": "/models/Bed_36/075.glb",
+    "preview": "/preview/Bed_36/075.png",
+    "name": "Bed 075",
+    "cost": 18905000,
+    "color": "bw"
+  },
+  {
+    "type": "bed",
+    "file": "/models/Bed_36/076.glb",
+    "preview": "/preview/Bed_36/076.png",
+    "name": "Bed 076",
+    "cost": 3198000,
+    "color": "bw"
+  },
+  {
+    "type": "bed",
+    "file": "/models/Bed_36/077.glb",
+    "preview": "/preview/Bed_36/077.png",
+    "name": "Bed 077",
+    "cost": 12300000,
+    "color": "bw"
+  },
+  {
+    "type": "bed",
+    "file": "/models/Bed_36/078.glb",
+    "preview": "/preview/Bed_36/078.png",
+    "name": "Bed 078",
+    "cost": 18167000,
+    "color": "bw"
+  },
+  {
+    "type": "bed",
+    "file": "/models/Bed_36/079.glb",
+    "preview": "/preview/Bed_36/079.png",
+    "name": "Bed 079",
+    "cost": 18380000,
+    "color": "bw"
+  },
+  {
+    "type": "bed",
+    "file": "/models/Bed_36/080.glb",
+    "preview": "/preview/Bed_36/080.png",
+    "name": "Bed 080",
+    "cost": 4624000,
+    "color": "bw"
+  },
+  {
+    "type": "bed",
+    "file": "/models/Bed_36/081.glb",
+    "preview": "/preview/Bed_36/081.png",
+    "name": "Bed 081",
+    "cost": 2332000,
+    "color": "bw"
+  },
+  {
+    "type": "bed",
+    "file": "/models/Bed_36/082.glb",
+    "preview": "/preview/Bed_36/082.png",
+    "name": "Bed 082",
+    "cost": 7511000,
+    "color": "bw"
+  },
+  {
+    "type": "bed",
+    "file": "/models/Bed_36/083.glb",
+    "preview": "/preview/Bed_36/083.png",
+    "name": "Bed 083",
+    "cost": 14030000,
+    "color": "bw"
+  },
+  {
+    "type": "bed",
+    "file": "/models/Bed_36/084.glb",
+    "preview": "/preview/Bed_36/084.png",
+    "name": "Bed 084",
+    "cost": 1040000,
+    "color": "bw"
+  },
+  {
+    "type": "bed",
+    "file": "/models/Bed_36/085.glb",
+    "preview": "/preview/Bed_36/085.png",
+    "name": "Bed 085",
+    "cost": 4415000,
+    "color": "bw"
+  },
+  {
+    "type": "bed",
+    "file": "/models/Bed_36/086.glb",
+    "preview": "/preview/Bed_36/086.png",
+    "name": "Bed 086",
+    "cost": 8500000,
+    "color": "bw"
+  },
+  {
+    "type": "bed",
+    "file": "/models/Bed_36/087.glb",
+    "preview": "/preview/Bed_36/087.png",
+    "name": "Bed 087",
+    "cost": 17595000,
+    "color": "bw"
+  },
+  {
+    "type": "bed",
+    "file": "/models/Bed_36/088.glb",
+    "preview": "/preview/Bed_36/088.png",
+    "name": "Bed 088",
+    "cost": 15410000,
+    "color": "bw"
+  },
+  {
+    "type": "bed",
+    "file": "/models/Bed_36/089.glb",
+    "preview": "/preview/Bed_36/089.png",
+    "name": "Bed 089",
+    "cost": 1072000,
+    "color": "bw"
+  },
+  {
+    "type": "bed",
+    "file": "/models/Bed_36/090.glb",
+    "preview": "/preview/Bed_36/090.png",
+    "name": "Bed 090",
+    "cost": 7090000,
+    "color": "bw"
+  },
+  {
+    "type": "bed",
+    "file": "/models/Bed_36/091.glb",
+    "preview": "/preview/Bed_36/091.png",
+    "name": "Bed 091",
+    "cost": 2311000,
+    "color": "bw"
+  },
+  {
+    "type": "bed",
+    "file": "/models/Bed_36/092.glb",
+    "preview": "/preview/Bed_36/092.png",
+    "name": "Bed 092",
+    "cost": 6238000,
+    "color": "bw"
+  },
+  {
+    "type": "bed",
+    "file": "/models/Bed_36/093.glb",
+    "preview": "/preview/Bed_36/093.png",
+    "name": "Bed 093",
+    "cost": 17817000,
+    "color": "bw"
+  },
+  {
+    "type": "bed",
+    "file": "/models/Bed_36/094.glb",
+    "preview": "/preview/Bed_36/094.png",
+    "name": "Bed 094",
+    "cost": 6568000,
+    "color": "bw"
+  },
+  {
+    "type": "bed",
+    "file": "/models/Bed_36/095.glb",
+    "preview": "/preview/Bed_36/095.png",
+    "name": "Bed 095",
+    "cost": 2243000,
+    "color": "bw"
+  },
+  {
+    "type": "bed",
+    "file": "/models/Bed_36/096.glb",
+    "preview": "/preview/Bed_36/096.png",
+    "name": "Bed 096",
+    "cost": 15024000,
+    "color": "bw"
+  }
+]

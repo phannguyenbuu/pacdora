@@ -1,0 +1,922 @@
+[
+  {
+    "type": "cabinet",
+    "file": "/models/Cabinet_39/001.glb",
+    "preview": "/preview/Cabinet_39/001.png",
+    "name": "Cabinet 001",
+    "cost": 7699000,
+    "color": "bw"
+  },
+  {
+    "type": "cabinet",
+    "file": "/models/Cabinet_39/002.glb",
+    "preview": "/preview/Cabinet_39/002.png",
+    "name": "Cabinet 002",
+    "cost": 8723000,
+    "color": "bw"
+  },
+  {
+    "type": "cabinet",
+    "file": "/models/Cabinet_39/003.glb",
+    "preview": "/preview/Cabinet_39/003.png",
+    "name": "Cabinet 003",
+    "cost": 18641000,
+    "color": "bw"
+  },
+  {
+    "type": "cabinet",
+    "file": "/models/Cabinet_39/004.glb",
+    "preview": "/preview/Cabinet_39/004.png",
+    "name": "Cabinet 004",
+    "cost": 7759000,
+    "color": "bw"
+  },
+  {
+    "type": "cabinet",
+    "file": "/models/Cabinet_39/005.glb",
+    "preview": "/preview/Cabinet_39/005.png",
+    "name": "Cabinet 005",
+    "cost": 17938000,
+    "color": "bw"
+  },
+  {
+    "type": "cabinet",
+    "file": "/models/Cabinet_39/006.glb",
+    "preview": "/preview/Cabinet_39/006.png",
+    "name": "Cabinet 006",
+    "cost": 13421000,
+    "color": "bw"
+  },
+  {
+    "type": "cabinet",
+    "file": "/models/Cabinet_39/007.glb",
+    "preview": "/preview/Cabinet_39/007.png",
+    "name": "Cabinet 007",
+    "cost": 19345000,
+    "color": "bw"
+  },
+  {
+    "type": "cabinet",
+    "file": "/models/Cabinet_39/008.glb",
+    "preview": "/preview/Cabinet_39/008.png",
+    "name": "Cabinet 008",
+    "cost": 14774000,
+    "color": "bw"
+  },
+  {
+    "type": "cabinet",
+    "file": "/models/Cabinet_39/009.glb",
+    "preview": "/preview/Cabinet_39/009.png",
+    "name": "Cabinet 009",
+    "cost": 4009000,
+    "color": "bw"
+  },
+  {
+    "type": "cabinet",
+    "file": "/models/Cabinet_39/010.glb",
+    "preview": "/preview/Cabinet_39/010.png",
+    "name": "Cabinet 010",
+    "cost": 2282000,
+    "color": "bw"
+  },
+  {
+    "type": "cabinet",
+    "file": "/models/Cabinet_39/011.glb",
+    "preview": "/preview/Cabinet_39/011.png",
+    "name": "Cabinet 011",
+    "cost": 19419000,
+    "color": "bw"
+  },
+  {
+    "type": "cabinet",
+    "file": "/models/Cabinet_39/012.glb",
+    "preview": "/preview/Cabinet_39/012.png",
+    "name": "Cabinet 012",
+    "cost": 8817000,
+    "color": "bw"
+  },
+  {
+    "type": "cabinet",
+    "file": "/models/Cabinet_39/013.glb",
+    "preview": "/preview/Cabinet_39/013.png",
+    "name": "Cabinet 013",
+    "cost": 17031000,
+    "color": "bw"
+  },
+  {
+    "type": "cabinet",
+    "file": "/models/Cabinet_39/014.glb",
+    "preview": "/preview/Cabinet_39/014.png",
+    "name": "Cabinet 014",
+    "cost": 2276000,
+    "color": "bw"
+  },
+  {
+    "type": "cabinet",
+    "file": "/models/Cabinet_39/015.glb",
+    "preview": "/preview/Cabinet_39/015.png",
+    "name": "Cabinet 015",
+    "cost": 8522000,
+    "color": "bw"
+  },
+  {
+    "type": "cabinet",
+    "file": "/models/Cabinet_39/016.glb",
+    "preview": "/preview/Cabinet_39/016.png",
+    "name": "Cabinet 016",
+    "cost": 12147000,
+    "color": "bw"
+  },
+  {
+    "type": "cabinet",
+    "file": "/models/Cabinet_39/017.glb",
+    "preview": "/preview/Cabinet_39/017.png",
+    "name": "Cabinet 017",
+    "cost": 8481000,
+    "color": "bw"
+  },
+  {
+    "type": "cabinet",
+    "file": "/models/Cabinet_39/018.glb",
+    "preview": "/preview/Cabinet_39/018.png",
+    "name": "Cabinet 018",
+    "cost": 6970000,
+    "color": "bw"
+  },
+  {
+    "type": "cabinet",
+    "file": "/models/Cabinet_39/019.glb",
+    "preview": "/preview/Cabinet_39/019.png",
+    "name": "Cabinet 019",
+    "cost": 3321000,
+    "color": "bw"
+  },
+  {
+    "type": "cabinet",
+    "file": "/models/Cabinet_39/020.glb",
+    "preview": "/preview/Cabinet_39/020.png",
+    "name": "Cabinet 020",
+    "cost": 3892000,
+    "color": "bw"
+  },
+  {
+    "type": "cabinet",
+    "file": "/models/Cabinet_39/021.glb",
+    "preview": "/preview/Cabinet_39/021.png",
+    "name": "Cabinet 021",
+    "cost": 9146000,
+    "color": "bw"
+  },
+  {
+    "type": "cabinet",
+    "file": "/models/Cabinet_39/022.glb",
+    "preview": "/preview/Cabinet_39/022.png",
+    "name": "Cabinet 022",
+    "cost": 18822000,
+    "color": "bw"
+  },
+  {
+    "type": "cabinet",
+    "file": "/models/Cabinet_39/023.glb",
+    "preview": "/preview/Cabinet_39/023.png",
+    "name": "Cabinet 023",
+    "cost": 13717000,
+    "color": "bw"
+  },
+  {
+    "type": "cabinet",
+    "file": "/models/Cabinet_39/024.glb",
+    "preview": "/preview/Cabinet_39/024.png",
+    "name": "Cabinet 024",
+    "cost": 14639000,
+    "color": "bw"
+  },
+  {
+    "type": "cabinet",
+    "file": "/models/Cabinet_39/025.glb",
+    "preview": "/preview/Cabinet_39/025.png",
+    "name": "Cabinet 025",
+    "cost": 4308000,
+    "color": "bw"
+  },
+  {
+    "type": "cabinet",
+    "file": "/models/Cabinet_39/026.glb",
+    "preview": "/preview/Cabinet_39/026.png",
+    "name": "Cabinet 026",
+    "cost": 18341000,
+    "color": "bw"
+  },
+  {
+    "type": "cabinet",
+    "file": "/models/Cabinet_39/027.glb",
+    "preview": "/preview/Cabinet_39/027.png",
+    "name": "Cabinet 027",
+    "cost": 12366000,
+    "color": "bw"
+  },
+  {
+    "type": "cabinet",
+    "file": "/models/Cabinet_39/028.glb",
+    "preview": "/preview/Cabinet_39/028.png",
+    "name": "Cabinet 028",
+    "cost": 6965000,
+    "color": "bw"
+  },
+  {
+    "type": "cabinet",
+    "file": "/models/Cabinet_39/029.glb",
+    "preview": "/preview/Cabinet_39/029.png",
+    "name": "Cabinet 029",
+    "cost": 8808000,
+    "color": "bw"
+  },
+  {
+    "type": "cabinet",
+    "file": "/models/Cabinet_39/030.glb",
+    "preview": "/preview/Cabinet_39/030.png",
+    "name": "Cabinet 030",
+    "cost": 9193000,
+    "color": "bw"
+  },
+  {
+    "type": "cabinet",
+    "file": "/models/Cabinet_39/031.glb",
+    "preview": "/preview/Cabinet_39/031.png",
+    "name": "Cabinet 031",
+    "cost": 3475000,
+    "color": "bw"
+  },
+  {
+    "type": "cabinet",
+    "file": "/models/Cabinet_39/032.glb",
+    "preview": "/preview/Cabinet_39/032.png",
+    "name": "Cabinet 032",
+    "cost": 6994000,
+    "color": "bw"
+  },
+  {
+    "type": "cabinet",
+    "file": "/models/Cabinet_39/033.glb",
+    "preview": "/preview/Cabinet_39/033.png",
+    "name": "Cabinet 033",
+    "cost": 1019000,
+    "color": "bw"
+  },
+  {
+    "type": "cabinet",
+    "file": "/models/Cabinet_39/034.glb",
+    "preview": "/preview/Cabinet_39/034.png",
+    "name": "Cabinet 034",
+    "cost": 6222000,
+    "color": "bw"
+  },
+  {
+    "type": "cabinet",
+    "file": "/models/Cabinet_39/035.glb",
+    "preview": "/preview/Cabinet_39/035.png",
+    "name": "Cabinet 035",
+    "cost": 1500000,
+    "color": "bw"
+  },
+  {
+    "type": "cabinet",
+    "file": "/models/Cabinet_39/036.glb",
+    "preview": "/preview/Cabinet_39/036.png",
+    "name": "Cabinet 036",
+    "cost": 7936000,
+    "color": "bw"
+  },
+  {
+    "type": "cabinet",
+    "file": "/models/Cabinet_39/037.glb",
+    "preview": "/preview/Cabinet_39/037.png",
+    "name": "Cabinet 037",
+    "cost": 18590000,
+    "color": "bw"
+  },
+  {
+    "type": "cabinet",
+    "file": "/models/Cabinet_39/038.glb",
+    "preview": "/preview/Cabinet_39/038.png",
+    "name": "Cabinet 038",
+    "cost": 9369000,
+    "color": "bw"
+  },
+  {
+    "type": "cabinet",
+    "file": "/models/Cabinet_39/039.glb",
+    "preview": "/preview/Cabinet_39/039.png",
+    "name": "Cabinet 039",
+    "cost": 5445000,
+    "color": "bw"
+  },
+  {
+    "type": "cabinet",
+    "file": "/models/Cabinet_39/040.glb",
+    "preview": "/preview/Cabinet_39/040.png",
+    "name": "Cabinet 040",
+    "cost": 9405000,
+    "color": "bw"
+  },
+  {
+    "type": "cabinet",
+    "file": "/models/Cabinet_39/041.glb",
+    "preview": "/preview/Cabinet_39/041.png",
+    "name": "Cabinet 041",
+    "cost": 12933000,
+    "color": "bw"
+  },
+  {
+    "type": "cabinet",
+    "file": "/models/Cabinet_39/042.glb",
+    "preview": "/preview/Cabinet_39/042.png",
+    "name": "Cabinet 042",
+    "cost": 1578000,
+    "color": "bw"
+  },
+  {
+    "type": "cabinet",
+    "file": "/models/Cabinet_39/043.glb",
+    "preview": "/preview/Cabinet_39/043.png",
+    "name": "Cabinet 043",
+    "cost": 17027000,
+    "color": "bw"
+  },
+  {
+    "type": "cabinet",
+    "file": "/models/Cabinet_39/044.glb",
+    "preview": "/preview/Cabinet_39/044.png",
+    "name": "Cabinet 044",
+    "cost": 7086000,
+    "color": "bw"
+  },
+  {
+    "type": "cabinet",
+    "file": "/models/Cabinet_39/045.glb",
+    "preview": "/preview/Cabinet_39/045.png",
+    "name": "Cabinet 045",
+    "cost": 12635000,
+    "color": "bw"
+  },
+  {
+    "type": "cabinet",
+    "file": "/models/Cabinet_39/046.glb",
+    "preview": "/preview/Cabinet_39/046.png",
+    "name": "Cabinet 046",
+    "cost": 8816000,
+    "color": "bw"
+  },
+  {
+    "type": "cabinet",
+    "file": "/models/Cabinet_39/047.glb",
+    "preview": "/preview/Cabinet_39/047.png",
+    "name": "Cabinet 047",
+    "cost": 4717000,
+    "color": "bw"
+  },
+  {
+    "type": "cabinet",
+    "file": "/models/Cabinet_39/048.glb",
+    "preview": "/preview/Cabinet_39/048.png",
+    "name": "Cabinet 048",
+    "cost": 10565000,
+    "color": "bw"
+  },
+  {
+    "type": "cabinet",
+    "file": "/models/Cabinet_39/049.glb",
+    "preview": "/preview/Cabinet_39/049.png",
+    "name": "Cabinet 049",
+    "cost": 14982000,
+    "color": "bw"
+  },
+  {
+    "type": "cabinet",
+    "file": "/models/Cabinet_39/050.glb",
+    "preview": "/preview/Cabinet_39/050.png",
+    "name": "Cabinet 050",
+    "cost": 10804000,
+    "color": "bw"
+  },
+  {
+    "type": "cabinet",
+    "file": "/models/Cabinet_39/051.glb",
+    "preview": "/preview/Cabinet_39/051.png",
+    "name": "Cabinet 051",
+    "cost": 17784000,
+    "color": "bw"
+  },
+  {
+    "type": "cabinet",
+    "file": "/models/Cabinet_39/052.glb",
+    "preview": "/preview/Cabinet_39/052.png",
+    "name": "Cabinet 052",
+    "cost": 5521000,
+    "color": "bw"
+  },
+  {
+    "type": "cabinet",
+    "file": "/models/Cabinet_39/053.glb",
+    "preview": "/preview/Cabinet_39/053.png",
+    "name": "Cabinet 053",
+    "cost": 19235000,
+    "color": "bw"
+  },
+  {
+    "type": "cabinet",
+    "file": "/models/Cabinet_39/054.glb",
+    "preview": "/preview/Cabinet_39/054.png",
+    "name": "Cabinet 054",
+    "cost": 14199000,
+    "color": "bw"
+  },
+  {
+    "type": "cabinet",
+    "file": "/models/Cabinet_39/055.glb",
+    "preview": "/preview/Cabinet_39/055.png",
+    "name": "Cabinet 055",
+    "cost": 10233000,
+    "color": "bw"
+  },
+  {
+    "type": "cabinet",
+    "file": "/models/Cabinet_39/056.glb",
+    "preview": "/preview/Cabinet_39/056.png",
+    "name": "Cabinet 056",
+    "cost": 13650000,
+    "color": "bw"
+  },
+  {
+    "type": "cabinet",
+    "file": "/models/Cabinet_39/057.glb",
+    "preview": "/preview/Cabinet_39/057.png",
+    "name": "Cabinet 057",
+    "cost": 15285000,
+    "color": "bw"
+  },
+  {
+    "type": "cabinet",
+    "file": "/models/Cabinet_39/058.glb",
+    "preview": "/preview/Cabinet_39/058.png",
+    "name": "Cabinet 058",
+    "cost": 18065000,
+    "color": "bw"
+  },
+  {
+    "type": "cabinet",
+    "file": "/models/Cabinet_39/059.glb",
+    "preview": "/preview/Cabinet_39/059.png",
+    "name": "Cabinet 059",
+    "cost": 18928000,
+    "color": "bw"
+  },
+  {
+    "type": "cabinet",
+    "file": "/models/Cabinet_39/060.glb",
+    "preview": "/preview/Cabinet_39/060.png",
+    "name": "Cabinet 060",
+    "cost": 15440000,
+    "color": "bw"
+  },
+  {
+    "type": "cabinet",
+    "file": "/models/Cabinet_39/061.glb",
+    "preview": "/preview/Cabinet_39/061.png",
+    "name": "Cabinet 061",
+    "cost": 12468000,
+    "color": "bw"
+  },
+  {
+    "type": "cabinet",
+    "file": "/models/Cabinet_39/062.glb",
+    "preview": "/preview/Cabinet_39/062.png",
+    "name": "Cabinet 062",
+    "cost": 19033000,
+    "color": "bw"
+  },
+  {
+    "type": "cabinet",
+    "file": "/models/Cabinet_39/063.glb",
+    "preview": "/preview/Cabinet_39/063.png",
+    "name": "Cabinet 063",
+    "cost": 5697000,
+    "color": "bw"
+  },
+  {
+    "type": "cabinet",
+    "file": "/models/Cabinet_39/064.glb",
+    "preview": "/preview/Cabinet_39/064.png",
+    "name": "Cabinet 064",
+    "cost": 14178000,
+    "color": "bw"
+  },
+  {
+    "type": "cabinet",
+    "file": "/models/Cabinet_39/065.glb",
+    "preview": "/preview/Cabinet_39/065.png",
+    "name": "Cabinet 065",
+    "cost": 17690000,
+    "color": "bw"
+  },
+  {
+    "type": "cabinet",
+    "file": "/models/Cabinet_39/066.glb",
+    "preview": "/preview/Cabinet_39/066.png",
+    "name": "Cabinet 066",
+    "cost": 19139000,
+    "color": "bw"
+  },
+  {
+    "type": "cabinet",
+    "file": "/models/Cabinet_39/067.glb",
+    "preview": "/preview/Cabinet_39/067.png",
+    "name": "Cabinet 067",
+    "cost": 5750000,
+    "color": "bw"
+  },
+  {
+    "type": "cabinet",
+    "file": "/models/Cabinet_39/068.glb",
+    "preview": "/preview/Cabinet_39/068.png",
+    "name": "Cabinet 068",
+    "cost": 6886000,
+    "color": "bw"
+  },
+  {
+    "type": "cabinet",
+    "file": "/models/Cabinet_39/069.glb",
+    "preview": "/preview/Cabinet_39/069.png",
+    "name": "Cabinet 069",
+    "cost": 11919000,
+    "color": "bw"
+  },
+  {
+    "type": "cabinet",
+    "file": "/models/Cabinet_39/070.glb",
+    "preview": "/preview/Cabinet_39/070.png",
+    "name": "Cabinet 070",
+    "cost": 8697000,
+    "color": "bw"
+  },
+  {
+    "type": "cabinet",
+    "file": "/models/Cabinet_39/071.glb",
+    "preview": "/preview/Cabinet_39/071.png",
+    "name": "Cabinet 071",
+    "cost": 9295000,
+    "color": "bw"
+  },
+  {
+    "type": "cabinet",
+    "file": "/models/Cabinet_39/072.glb",
+    "preview": "/preview/Cabinet_39/072.png",
+    "name": "Cabinet 072",
+    "cost": 9836000,
+    "color": "bw"
+  },
+  {
+    "type": "cabinet",
+    "file": "/models/Cabinet_39/073.glb",
+    "preview": "/preview/Cabinet_39/073.png",
+    "name": "Cabinet 073",
+    "cost": 13491000,
+    "color": "bw"
+  },
+  {
+    "type": "cabinet",
+    "file": "/models/Cabinet_39/074.glb",
+    "preview": "/preview/Cabinet_39/074.png",
+    "name": "Cabinet 074",
+    "cost": 13970000,
+    "color": "bw"
+  },
+  {
+    "type": "cabinet",
+    "file": "/models/Cabinet_39/075.glb",
+    "preview": "/preview/Cabinet_39/075.png",
+    "name": "Cabinet 075",
+    "cost": 9617000,
+    "color": "bw"
+  },
+  {
+    "type": "cabinet",
+    "file": "/models/Cabinet_39/076.glb",
+    "preview": "/preview/Cabinet_39/076.png",
+    "name": "Cabinet 076",
+    "cost": 17354000,
+    "color": "bw"
+  },
+  {
+    "type": "cabinet",
+    "file": "/models/Cabinet_39/077.glb",
+    "preview": "/preview/Cabinet_39/077.png",
+    "name": "Cabinet 077",
+    "cost": 19292000,
+    "color": "bw"
+  },
+  {
+    "type": "cabinet",
+    "file": "/models/Cabinet_39/078.glb",
+    "preview": "/preview/Cabinet_39/078.png",
+    "name": "Cabinet 078",
+    "cost": 3968000,
+    "color": "bw"
+  },
+  {
+    "type": "cabinet",
+    "file": "/models/Cabinet_39/079.glb",
+    "preview": "/preview/Cabinet_39/079.png",
+    "name": "Cabinet 079",
+    "cost": 1357000,
+    "color": "bw"
+  },
+  {
+    "type": "cabinet",
+    "file": "/models/Cabinet_39/080.glb",
+    "preview": "/preview/Cabinet_39/080.png",
+    "name": "Cabinet 080",
+    "cost": 18202000,
+    "color": "bw"
+  },
+  {
+    "type": "cabinet",
+    "file": "/models/Cabinet_39/081.glb",
+    "preview": "/preview/Cabinet_39/081.png",
+    "name": "Cabinet 081",
+    "cost": 1670000,
+    "color": "bw"
+  },
+  {
+    "type": "cabinet",
+    "file": "/models/Cabinet_39/082.glb",
+    "preview": "/preview/Cabinet_39/082.png",
+    "name": "Cabinet 082",
+    "cost": 14411000,
+    "color": "bw"
+  },
+  {
+    "type": "cabinet",
+    "file": "/models/Cabinet_39/083.glb",
+    "preview": "/preview/Cabinet_39/083.png",
+    "name": "Cabinet 083",
+    "cost": 6649000,
+    "color": "bw"
+  },
+  {
+    "type": "cabinet",
+    "file": "/models/Cabinet_39/084.glb",
+    "preview": "/preview/Cabinet_39/084.png",
+    "name": "Cabinet 084",
+    "cost": 11100000,
+    "color": "bw"
+  },
+  {
+    "type": "cabinet",
+    "file": "/models/Cabinet_39/085.glb",
+    "preview": "/preview/Cabinet_39/085.png",
+    "name": "Cabinet 085",
+    "cost": 4254000,
+    "color": "bw"
+  },
+  {
+    "type": "cabinet",
+    "file": "/models/Cabinet_39/086.glb",
+    "preview": "/preview/Cabinet_39/086.png",
+    "name": "Cabinet 086",
+    "cost": 8694000,
+    "color": "bw"
+  },
+  {
+    "type": "cabinet",
+    "file": "/models/Cabinet_39/087.glb",
+    "preview": "/preview/Cabinet_39/087.png",
+    "name": "Cabinet 087",
+    "cost": 2035000,
+    "color": "bw"
+  },
+  {
+    "type": "cabinet",
+    "file": "/models/Cabinet_39/088.glb",
+    "preview": "/preview/Cabinet_39/088.png",
+    "name": "Cabinet 088",
+    "cost": 14438000,
+    "color": "bw"
+  },
+  {
+    "type": "cabinet",
+    "file": "/models/Cabinet_39/089.glb",
+    "preview": "/preview/Cabinet_39/089.png",
+    "name": "Cabinet 089",
+    "cost": 10876000,
+    "color": "bw"
+  },
+  {
+    "type": "cabinet",
+    "file": "/models/Cabinet_39/090.glb",
+    "preview": "/preview/Cabinet_39/090.png",
+    "name": "Cabinet 090",
+    "cost": 3012000,
+    "color": "bw"
+  },
+  {
+    "type": "cabinet",
+    "file": "/models/Cabinet_39/091.glb",
+    "preview": "/preview/Cabinet_39/091.png",
+    "name": "Cabinet 091",
+    "cost": 13866000,
+    "color": "bw"
+  },
+  {
+    "type": "cabinet",
+    "file": "/models/Cabinet_39/092.glb",
+    "preview": "/preview/Cabinet_39/092.png",
+    "name": "Cabinet 092",
+    "cost": 19163000,
+    "color": "bw"
+  },
+  {
+    "type": "cabinet",
+    "file": "/models/Cabinet_39/093.glb",
+    "preview": "/preview/Cabinet_39/093.png",
+    "name": "Cabinet 093",
+    "cost": 18733000,
+    "color": "bw"
+  },
+  {
+    "type": "cabinet",
+    "file": "/models/Cabinet_39/094.glb",
+    "preview": "/preview/Cabinet_39/094.png",
+    "name": "Cabinet 094",
+    "cost": 5207000,
+    "color": "bw"
+  },
+  {
+    "type": "cabinet",
+    "file": "/models/Cabinet_39/095.glb",
+    "preview": "/preview/Cabinet_39/095.png",
+    "name": "Cabinet 095",
+    "cost": 18749000,
+    "color": "bw"
+  },
+  {
+    "type": "cabinet",
+    "file": "/models/Cabinet_39/096.glb",
+    "preview": "/preview/Cabinet_39/096.png",
+    "name": "Cabinet 096",
+    "cost": 19405000,
+    "color": "bw"
+  },
+  {
+    "type": "cabinet",
+    "file": "/models/Cabinet_39/097.glb",
+    "preview": "/preview/Cabinet_39/097.png",
+    "name": "Cabinet 097",
+    "cost": 2357000,
+    "color": "bw"
+  },
+  {
+    "type": "cabinet",
+    "file": "/models/Cabinet_39/098.glb",
+    "preview": "/preview/Cabinet_39/098.png",
+    "name": "Cabinet 098",
+    "cost": 6660000,
+    "color": "bw"
+  },
+  {
+    "type": "cabinet",
+    "file": "/models/Cabinet_39/099.glb",
+    "preview": "/preview/Cabinet_39/099.png",
+    "name": "Cabinet 099",
+    "cost": 2760000,
+    "color": "bw"
+  },
+  {
+    "type": "cabinet",
+    "file": "/models/Cabinet_39/100.glb",
+    "preview": "/preview/Cabinet_39/100.png",
+    "name": "Cabinet 100",
+    "cost": 16935000,
+    "color": "bw"
+  },
+  {
+    "type": "cabinet",
+    "file": "/models/Cabinet_39/101.glb",
+    "preview": "/preview/Cabinet_39/101.png",
+    "name": "Cabinet 101",
+    "cost": 15914000,
+    "color": "bw"
+  },
+  {
+    "type": "cabinet",
+    "file": "/models/Cabinet_39/102.glb",
+    "preview": "/preview/Cabinet_39/102.png",
+    "name": "Cabinet 102",
+    "cost": 1219000,
+    "color": "bw"
+  },
+  {
+    "type": "cabinet",
+    "file": "/models/Cabinet_39/103.glb",
+    "preview": "/preview/Cabinet_39/103.png",
+    "name": "Cabinet 103",
+    "cost": 1495000,
+    "color": "bw"
+  },
+  {
+    "type": "cabinet",
+    "file": "/models/Cabinet_39/104.glb",
+    "preview": "/preview/Cabinet_39/104.png",
+    "name": "Cabinet 104",
+    "cost": 3420000,
+    "color": "bw"
+  },
+  {
+    "type": "cabinet",
+    "file": "/models/Cabinet_39/105.glb",
+    "preview": "/preview/Cabinet_39/105.png",
+    "name": "Cabinet 105",
+    "cost": 12207000,
+    "color": "bw"
+  },
+  {
+    "type": "cabinet",
+    "file": "/models/Cabinet_39/106.glb",
+    "preview": "/preview/Cabinet_39/106.png",
+    "name": "Cabinet 106",
+    "cost": 18701000,
+    "color": "bw"
+  },
+  {
+    "type": "cabinet",
+    "file": "/models/Cabinet_39/107.glb",
+    "preview": "/preview/Cabinet_39/107.png",
+    "name": "Cabinet 107",
+    "cost": 4654000,
+    "color": "bw"
+  },
+  {
+    "type": "cabinet",
+    "file": "/models/Cabinet_39/108.glb",
+    "preview": "/preview/Cabinet_39/108.png",
+    "name": "Cabinet 108",
+    "cost": 17495000,
+    "color": "bw"
+  },
+  {
+    "type": "cabinet",
+    "file": "/models/Cabinet_39/109.glb",
+    "preview": "/preview/Cabinet_39/109.png",
+    "name": "Cabinet 109",
+    "cost": 4964000,
+    "color": "bw"
+  },
+  {
+    "type": "cabinet",
+    "file": "/models/Cabinet_39/110.glb",
+    "preview": "/preview/Cabinet_39/110.png",
+    "name": "Cabinet 110",
+    "cost": 11005000,
+    "color": "bw"
+  },
+  {
+    "type": "cabinet",
+    "file": "/models/Cabinet_39/111.glb",
+    "preview": "/preview/Cabinet_39/111.png",
+    "name": "Cabinet 111",
+    "cost": 16704000,
+    "color": "bw"
+  },
+  {
+    "type": "cabinet",
+    "file": "/models/Cabinet_39/112.glb",
+    "preview": "/preview/Cabinet_39/112.png",
+    "name": "Cabinet 112",
+    "cost": 3279000,
+    "color": "bw"
+  },
+  {
+    "type": "cabinet",
+    "file": "/models/Cabinet_39/113.glb",
+    "preview": "/preview/Cabinet_39/113.png",
+    "name": "Cabinet 113",
+    "cost": 15544000,
+    "color": "bw"
+  },
+  {
+    "type": "cabinet",
+    "file": "/models/Cabinet_39/114.glb",
+    "preview": "/preview/Cabinet_39/114.png",
+    "name": "Cabinet 114",
+    "cost": 8001000,
+    "color": "bw"
+  },
+  {
+    "type": "cabinet",
+    "file": "/models/Cabinet_39/115.glb",
+    "preview": "/preview/Cabinet_39/115.png",
+    "name": "Cabinet 115",
+    "cost": 8145000,
+    "color": "bw"
+  }
+]
