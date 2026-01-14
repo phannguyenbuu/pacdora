@@ -12,51 +12,53 @@ import CartInUsePanel from './CartInUse';
 import ModelSelectSwatch from './ModelSelectSwatch';
 import libraryData from "../../json/modelLibrary.json"; // ✅ JSON config rooms
 import KonvaTextureEditor from './KonvaTextureEditor';
+import Experience from '../Experience';
+import Slider from '@mui/material/Slider';
 
 const WorkspaceConfig = () => {
   const { message } = useSelection();
-  const { addedHighlights, setAddedHighlights } = usePointer();
-  
-  const [isRoomStyleVisible, setRoomStyleVisible] = useState(false);
-  const [selectedModels, setSelectedModels] = useState({}); // {roomId: selectedModel}
+  // const { addedHighlights, setAddedHighlights } = usePointer();
+  const [foldProgress, setFoldProgress] = useState(0.2);
+  // const [isRoomStyleVisible, setRoomStyleVisible] = useState(false);
+  // const [selectedModels, setSelectedModels] = useState({}); // {roomId: selectedModel}
 
-  const handleSave = (values) => {
-    console.log('Saved:', values);
-  };
+  // const handleSave = (values) => {
+  //   console.log('Saved:', values);
+  // };
 
   // ✅ Lấy config từ JSON
   // Trong WorkspaceConfig
   const [rooms, setRooms] = useState([]);
 
 
-  const BASE_URL = 'https://n-lux.com/creative/json';
+  // const BASE_URL = 'https://n-lux.com/creative/json';
 
-  useEffect(() => {
-    const loadRooms = async () => {
-      const loadedRooms = await Promise.all(
-        libraryData.map(async (roomMeta) => {
-          // ✅ Dùng fetch thay dynamic import
-          const url = `${BASE_URL}/${roomMeta.path}`;
-          console.log('Fetching:', url);
+  // useEffect(() => {
+  //   const loadRooms = async () => {
+  //     const loadedRooms = await Promise.all(
+  //       libraryData.map(async (roomMeta) => {
+  //         // ✅ Dùng fetch thay dynamic import
+  //         const url = `${BASE_URL}/${roomMeta.path}`;
+  //         console.log('Fetching:', url);
           
-          const response = await fetch(url);
-          const rawModels = await response.json();
+  //         const response = await fetch(url);
+  //         const rawModels = await response.json();
           
-          return {
-            ...roomMeta,
-            models: rawModels.map((model, i) => ({
-              id: `${roomMeta.activeRoom}_${i}`,
-              roomId: roomMeta.activeRoom,
-              ...model
-            }))
-          };
-        })
-      );
-      setRooms(loadedRooms);
-    };
+  //         return {
+  //           ...roomMeta,
+  //           models: rawModels.map((model, i) => ({
+  //             id: `${roomMeta.activeRoom}_${i}`,
+  //             roomId: roomMeta.activeRoom,
+  //             ...model
+  //           }))
+  //         };
+  //       })
+  //     );
+  //     setRooms(loadedRooms);
+  //   };
     
-    loadRooms();
-  }, []);
+  //   loadRooms();
+  // }, []);
 
 
 
@@ -65,15 +67,15 @@ const WorkspaceConfig = () => {
   // const activeRoom = libraryData.activeRoom || 'living';
 
   // Callback add furniture
-  const addFurniture = (model, roomId) => {
-    console.log(`Adding ${roomId} model:`, model);
-    setSelectedModels(prev => ({ ...prev, [roomId]: model }));
-    // Logic thêm vào scene/store
-  };
+  // const addFurniture = (model, roomId) => {
+  //   console.log(`Adding ${roomId} model:`, model);
+  //   setSelectedModels(prev => ({ ...prev, [roomId]: model }));
+  //   // Logic thêm vào scene/store
+  // };
 
   return (
     <div className="configurator-container">
-      {/* 3D Scene */}
+      <Experience foldProgress={foldProgress}/>
       
 
       {/* Top Left: RoomSize */}
@@ -96,8 +98,9 @@ const WorkspaceConfig = () => {
 
       {/* Middle Bottom: Dynamic Room Swatches */}
       <div className="panel panel-middle-bottom">
-        
-        <div style={{
+        {/* <CanvasPanel /> */}
+
+        {/* <div style={{
           display: 'grid',
           gridTemplateColumns: 'repeat(6, 1fr)',  // 5 cột đều
           gridTemplateRows: 'repeat(2, auto)',     // 2 hàng
@@ -117,13 +120,13 @@ const WorkspaceConfig = () => {
               gradient={room.gradient}
             />
           ))}
-        </div>
+        </div> */}
       </div>
 
       {/* Top Right: Cart */}
       <div className="panel panel-top-right">
         <div className="panel-content">
-          <h3>Cart</h3>
+          <h3>Message</h3>
           <textarea style={{width:'100%',height:120, 
             border: '1px solid #000', background: 'none'}}
             value={message}
@@ -136,21 +139,39 @@ const WorkspaceConfig = () => {
 
       {/* Bottom Right: Actions */}
       <div className="panel panel-bottom-right">
-        <Space direction='vertical'>
+        {/* <Space direction='vertical'>
           <button className="save-btn">Save Config</button>
           <button className="share-btn">Share</button>
-        </Space>
+        </Space> */}
+        
+
       </div>
 
       {/* Middle Top: Material */}
       <div className="panel panel-middle-top">
-        <div className="panel-content">
+        {/* <div className="panel-content">
           <h3>Room Material</h3>
           <MaterialPanel onCancel={() => setRoomStyleVisible(false)} onSave={handleSave} />
-        </div>
+        </div> */}
       </div>
 
-      {/* <CanvasPanel /> */}
+    
+      <div className={`panel panel-left-bottom`}>
+        <Slider 
+            defaultValue={0}  // 🔥 SET DEFAULT = 0
+            value={foldProgress}
+            onChange={(_, v) => setFoldProgress(v)}
+            min={0} 
+            max={1} 
+            step={0.01}
+            marks={[
+            { value: 0, label: 'A1 Mở' },
+            { value: 0.5, label: '45°' },
+            { value: 1, label: 'A1 Gập 90°' }
+            ]}
+            sx={{ width: 150 }}
+          />
+      </div>
     </div>
   );
 };
@@ -181,7 +202,7 @@ const CanvasPanel = () => {
   };
 
   return (
-    <div className={`panel panel-left-bottom ${isExpanded ? 'expanded' : 'collapsed'} ${showPanel ? 'show' : 'hide'}`}>
+    <>
       {/* ✅ HEADER LUÔN Ở ĐẦU */}
       <Space direction='horizontal'>        
         
@@ -217,6 +238,6 @@ const CanvasPanel = () => {
           <KonvaTextureEditor svgPath="/box-sample/150010.svg"/>
         </Space>
       </div>
-    </div>
+    </>
   );
 };

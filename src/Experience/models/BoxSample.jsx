@@ -1,0 +1,94 @@
+import React, { useRef, useEffect, useMemo, useCallback } from "react";
+import { useGLTF } from "@react-three/drei";
+import { useFrame } from "@react-three/fiber";
+import * as THREE from "three";
+import { useUploadTextureStore } from "../../stores/uploadTextureStore";
+import { usePointer, useSelection } from "../../stores/selectionStore";
+
+import { FoldRenderer } from "./FoldModule";
+import { resizeScene, calculateOriginalBBox } from "./ResizeModule";
+
+export default function Model({ progress = 0, scale = 0.05, ...props }) {
+  const { setOriginalWidth, setOriginalLength, setOriginalHeight, originalSize } = usePointer();
+  const gltf = useGLTF("/box-sample/150010.glb");
+  const group = useRef();
+  const sizeCache = useRef(null);
+  const sceneRef = useRef();
+  const sizesLogged = useRef(false);  // 🔥 1 LẦN
+  
+  const { boxWidth, boxLength, boxHeight, boxDepth } = usePointer();
+  const { getCurrentTexture } = useUploadTextureStore();
+
+  
+
+  // 🔥 LƯU originalSize 1 LẦN khi load GLB
+  // Model.jsx - Load GLB → setOriginal từ specific nodes
+const originalBBox = useMemo(() => {
+  // Tìm nodes O và C2
+  let oNode = null, c2Node = null;
+  gltf.scene.traverse((child) => {
+    if (child.isMesh && child.name.includes('O')) oNode = child;
+    if (child.isMesh && child.name.includes('C2')) c2Node = child;
+  });
+
+  if (!sizesLogged.current && oNode && c2Node) {
+    // O node: width (X), length (Z)
+    oNode.geometry.computeBoundingBox();
+    const oWidth = oNode.geometry.boundingBox.max.x - oNode.geometry.boundingBox.min.x;
+    const oLength = oNode.geometry.boundingBox.max.z - oNode.geometry.boundingBox.min.z;
+    
+    // C2 node: height (Y)
+    c2Node.geometry.computeBoundingBox();
+    const c2Height = c2Node.geometry.boundingBox.max.z - c2Node.geometry.boundingBox.min.z;
+    
+    // 🔥 SET STORE
+    setOriginalWidth(oWidth);
+    setOriginalLength(oLength);
+    setOriginalHeight(c2Height);
+    
+    console.log('GLB originalSize from nodes:', {
+      width: oWidth.toFixed(3),    // O.x
+      height: c2Height.toFixed(3), // C2.y  
+      length: oLength.toFixed(3)   // O.z
+    });
+    
+    sizesLogged.current = true;
+  }
+  
+  return calculateOriginalBBox(gltf);  // Giữ bbox full cho resizeScene
+}, [gltf, setOriginalWidth, setOriginalLength, setOriginalHeight]);
+
+  
+
+  useFrame(() => {
+    const sizeKey = `${boxWidth.toFixed(2)}-${boxLength.toFixed(2)}-${boxHeight.toFixed(2)}-${boxDepth.toFixed(2)}`;
+    
+    if (!sceneRef.current) {
+      sceneRef.current = gltf.scene.clone(true);
+    }
+
+    const baseScene = resizeScene(
+      gltf, 
+      boxWidth, boxLength, boxHeight, 
+      sizeCache, 
+      sizeKey
+    );
+
+    sceneRef.current.clear();
+    sceneRef.current.add(baseScene.clone(true));
+    
+    
+  });
+
+  return (
+    <group ref={group} {...props} scale={scale} dispose={null}>
+      <FoldRenderer 
+        sceneClone={sceneRef.current} 
+        progress={progress} 
+        getCurrentTexture={getCurrentTexture}
+        boxSize={{x: boxWidth, y: boxHeight, z: boxLength}}
+        originalSize = {originalSize}
+      />
+    </group>
+  );
+}

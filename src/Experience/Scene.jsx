@@ -1,7 +1,7 @@
 // Scene.jsx - SỬA LỖI + Tích hợp foldProgress
 import React, { Suspense, useRef, useState, useEffect } from "react";
 import * as THREE from "three";
-import BoxSample from "./models/light/BoxSample.jsx"; // ✅ ĐÚNG đường dẫn
+import BoxSample from "./models/BoxSample.jsx";
 import { useToggleRoomStore } from "../stores/toggleRoomStore";
 import { usePointer, useSelection } from "../stores/selectionStore";
 import gsap from "gsap";

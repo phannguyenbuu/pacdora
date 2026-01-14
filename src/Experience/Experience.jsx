@@ -17,7 +17,7 @@ import { Button, notification } from 'antd';
 import WorkspaceConfig from "./components/WorkspaceConfig";
 import ReactDOM from 'react-dom';
 
-import Slider from '@mui/material/Slider';
+
 
 import KonvaTextureEditor from "./components/KonvaTextureEditor";
 
@@ -66,7 +66,7 @@ function NotificationContainer({ children }) {
 }
 
 
-const Experience = () => {
+const Experience = ({foldProgress}) => {
   const [api, contextHolder] = notification.useNotification();
   const cameraRef = useRef();
   const pointerRef = useRef({ x: 0, y: 0 });
@@ -93,7 +93,7 @@ const Experience = () => {
     },
   };
 
-  const [foldProgress, setFoldProgress] = useState(45);
+  
   
 
   const zoomValues = {
@@ -242,30 +242,8 @@ const Experience = () => {
 
       </Canvas>
 
-      <div style={{ position: 'fixed', left: 20,  top: 50,
-           color: 'black', zIndex:99 }}>
-          {/* <KonvaTextureEditor svgPath="/box-sample/150010.svg"/> */}
-          <WorkspaceConfig/>
-      </div>
-      <Slider 
-      value={foldProgress}
-      onChange={(_, v) => setFoldProgress(v)}
-      min={0} 
-      max={1} 
-      step={0.01}
-      marks={[
-        { value: 0, label: 'A1 Mở' },
-        { value: 0.5, label: '45°' },
-        { value: 1, label: 'A1 Gập 90°' }
-      ]}
-      sx={{ 
-        position: 'fixed', 
-        bottom: 50, 
-        right: 50, 
-        width: 250, 
-        zIndex: 1000 
-      }}
-    />
+      
+      
     </>
   );
 };

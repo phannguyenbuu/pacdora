@@ -1,0 +1,194 @@
+import * as THREE from "three";
+import resizeConfig from "../../json/pointConfig/150010.json";
+
+export const calculateOriginalBBox = (gltf) => {
+  const box = new THREE.Box3();
+  gltf.scene.traverse((child) => {
+    if (child.isMesh && child.geometry) {
+      child.geometry.computeBoundingBox();
+      box.union(child.geometry.boundingBox);
+    }
+  });
+  return box;
+};
+
+// export const getRuleForChild = (childName, resizeRules, axis = 'x') => {
+//   const rule = resizeRules?.[axis.toUpperCase()];
+  
+//   if (!rule) return null;
+
+//   if (rule[childName]) {
+//     return rule[childName];
+//   }
+  
+//   const baseName = childName.replace(/_[1-2]$/, '');
+//   if (baseName !== childName && rule[baseName]) {
+//     return rule[baseName];
+//   }
+  
+//   return null;
+// };
+
+export const getRuleForChild = (childName, resizeRules) => {
+  const axes = ['X', 'Y', 'Z'];
+  const result = {};
+  
+  axes.forEach(axis => {
+    const rule = resizeRules?.[axis];
+    
+    if (!rule) {
+      result[axis] = null;
+      return;
+    }
+
+    if (rule[childName]) {
+      result[axis] = rule[childName];
+    } else {
+      const baseName = childName.replace(/_[1-3]$/, '');
+      result[axis] = (baseName !== childName && rule[baseName]) ? rule[baseName] : null;
+    }
+  });
+  
+  return result;  // {X: ruleX, Y: ruleY, Z: ruleZ}
+};
+
+const resizeAxisX = (coord, deltaSize, rule) => {
+  
+  if (rule?.type === "full") {
+    const multiplier = rule.deltaMultiplier || 1;
+    const v =  deltaSize * (rule.deltaMultiplier ? multiplier : 0);
+
+    return rule.direction === "left" ? coord - v : coord + v;
+  } else {
+    // Default symmetric
+    const deltaHalf = deltaSize / 2;
+    return coord > 0 ? (coord + deltaHalf) : (coord - deltaHalf);
+  }
+  
+};
+
+
+const logZ = (childName,originalBBox,positions) => {
+  // Log debug: Check z distribution
+  console.group('Z Debug - ' + childName);
+  console.log('bbox minZ:', originalBBox.min.z.toFixed(3), 
+              'maxZ:', originalBBox.max.z.toFixed(3), 
+              'centerZ:', ((originalBBox.min.z + originalBBox.max.z)/2).toFixed(3));
+
+  const zValues = [];
+  let posCount = 0, negCount = 0, zeroCount = 0;
+  for (let i = 0; i < positions.length; i += 3) {
+    const z = positions[i + 2];
+    zValues.push(z.toFixed(3));
+    if (z > ((originalBBox.min.z + originalBBox.max.z)/2)) posCount++;
+    else if (z < ((originalBBox.min.z + originalBBox.max.z)/2)) negCount++;
+    else zeroCount++;
+  }
+
+  console.log('z > centerZ:', posCount, 'z < centerZ:', negCount, 'z == centerZ:', zeroCount);
+  console.log('All z < 0?', Math.max(...positions.filter((_,i)=>i%3==2)) < 0);
+  console.log('z min/max:', 
+    Math.min(...positions.filter((_,i)=>i%3==2)).toFixed(3), 
+    Math.max(...positions.filter((_,i)=>i%3==2)).toFixed(3));
+  console.log('First 10 z:', zValues.slice(0,10));
+  console.groupEnd();
+
+}
+
+const resizeAxisZ = (coord, deltaSize, rule, isCoord) => {
+  
+  if (rule?.type === "pivot") {
+    const v =  deltaSize * (rule.deltaMultiplier ? rule.deltaMultiplier : 0);
+    // console.log("V", coord, isCoord);
+    return isCoord ? coord + v : coord;
+  } else {
+    return coord;
+  }
+  
+};
+
+
+export const applyResizeRule = (geometry, childName, boxWidth, boxLength, boxHeight, originalBBox, resizeRules) => {
+  const rules = getRuleForChild(childName, resizeRules);
+
+
+  const positions = [...geometry.attributes.position.array];
+  const bboxSize = {
+    x: originalBBox.max.x - originalBBox.min.x,
+    z: originalBBox.max.z - originalBBox.min.z,
+    y: originalBBox.max.y - originalBBox.min.y
+  };
+
+  const centerZ = (originalBBox.min.z + originalBBox.max.z) / 2;
+  const deltaZ = boxLength - bboxSize.z;
+  const deltaY = boxHeight - bboxSize.y;
+
+  // computeSizeZ(geometry, positions);
+
+  for (let i = 0; i < positions.length; i += 3) {
+    let x = positions[i], y = positions[i + 1], z = positions[i + 2];
+    
+    x = resizeAxisX(x, (boxWidth - bboxSize.x), rules.X);
+
+    if(childName.startsWith("F2"))
+      console.log("R", childName, z >= centerZ);
+
+    z = resizeAxisZ(z, deltaY, rules.Y,  z >= centerZ);
+    z = resizeAxisZ(z, deltaZ, rules.Z,  z >= centerZ);
+    
+    positions[i] = x; positions[i + 1] = y; positions[i + 2] = z;
+  }
+
+  geometry.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3));
+  geometry.attributes.position.needsUpdate = true;
+  geometry.computeVertexNormals();
+  return geometry;
+};
+
+
+
+
+
+
+
+export const resizeScene = (gltf, boxWidth, boxLength, boxHeight, sizeCache, sizeKey) => {
+  let baseScene;
+  
+  if (!sizeCache.current || sizeCache.current.key !== sizeKey) {
+    const originalScene = gltf.scene.clone(true);
+    
+    const pivotPositions = {};
+    originalScene.traverse(child => {
+      if (child.isMesh && child.name.includes('2')) {
+        child.updateMatrixWorld(true);
+        pivotPositions[child.name] = child.getWorldPosition(new THREE.Vector3()).clone();
+      }
+    });
+    
+    baseScene = originalScene.clone(true);
+    baseScene.traverse(child => {
+      if (child.isMesh) {
+        const childBbox = new THREE.Box3();
+        childBbox.setFromBufferAttribute(child.geometry.attributes.position);
+
+        child.geometry = applyResizeRule(
+          child.geometry.clone(),
+          child.name,
+          boxWidth, boxLength, boxHeight,
+          childBbox,
+          resizeConfig.resizeRules
+        );
+      }
+    });
+    
+    sizeCache.current = { 
+      key: sizeKey, 
+      scene: baseScene,
+      pivotPositions 
+    };
+  } else {
+    baseScene = sizeCache.current.scene;
+  }
+  
+  return baseScene;
+};

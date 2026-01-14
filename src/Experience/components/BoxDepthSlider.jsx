@@ -4,7 +4,7 @@ import { Space } from 'antd';
 
 function boxDepthSlider() {
   const [sliderValue, setSliderValue] = useState(0);
-  const {boxWidth, boxLength, boxDepth, setboxDepth} = usePointer();
+  const {boxWidth, boxLength, boxDepth, setBoxDepth} = usePointer();
   
    useEffect(() => {
     if (boxDepth !== sliderValue) {
@@ -14,7 +14,7 @@ function boxDepthSlider() {
 
   const onSliderChange = (value) => {
     setSliderValue(value);
-    setboxDepth(value);
+    setBoxDepth(value);
   };
 
   return (

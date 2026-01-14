@@ -1,0 +1,444 @@
+import React, { useRef } from "react";
+import { useFrame } from "@react-three/fiber";
+import { usePointer } from "../../stores/selectionStore";
+import * as THREE from "three";
+import { getRuleForChild } from "./ResizeModule";
+import { useUploadTextureStore } from "../../stores/uploadTextureStore";
+import resizeConfig from "../../json/pointConfig/150010.json";
+import { evaluate, parse } from 'mathjs';
+
+const isChild = (child, s) => {
+  return child.name === s || child.name.startsWith(s + "_");
+};
+
+const getFoldConfig = (prefix) => {
+  return resizeConfig.foldPivots[prefix] || {};
+};
+
+const parseOffset = (size, str) => {
+    const scope = { w: size.x, h: size.y, l: size.z };
+    return evaluate(str, scope);
+};
+
+
+const createDebugBox = (position, size = 0.1, color = 0xff0000) => {
+  const geometry = new THREE.BoxGeometry(size, size, size);
+  const material = new THREE.MeshBasicMaterial({ 
+    color, 
+    wireframe: true,
+    transparent: true,
+    opacity: 0.8 
+  });
+  const box = new THREE.Mesh(geometry, material);
+  box.position.copy(position);
+  box.userData.isDebugBox = true; // Để texture bỏ qua
+  return box;
+};
+
+// 🔥 HELPER: Tính stage progress
+const getStageProgress = (stageIndex, progress) => {
+  const stageStart = (stageIndex - 1) * 0.125;
+  return Math.max(0, Math.min((progress - stageStart) / 0.125, 1));
+};
+
+const foldObj = (idx, mesh, rule, size, ax) => {
+  let offsetX = ax.toUpperCase() === "X" ? (idx === 0 ? -size.x / 2 : size.x / 2) : mesh.position.x;
+  let offsetY = mesh.position.y;
+  let offsetZ = mesh.position.z;
+
+  
+
+  // 🔥 PARSE OFFSET TỪ JSON VỚI SUBSTITUTE
+  if (rule && rule.offset) {
+    if(mesh.name.includes("B2"))
+      console.log("mesh",mesh.name, rule, rule.offset);
+    const [xStr, yStr, zStr] = rule.offset.split(',');
+    
+    // Helper function parse với substitute
+    if(mesh.name==="A2_1")
+      console.log("scale_f", ax,  parseOffset(size, zStr));
+
+    offsetX += parseOffset(size, xStr);
+    offsetY += parseOffset(size, yStr);
+    offsetZ += parseOffset(size, zStr);
+  }
+
+  return [offsetX, offsetY, offsetZ];
+}
+
+
+const pivotCache = new Map(); // Lưu pivot positions gốc
+
+const cachePivotPositions = (sceneClone) => {
+  sceneClone.traverse((child) => {
+    if (child.isMesh && child.name.includes('2')) { // Các pivot thường có tên *_2
+      const worldPos = child.getWorldPosition(new THREE.Vector3()).clone();
+      pivotCache.set(child.name, worldPos);
+    }
+  });
+};
+
+const createFoldGroup = ({
+  sceneClone,
+  config,           // { prefix: 'A', pivot: 'A2', isComplexD: false }
+  progress,
+  size = { x: 0, y: 0, z: 0 },    // 🔥 THÊM SIZE
+  originalSize,
+  axis = 0,
+  reversed = false,
+  moveZ = null
+}) => {
+  
+  let moveZValue = 0;
+
+  if (moveZ)
+    moveZValue = evaluate(moveZ, { 
+      w: size.x, l:size.z, h: size.y}); 
+
+    const foldConfigData = getFoldConfig(config.prefix);
+    const useAxis = foldConfigData.axis !== undefined ? foldConfigData.axis : axis;
+    const isReversed = foldConfigData.reversed !== undefined ? foldConfigData.reversed : reversed;
+
+    const prefix = config.prefix;
+    const pivotPrefix = config.pivot;
+
+    
+    const pivotWorldPos = pivotCache.get(pivotPrefix) || new THREE.Vector3();
+    
+    // 🔥 SCALE PIVOT THEO TỶ LỆ RESIZE
+    const scaleRatio = {
+      x: size.x / originalSize.x,
+      y: size.y / originalSize.y, 
+      z: size.z / originalSize.z
+    };
+    
+    const scaledPivotPos = pivotWorldPos.clone().multiply(scaleRatio);
+    const meshes = { chains: { left: [], right: [] }, pivot: [] };
+    
+    const isComplexD = false;
+
+  // 🔥 ƯU TIÊN pivotPositions từ resize
+  
+    sceneClone.traverse((child) => {
+      if (child.isMesh) {
+        if (isComplexD) {
+          if (isChild(child, prefix + '1') || isChild(child, prefix + '2') || isChild(child, prefix + '3')) {
+            meshes.chains.left.push(child);
+          }
+          if (isChild(child, prefix + '5') || isChild(child, prefix + '6') || isChild(child, prefix + '7')) {
+            meshes.chains.right.push(child);
+          }
+          if (isChild(child, pivotPrefix)) {
+            meshes.pivot.push(child);
+            if (!pivotWorldPos) pivotWorldPos = child.getWorldPosition(new THREE.Vector3()).clone();
+          }
+        } else {
+          if (isChild(child, prefix + '1')) meshes.chains.left.push(child);
+          if (isChild(child, pivotPrefix)) {
+            meshes.pivot.push(child);
+            if (!pivotWorldPos) pivotWorldPos = child.getWorldPosition(new THREE.Vector3()).clone();
+          }
+          if (isChild(child, prefix + '3')) meshes.chains.right.push(child);
+        }
+      }
+    });
+  
+  const foldGroup = new THREE.Group();
+  
+  // 🔥 DEBUG PIVOT BOX
+  if (pivotWorldPos) {
+    // const pivotBox = createDebugBox(pivotWorldPos, 0.15, 0xff6600);
+    // foldGroup.add(pivotBox);
+
+  }
+
+// console.log("size", size);
+
+
+[meshes.chains.left, meshes.chains.right].forEach((ls, idx) => {
+    ls.forEach(mesh => {
+        const rules = getRuleForChild(mesh.name, resizeConfig.resizeRules);
+
+        let [offsetX, offsetY, offsetZ] = foldObj(idx, mesh,rules.X,size,"x");
+
+        if (rules?.X?.offset) {
+          offsetX *= scaleRatio.x;
+          offsetY *= scaleRatio.y; 
+          offsetZ *= scaleRatio.z;
+        }
+        // const [_x, _y, _z] = foldObj(idx, mesh,rules.Z,size,"z");
+
+        // offsetX += _x;
+        // offsetY += _y;
+        // offsetZ += _z;
+        
+        mesh.position.set(offsetX, offsetY, offsetZ);
+        foldGroup.add(mesh);
+
+        const pivotBox = createDebugBox(mesh.position, 0.15, 0xff0000);
+        foldGroup.add(pivotBox);
+    });
+});
+
+
+
+  meshes.pivot.forEach(pivotMesh => {
+    if (pivotMesh && pivotWorldPos) {
+      pivotMesh.position.set(0, 0, 0);
+      foldGroup.add(pivotMesh);
+
+      const pivotBox = createDebugBox(pivotMesh.position, 0.15, 0x0000ff);
+        foldGroup.add(pivotBox);
+    }
+  });
+
+  pivotWorldPos.set(pivotWorldPos.x,pivotWorldPos.y,0);
+
+  if (pivotWorldPos) foldGroup.position.copy(pivotWorldPos);
+  
+  const FULL_ANGLE = Math.PI / 2;
+  const chainProgress = Math.min(progress * 6.67, 1);
+
+  meshes.chains.left.forEach(mesh => {mesh.rotation.z = -chainProgress * FULL_ANGLE;});
+  meshes.chains.right.forEach(mesh => {mesh.rotation.z = chainProgress * FULL_ANGLE;});
+
+  const groupProgress = Math.max(0, (progress - 0.25) / 0.75);
+  if (useAxis == 1)
+    foldGroup.rotation.z = isReversed ? -groupProgress * FULL_ANGLE : groupProgress * FULL_ANGLE;
+  else
+    foldGroup.rotation.x = isReversed ? -groupProgress * FULL_ANGLE : groupProgress * FULL_ANGLE;
+
+  // const pt = foldGroup.position;
+  // foldGroup.position.set(pt.x, pt.y, moveZValue);
+
+  const children = foldGroup.children.filter(c => !c.userData?.isDebugBox);
+
+// 2. Dịch tất cả con theo trục Z local
+  const dz = 0.5; // khoảng muốn dịch
+  children.forEach(child => {
+    child.position.z += moveZValue;
+  });
+  
+  return foldGroup;
+};
+
+const collectMeshes = (scene, nameList) => {
+  const result = [];
+  scene.traverse((child) => {
+    if (child.isMesh && nameList.some(name => isChild(child, name))) {
+      result.push(child);
+    }
+  });
+  return result;
+};
+
+// 🔥 createThreeStageFoldGroup HOÀN TOÀN TỪ JSON
+const createThreeStageFoldGroup = ({
+  sceneClone,
+  prefixList,
+  progress,
+  size = { x: 0, y: 0, z: 0 },     // 🔥 THÊM SIZE
+  reversed = false,
+  debug = false
+}) => {
+  const prefix = prefixList[0];
+  const foldConfigData = getFoldConfig(prefix);
+  const mainPivot = foldConfigData.mainPivot;
+  const stages = foldConfigData.stages || [];
+
+  const meshesList = prefixList.map(prefix =>
+    collectMeshes(sceneClone, [prefix + '1', prefix + '2', prefix + '3'])
+  );
+
+  const FULL_ANGLE = Math.PI / 2;
+  const dir = reversed ? 1 : -1;
+
+  const mainGroup = new THREE.Group();
+  meshesList.flat().forEach(mesh => mainGroup.add(mesh));
+
+  const dPivot = new THREE.Group();
+  
+  // 🔥 MAIN PIVOT TỪ JSON
+  dPivot.position.set(reversed ? size.x / 2 : size.x/2,size.y, size.z / 2);
+
+  const xOffset = reversed ? -size.y : size.y;
+  dPivot.position.add(new THREE.Vector3(xOffset, 0, 0));
+  dPivot.add(mainGroup);
+  mainGroup.position.set(-xOffset, 0, 0);
+
+  // 🔥 DEBUG DPIVOT
+  if (debug) {
+    const dPivotBox = createDebugBox(new THREE.Vector3(), 0.12, 0x0000ff); //Blue
+    dPivot.add(dPivotBox);
+  }
+
+  // 🔥 STAGE 1: dPivot rotation
+  const p1 = Math.min(progress / 0.3, 1);
+  dPivot.rotation.z = dir * p1 * FULL_ANGLE;
+
+  // 🔥 STAGE 2: D12 folding
+  const d12Meshes = collectMeshes(mainGroup, [prefixList[0] + '1', prefixList[0] + '2']);
+  if (d12Meshes.length > 0) {
+    const d12Bbox = new THREE.Box3();
+    d12Meshes.forEach(mesh => {
+      mesh.updateMatrixWorld();
+      d12Bbox.expandByObject(mesh);
+    });
+    const d12Pivot = new THREE.Vector3(reversed ? d12Bbox.min.x : d12Bbox.max.x, d12Bbox.min.y, 0);
+
+    const d12RotationGroup = new THREE.Group();
+    d12RotationGroup.position.copy(d12Pivot);
+    mainGroup.add(d12RotationGroup);
+
+    if (debug) {
+      const d12Box = createDebugBox(new THREE.Vector3(), 0.1, 0xff0000); //Red
+      d12RotationGroup.add(d12Box);
+    }
+
+    d12Meshes.forEach(mesh => {
+      const meshLocalPos = mesh.position.clone();
+      mesh.position.copy(meshLocalPos.sub(d12Pivot));
+      d12RotationGroup.add(mesh);
+    });
+
+    const p2 = Math.max(0, Math.min((progress - 0.3) / 0.4, 1));
+    d12RotationGroup.rotation.z = dir * p2 * FULL_ANGLE;
+
+    // 🔥 STAGE 3: D1 folding
+    const d1Meshes = collectMeshes(d12RotationGroup, [prefixList[0] + '1']);
+    if (d1Meshes.length > 0) {
+      const d1Bbox = new THREE.Box3();
+      d1Meshes.forEach(mesh => {
+        mesh.updateMatrixWorld();
+        d1Bbox.expandByObject(mesh);
+      });
+      
+      // 🔥 D1 OFFSET TỪ JSON STAGES
+      const stage3 = stages.find(s => s.group === "d1RotationGroup");
+      const xOffset = reversed ? -(stage3?.offset || 0.085) : (stage3?.offset || 0.085);
+      const d1PivotPos = new THREE.Vector3(reversed ? d1Bbox.min.x - xOffset : d1Bbox.max.x - xOffset, d1Bbox.min.y, 0);
+
+      const d1RotationGroup = new THREE.Group();
+      d1RotationGroup.position.copy(d1PivotPos);
+      d12RotationGroup.add(d1RotationGroup);
+
+      if (debug) {
+        const d1Box = createDebugBox(new THREE.Vector3(), 0.08, 0xff00ff); //Pink
+        d1RotationGroup.add(d1Box);
+      }
+
+      d1Meshes.forEach(mesh => {
+        const meshLocalPos = mesh.position.clone();
+        mesh.position.copy(meshLocalPos.sub(d1PivotPos));
+        mesh.position.x -= xOffset;
+        d1RotationGroup.add(mesh);
+      });
+
+      const p3 = Math.max(0, Math.min((progress - 0.7) / 0.3, 1));
+      d1RotationGroup.rotation.z = dir * p3 * FULL_ANGLE;
+    }
+  }
+
+  return dPivot;
+};
+
+const setTexture = (sceneClone, getCurrentTexture) => {
+  const texture = getCurrentTexture();
+  if (texture) {
+    sceneClone.traverse((child) => {
+      if (child.isMesh && !child.userData.isDebugBox) {
+        const nameOK = child.name.includes('_1');
+        if (nameOK) {
+          child.material = child.material.clone();
+          child.material.map = texture;
+          child.material.needsUpdate = true;
+          child.material.envMapIntensity = 1.5;
+        }
+      }
+    });
+  }
+};
+
+export const foldAllStages = (sceneClone, progress, boxSize, originalSize, delta) => {
+    //{ x: 3.2, y: 1.12, z: 0.085 }
+  pivotCache.clear();
+  cachePivotPositions(sceneClone);
+
+  const stage1 = getStageProgress(1, progress);
+  const stage2 = getStageProgress(2, progress);
+  const stage5 = getStageProgress(5, progress);
+  const stage6 = getStageProgress(6, progress);
+  const stage7 = getStageProgress(7, progress);
+  const stage8 = getStageProgress(8, progress);
+
+  
+  const common = {sceneClone, originalSize, size: boxSize, axis: 0, reversed: false, delta};
+
+  // 🔥 OBJECT CONFIG - SIÊU DỄ ĐỌC!
+  const lidGroupA = createFoldGroup({...common,
+    config: { prefix: 'A', pivot: 'A2' }, progress: stage8,
+    moveZ:"-l-h"
+  });
+
+
+  const sideGroupB = createFoldGroup({...common,
+    config: { prefix: 'B', pivot: 'B2' }, progress: stage7,
+    moveZ:"-l-h"
+  });
+
+  const sideGroupC = createFoldGroup({...common,
+    config: { prefix: 'C', pivot: 'C2' }, progress: stage2,
+    moveZ:"-h"
+  });
+
+  const sideGroupF = createFoldGroup({...common,
+    config: { prefix: 'F', pivot: 'F2' }, progress: stage1,
+    reversed: true,
+    moveZ:"l+0.6"
+  });
+
+  const d123Folded = createThreeStageFoldGroup({
+    sceneClone,
+    prefixList: ['D'],
+    progress: stage5,
+    size: boxSize,  // 🔥 SIZE TỪ JSON geometry
+    reversed: false,
+    delta
+  });
+
+const e123Folded = createThreeStageFoldGroup({
+  sceneClone,
+  prefixList: ['E'],
+  progress: stage6,
+  size: boxSize,  // 🔥 SIZE TỪ JSON geometry
+  reversed: false,
+  delta
+});
+
+  // Nesting
+  sideGroupB.add(lidGroupA);
+  sideGroupC.add(sideGroupB);
+  lidGroupA.position.z += 0.55;
+  sideGroupB.position.z -= 0.55;
+
+  [sideGroupF, sideGroupC, d123Folded, e123Folded].forEach(group => {
+    if (group) sceneClone.add(group);
+  });
+};
+
+export const FoldRenderer = ({ sceneClone, progress, getCurrentTexture, boxSize, originalSize  }) => {
+  const group = useRef();
+  const {deltaWidth,deltaLength,deltaHeight} = usePointer();
+
+  useFrame(() => {
+    if (!group.current || !sceneClone || !originalSize) return;
+
+    group.current.clear();
+    const sceneWorking = sceneClone.clone(true);
+    setTexture(sceneWorking, getCurrentTexture);
+    foldAllStages(sceneWorking, progress, boxSize, originalSize , [deltaWidth,deltaHeight,deltaLength]);
+    group.current.add(sceneWorking);
+  });
+
+  return <group ref={group} dispose={null} />;
+};
