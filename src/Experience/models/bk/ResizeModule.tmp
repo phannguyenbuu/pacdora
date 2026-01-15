@@ -1,5 +1,5 @@
 import * as THREE from "three";
-import resizeConfig from "../../json/pointConfig/150010.json";
+import resizeConfig from "../../../json/pointConfig/150010.json";
 
 export const calculateOriginalBBox = (gltf) => {
   const box = new THREE.Box3();
@@ -138,7 +138,7 @@ export const resizeScene = (gltf, boxWidth, boxLength, boxHeight, sizeCache, siz
   let baseScene;
   
   if (!sizeCache.current || sizeCache.current.key !== sizeKey) {
-    const originalScene = gltf.clone(true);
+    const originalScene = gltf.scene.clone(true);
     
     const pivotPositions = {};
     originalScene.traverse(child => {

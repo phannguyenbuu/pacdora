@@ -229,7 +229,7 @@ const Experience = ({foldProgress}) => {
           rotation={[-0.6, -0.7, -0.4]}
           fov={45}  // Tương đương zoom={zoomValues.default} ~1.0-1.5 ortho
           near={0.1}
-          far={100}
+          far={1000}
         />
         
         <OrbitControls/>
