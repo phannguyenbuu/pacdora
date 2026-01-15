@@ -5,7 +5,7 @@ import MaterialPanel from './MaterialPanel';
 import FiveOptionToggle from './FiveOptionToggle';
 import BoxDepthSlider from './BoxDepthSlider';
 // import { RoomAxisSlider } from './ModifyControl';
-import RoomSizeSliders from './BoxSizeSliders';
+import BoxSizeSliders from './BoxSizeSliders';
 import { CaretUpOutlined, CaretDownOutlined } from '@ant-design/icons';
 import { useSelection, usePointer } from '../../stores/selectionStore';
 import CartInUsePanel from './CartInUse';
@@ -86,7 +86,7 @@ const WorkspaceConfig = () => {
           
           <Space direction='vertical'>
             <div style={{marginTop: -40}}>
-              <RoomSizeSliders />
+              <BoxSizeSliders />
             </div>
             <div style={{marginTop: 0}}>
               <BoxDepthSlider />

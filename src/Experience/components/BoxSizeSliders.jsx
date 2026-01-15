@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import { usePointer } from '../../stores/selectionStore';
 import { Space } from 'antd';
 
-const RoomSizeSliders = () => {
+const BoxSizeSliders = () => {
   const { boxWidth, setBoxWidth, boxLength, 
         setBoxLength, boxHeight, setBoxHeight,
         boxDepth, setBoxDepth
@@ -10,7 +10,11 @@ const RoomSizeSliders = () => {
   
   const handleWidthChange = (e) => setBoxWidth(Number(e.target.value));
   const handleLengthChange = (e) => setBoxLength(Number(e.target.value));
-  const handleHeightChange = (e) => setBoxHeight(Number(e.target.value));
+  const handleHeightChange = (e) => {
+    
+    setBoxHeight(Number(e.target.value));
+  }
+;
   
   
 
@@ -66,4 +70,4 @@ const RoomSizeSliders = () => {
   );
 };
 
-export default RoomSizeSliders;
+export default BoxSizeSliders;

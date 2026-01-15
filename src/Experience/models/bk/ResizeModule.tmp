@@ -172,6 +172,11 @@ export const resizeScene = (gltf, boxWidth, boxLength, boxHeight, sizeCache, siz
   } else {
     baseScene = sizeCache.current.scene;
   }
+
+
+
   
   return baseScene;
 };
+
+

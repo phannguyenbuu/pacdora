@@ -1,6 +1,6 @@
 import React, { useRef, useEffect } from "react";
 import { useFrame } from "@react-three/fiber";
-import { usePointer } from "../../stores/selectionStore";
+import { usePointer, useSelection } from "../../stores/selectionStore";
 import * as THREE from "three";
 import { getRuleForChild } from "./ResizeModule";
 import resizeConfig from "../../json/pointConfig/150010.json";
@@ -19,15 +19,37 @@ export const restorePivotPositions = () => {
   });
 };
 
+function computeLocalMaxZ(group) {
+  const box = new THREE.Box3();
+
+  group.children.forEach(child => {
+    if (!child.isMesh || !child.geometry) return;
+
+    child.geometry.computeBoundingBox();
+    const childBox = child.geometry.boundingBox.clone();
+
+    // áp scale local
+    childBox.min.multiply(child.scale);
+    childBox.max.multiply(child.scale);
+
+    // áp position local
+    childBox.translate(child.position);
+
+    box.union(childBox);
+  });
+
+  return box;
+}
 
 
-export function applyMinZPivot(group) {
+
+export function applyMinZPivot(group, reserved = false) {
   if (!group || !group.children.length) return;
 
   group.updateWorldMatrix(true, true);
 
-  const box = new THREE.Box3().setFromObject(group);
-  const minZ = box.min.z;
+  const box = computeLocalMaxZ(group);
+  const minZ = reserved ? box.min.z : box.max.z;
 
   group.children.forEach(child => {
     child.position.z -= minZ;
@@ -158,7 +180,7 @@ const createFoldGroup = ({
   }
 
   // === ÁP PIVOT = MIN.Z (🔥 QUAN TRỌNG NHẤT) ===
-  applyMinZPivot(foldGroup);
+  applyMinZPivot(foldGroup, reversed);
 
   // === ROTATION ===
   const FULL_ANGLE = Math.PI / 2;
@@ -446,13 +468,13 @@ export const foldAllStages = (sceneClone, progress, boxSize, originalSize, delta
 
   const sideGroupC = createFoldGroup({...common,
     config: { prefix: 'C', pivot: 'C2' }, progress: stage2,
-    moveZ:"-h"
+    moveZ:""
   });
 
   const sideGroupF = createFoldGroup({...common,
     config: { prefix: 'F', pivot: 'F2' }, progress: stage1,
     reversed: true,
-    moveZ:"l-5.4"
+    moveZ:"l"
   });
 
   const d123Folded = createThreeStageFoldGroup({
@@ -488,6 +510,62 @@ export const FoldRenderer = ({ sceneClone, progress, getCurrentTexture, boxSize,
  const group = useRef();
 const foldGroups = useRef([]);
 
+const {setMessage} = useSelection();
+
+// import * as THREE from "three";
+
+function logBBoxOfObjects(scene, names, label = "") {
+  if (!scene) return;
+
+  scene.updateWorldMatrix(true, true);
+    let msg = '';
+  names.forEach(name => {
+    const obj = scene.getObjectByName(name);
+    if (!obj) {
+      console.warn(`[BBox] ${name} NOT FOUND`);
+      return;
+    }
+
+    // WORLD bbox
+    const worldBox = new THREE.Box3().setFromObject(obj);
+
+    // LOCAL bbox (geometry)
+    let localBox = null;
+    if (obj.geometry) {
+      obj.geometry.computeBoundingBox();
+      localBox = obj.geometry.boundingBox.clone();
+    }
+
+    msg += `📦 BBOX ${name} ${label}\n`;
+
+    // msg += `position: [${obj.position.toArray().map(n => n.toFixed(4)).join(', ')}]\n`;
+    // msg += `scale:    [${obj.scale.toArray().map(n => n.toFixed(4)).join(', ')}]\n`;
+    // msg += `rotation: [${[
+    // obj.rotation.x,
+    // obj.rotation.y,
+    // obj.rotation.z
+    // ].map(n => n.toFixed(4)).join(', ')}]\n`;
+
+    if (localBox) {
+    // msg += `LOCAL bbox:\n`;
+    // msg += `  min: [${localBox.min.toArray().map(n => n.toFixed(4)).join(', ')}]\n`;
+    // msg += `  max: [${localBox.max.toArray().map(n => n.toFixed(4)).join(', ')}]\n`;
+    msg += `  size:[${localBox.getSize(new THREE.Vector3()).toArray().map(n => n.toFixed(4)).join(', ')}]\n`;
+    } else {
+    msg += `LOCAL bbox: none\n`;
+    }
+
+    // msg += `WORLD bbox:\n`;
+    // msg += `  min: [${worldBox.min.toArray().map(n => n.toFixed(4)).join(', ')}]\n`;
+    // msg += `  max: [${worldBox.max.toArray().map(n => n.toFixed(4)).join(', ')}]\n`;
+    // msg += `  size:[${worldBox.getSize(new THREE.Vector3()).toArray().map(n => n.toFixed(4)).join(', ')}]\n`;
+
+    setMessage(msg);
+
+  });
+}
+
+
 useEffect(() => {
   if (!sceneClone || !originalSize) return;
 
@@ -502,15 +580,22 @@ useEffect(() => {
     originalSize
   });
 
+
+  logBBoxOfObjects(
+    working,
+    ["A2_1", "B2_1", "C2_1", "O_1", "F2_1"],
+    "AFTER BUILD FOLD"
+    );
+
   group.current.clear();
   group.current.add(working);
 }, [sceneClone, boxSize, originalSize, getCurrentTexture]);
 
 
-useFrame(() => {
-  if (!foldGroups.current.length) return;
-  animateFoldGroups(foldGroups.current, progress);
-});
+// useFrame(() => {
+//   if (!foldGroups.current.length) return;
+//   animateFoldGroups(foldGroups.current, progress);
+// });
 
 
 

@@ -78,15 +78,15 @@ const logZ = (childName,originalBBox,positions) => {
 
 }
 
-const resizeAxisZ = (coord, deltaSize, rule, isCoord) => {
+const resizeAxisZ = (coord, deltaSize, rule, isCoord, sign = 1) => {
   
   if (rule?.type === "pivot") {
     const v =  deltaSize * (rule.deltaMultiplier ? rule.deltaMultiplier : 0);
     // console.log("V", coord, isCoord);
-    return isCoord ? coord + v : coord;
-  } else {
+    return isCoord ? coord + sign * v : coord;
+  } 
     return coord;
-  }
+  
   
 };
 
@@ -98,13 +98,20 @@ export const applyResizeRule = (geometry, childName, boxWidth, boxLength, boxHei
   const positions = [...geometry.attributes.position.array];
   const bboxSize = {
     x: originalBBox.max.x - originalBBox.min.x,
-    z: originalBBox.max.z - originalBBox.min.z,
-    y: originalBBox.max.y - originalBBox.min.y
+    z: originalBBox.max.z - originalBBox.min.z
   };
 
+  const isHeightFoldPanel = ["A2", "C2", "F2"].some(prefix =>
+    childName.startsWith(prefix)
+  );
+
+   const delta = isHeightFoldPanel ? boxHeight - bboxSize.z : boxLength - bboxSize.z;
+
   const centerZ = (originalBBox.min.z + originalBBox.max.z) / 2;
-  const deltaZ = boxLength - bboxSize.z;
-  const deltaY = boxHeight - bboxSize.y;
+  
+  
+
+  console.log("G", boxHeight, bboxSize.y);
 
   // computeSizeZ(geometry, positions);
 
@@ -116,8 +123,10 @@ export const applyResizeRule = (geometry, childName, boxWidth, boxLength, boxHei
     // if(childName.startsWith("F2"))
     //   console.log("R", childName, z >= centerZ);
 
-    z = resizeAxisZ(z, deltaY, rules.Y,  z >= centerZ);
-    z = resizeAxisZ(z, deltaZ, rules.Z,  z >= centerZ);
+    if(isHeightFoldPanel)
+        z = resizeAxisZ(z, delta, rules.Y,  z >= centerZ, 1);
+    else
+        z = resizeAxisZ(z, delta, rules.Z,  z >= centerZ, 1);
     
     positions[i] = x; positions[i + 1] = y; positions[i + 2] = z;
   }
