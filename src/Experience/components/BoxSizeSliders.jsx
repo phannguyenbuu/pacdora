@@ -1,20 +1,46 @@
-import React, {useState, useEffect} from 'react';
+import React, { useEffect, useState } from 'react';
 import { usePointer } from '../../stores/selectionStore';
 import { Space } from 'antd';
 
 const BoxSizeSliders = () => {
-  const { boxWidth, setBoxWidth, boxLength, 
-        setBoxLength, boxHeight, setBoxHeight,
-        boxDepth, setBoxDepth
-       } = usePointer();
-  
-  const handleWidthChange = (e) => setBoxWidth(Number(e.target.value));
-  const handleLengthChange = (e) => setBoxLength(Number(e.target.value));
-  const handleHeightChange = (e) => {
-    
-    setBoxHeight(Number(e.target.value));
-  }
-;
+  const {
+    boxWidth,
+    setBoxWidth,
+    boxLength,
+    setBoxLength,
+    boxHeight,
+    setBoxHeight,
+    pulseResize
+  } = usePointer();
+
+  const [widthDraft, setWidthDraft] = useState(boxWidth);
+  const [lengthDraft, setLengthDraft] = useState(boxLength);
+  const [heightDraft, setHeightDraft] = useState(boxHeight);
+
+  useEffect(() => {
+    setWidthDraft(boxWidth);
+  }, [boxWidth]);
+
+  useEffect(() => {
+    setLengthDraft(boxLength);
+  }, [boxLength]);
+
+  useEffect(() => {
+    setHeightDraft(boxHeight);
+  }, [boxHeight]);
+
+  const commitWidth = () => {
+    setBoxWidth(Number(widthDraft));
+    pulseResize();
+  };
+  const commitLength = () => {
+    setBoxLength(Number(lengthDraft));
+    pulseResize();
+  };
+  const commitHeight = () => {
+    setBoxHeight(Number(heightDraft));
+    pulseResize();
+  };
   
   
 
@@ -26,13 +52,16 @@ const BoxSizeSliders = () => {
         <input
           type="range"
           min="0.2"
-          max="20"
+          max="12"
           step="0.01"
-          value={boxWidth}
-          onChange={handleWidthChange}
+          value={widthDraft}
+          onChange={(e) => setWidthDraft(Number(e.target.value))}
+          onMouseUp={commitWidth}
+          onTouchEnd={commitWidth}
+          onKeyUp={commitWidth}
           style={{ width: "100%" }}
         />
-        <p>{boxWidth * 100}mm</p>
+        <p>{Math.round(widthDraft * 100)}mm</p>
       </Space>
 
       {/* Length Slider */}
@@ -41,13 +70,16 @@ const BoxSizeSliders = () => {
         <input
           type="range"
           min="0.2"
-          max="20"
+          max="12"
           step="0.01"
-          value={boxLength}
-          onChange={handleLengthChange}
+          value={lengthDraft}
+          onChange={(e) => setLengthDraft(Number(e.target.value))}
+          onMouseUp={commitLength}
+          onTouchEnd={commitLength}
+          onKeyUp={commitLength}
           style={{ width: "100%" }}
         />
-        <p>{boxLength * 100}mm</p>
+        <p>{Math.round(lengthDraft * 100)}mm</p>
       </Space>
 
       
@@ -58,13 +90,16 @@ const BoxSizeSliders = () => {
         <input
           type="range"
           min="0.20"
-          max="20"
+          max="12"
           step="0.01"
-          value={boxHeight}
-          onChange={handleHeightChange}
+          value={heightDraft}
+          onChange={(e) => setHeightDraft(Number(e.target.value))}
+          onMouseUp={commitHeight}
+          onTouchEnd={commitHeight}
+          onKeyUp={commitHeight}
           style={{ width: "100%" }}
         />
-        <p>{boxHeight * 100}mm</p>
+        <p>{Math.round(heightDraft * 100)}mm</p>
       </Space>
     </div>
   );

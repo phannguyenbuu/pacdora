@@ -67,22 +67,16 @@ const logZ = (childName,originalBBox,positions) => {
     else if (z < ((originalBBox.min.z + originalBBox.max.z)/2)) negCount++;
     else zeroCount++;
   }
-
-  console.log('z > centerZ:', posCount, 'z < centerZ:', negCount, 'z == centerZ:', zeroCount);
-  console.log('All z < 0?', Math.max(...positions.filter((_,i)=>i%3==2)) < 0);
-  console.log('z min/max:', 
-    Math.min(...positions.filter((_,i)=>i%3==2)).toFixed(3), 
-    Math.max(...positions.filter((_,i)=>i%3==2)).toFixed(3));
-  console.log('First 10 z:', zValues.slice(0,10));
-  console.groupEnd();
-
 }
 
 const resizeAxisZ = (coord, deltaSize, rule, isCoord) => {
   
+
   if (rule?.type === "pivot") {
-    const v =  deltaSize * (rule.deltaMultiplier ? rule.deltaMultiplier : 0);
-    // console.log("V", coord, isCoord);
+    const v =  deltaSize * (rule.deltaMultiplier ? rule.deltaMultiplier : 0) + (rule.extent ? rule.extent : 0);
+
+
+    
     return isCoord ? coord + v : coord;
   } else {
     return coord;
@@ -113,8 +107,8 @@ export const applyResizeRule = (geometry, childName, boxWidth, boxLength, boxHei
     
     x = resizeAxisX(x, (boxWidth - bboxSize.x), rules.X);
 
-    // if(childName.startsWith("F2"))
-    //   console.log("R", childName, z >= centerZ);
+    if(childName.startsWith("F2"))
+      console.log("R", childName, rules.Z);
 
     z = resizeAxisZ(z, deltaY, rules.Y,  z >= centerZ);
     z = resizeAxisZ(z, deltaZ, rules.Z,  z >= centerZ);

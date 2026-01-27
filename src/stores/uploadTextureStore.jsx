@@ -7,6 +7,8 @@ export const useUploadTextureStore = create((set, get) => ({
   currentTexture: null,
   showEditor: false,
   editorImage: null,
+  defaultImageUrl: "/hoasen_03.png",
+  backgroundColor: "#ffffff",
 
   // 🔥 GETTER cho BoxSample
   getCurrentTexture: () => get().currentTexture,
@@ -27,6 +29,21 @@ export const useUploadTextureStore = create((set, get) => ({
     img.src = URL.createObjectURL(file);
   },
 
+  initDefaultImage: () => {
+    if (get().currentImage) return;
+    const img = new Image();
+    img.onload = () => {
+      set({
+        currentImage: img,
+        editorImage: img,
+      });
+      createTextureFromImage(img, set);
+    };
+    img.src = get().defaultImageUrl;
+  },
+
+  setBackgroundColor: (color) => set({ backgroundColor: color || "#ffffff" }),
+
   // 🔥 UPDATE từ Konva canvas
   updateTextureFromCanvas: (canvas) => {
     const texture = new THREE.CanvasTexture(canvas);
@@ -45,6 +62,8 @@ export const useUploadTextureStore = create((set, get) => ({
   
 
   // 🔥 ĐÓNG EDITOR
+  openEditor: () => set({ showEditor: true }),
+
   closeEditor: () => set({ showEditor: false })
 }));
 

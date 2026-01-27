@@ -62,7 +62,11 @@ const TransitionComponent = ({ children }) => {
         appear={true}
         onEnter={() => {
           // No transition for Home Page
-          if (location.pathname === "/") return;
+          if (location.pathname === "/") {
+            gsap.set(nodeRef.current, { x: 0, y: 0 });
+            setIsEntering(false);
+            return;
+          }
 
           // Determine if camera transitioning for an added delay
           let flagDelay = false;

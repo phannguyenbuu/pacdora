@@ -1,39 +1,17 @@
 import * as THREE from "three";
 import resizeConfig from "../../json/pointConfig/150010.json";
-
-export const calculateOriginalBBox = (gltf) => {
-  const box = new THREE.Box3();
-  gltf.scene.traverse((child) => {
-    if (child.isMesh && child.geometry) {
-      child.geometry.computeBoundingBox();
-      box.union(child.geometry.boundingBox);
-    }
-  });
-  return box;
-};
-
-export const getRuleForChild = (childName, resizeRules) => {
-  const axes = ['X', 'Y', 'Z'];
-  const result = {};
-  
-  axes.forEach(axis => {
-    const rule = resizeRules?.[axis];
-    
-    if (!rule) {
-      result[axis] = null;
-      return;
-    }
-
-    if (rule[childName]) {
-      result[axis] = rule[childName];
-    } else {
-      const baseName = childName.replace(/_[1-3]$/, '');
-      result[axis] = (baseName !== childName && rule[baseName]) ? rule[baseName] : null;
-    }
-  });
-  
-  return result;  // {X: ruleX, Y: ruleY, Z: ruleZ}
-};
+import { computeLocalMeshBB } from "./geometryUtils";
+import { getRuleForChild } from "./modelRules";
+// export const calculateOriginalBBox = (gltf) => {
+//   const box = new THREE.Box3();
+//   gltf.scene.traverse((child) => {
+//     if (child.isMesh && child.geometry) {
+//       child.geometry.computeBoundingBox();
+//       box.union(child.geometry.boundingBox);
+//     }
+//   });
+//   return box;
+// };
 
 const resizeAxisX = (coord, deltaSize, rule) => {
   
@@ -50,38 +28,11 @@ const resizeAxisX = (coord, deltaSize, rule) => {
   
 };
 
-
-const logZ = (childName,originalBBox,positions) => {
-  // Log debug: Check z distribution
-  console.group('Z Debug - ' + childName);
-  console.log('bbox minZ:', originalBBox.min.z.toFixed(3), 
-              'maxZ:', originalBBox.max.z.toFixed(3), 
-              'centerZ:', ((originalBBox.min.z + originalBBox.max.z)/2).toFixed(3));
-
-  const zValues = [];
-  let posCount = 0, negCount = 0, zeroCount = 0;
-  for (let i = 0; i < positions.length; i += 3) {
-    const z = positions[i + 2];
-    zValues.push(z.toFixed(3));
-    if (z > ((originalBBox.min.z + originalBBox.max.z)/2)) posCount++;
-    else if (z < ((originalBBox.min.z + originalBBox.max.z)/2)) negCount++;
-    else zeroCount++;
-  }
-
-  console.log('z > centerZ:', posCount, 'z < centerZ:', negCount, 'z == centerZ:', zeroCount);
-  console.log('All z < 0?', Math.max(...positions.filter((_,i)=>i%3==2)) < 0);
-  console.log('z min/max:', 
-    Math.min(...positions.filter((_,i)=>i%3==2)).toFixed(3), 
-    Math.max(...positions.filter((_,i)=>i%3==2)).toFixed(3));
-  console.log('First 10 z:', zValues.slice(0,10));
-  console.groupEnd();
-
-}
-
 const resizeAxisZ = (coord, deltaSize, rule, isCoord, sign = 1) => {
   
   if (rule?.type === "pivot") {
-    const v =  deltaSize * (rule.deltaMultiplier ? rule.deltaMultiplier : 0);
+    const v =  deltaSize * (rule.deltaMultiplier ? rule.deltaMultiplier : 0) + (rule.extent ? rule.extent : 0);
+
     // console.log("V", coord, isCoord);
     return isCoord ? coord + sign * v : coord;
   } 
@@ -91,7 +42,7 @@ const resizeAxisZ = (coord, deltaSize, rule, isCoord, sign = 1) => {
 };
 
 
-export const applyResizeRule = (geometry, childName, boxWidth, boxLength, boxHeight, originalBBox, resizeRules) => {
+export const applyResizeRule = (geometry, childName, boxWidth, boxLength, boxHeight, originalBBox, resizeRules, isONode) => {
   const rules = getRuleForChild(childName, resizeRules);
 
 
@@ -101,6 +52,8 @@ export const applyResizeRule = (geometry, childName, boxWidth, boxLength, boxHei
     z: originalBBox.max.z - originalBBox.min.z
   };
 
+   
+
   const isHeightFoldPanel = ["A2", "C2", "F2"].some(prefix =>
     childName.startsWith(prefix)
   );
@@ -108,28 +61,29 @@ export const applyResizeRule = (geometry, childName, boxWidth, boxLength, boxHei
    const delta = isHeightFoldPanel ? boxHeight - bboxSize.z : boxLength - bboxSize.z;
 
   const centerZ = (originalBBox.min.z + originalBBox.max.z) / 2;
-  
-  
 
-  console.log("G", boxHeight, bboxSize.y);
-
-  // computeSizeZ(geometry, positions);
+  // if(childName.startsWith("B2"))
+  //     console.log("R", childName, rules.Z); 
+  
 
   for (let i = 0; i < positions.length; i += 3) {
     let x = positions[i], y = positions[i + 1], z = positions[i + 2];
     
     x = resizeAxisX(x, (boxWidth - bboxSize.x), rules.X);
 
-    // if(childName.startsWith("F2"))
-    //   console.log("R", childName, z >= centerZ);
-
-    if(isHeightFoldPanel)
-        z = resizeAxisZ(z, delta, rules.Y,  z >= centerZ, 1);
-    else
-        z = resizeAxisZ(z, delta, rules.Z,  z >= centerZ, 1);
+    if(!isONode)
+    {
+      
+      if(isHeightFoldPanel)
+          z = resizeAxisZ(z, delta, rules.Y,  z >= centerZ, 1);
+      else
+          z = resizeAxisZ(z, delta, rules.Z,  z >= centerZ, 1);
+    }
     
     positions[i] = x; positions[i + 1] = y; positions[i + 2] = z;
   }
+
+
 
   geometry.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3));
   geometry.attributes.position.needsUpdate = true;
@@ -163,13 +117,25 @@ export const resizeScene = (gltf, boxWidth, boxLength, boxHeight, sizeCache, siz
         const childBbox = new THREE.Box3();
         childBbox.setFromBufferAttribute(child.geometry.attributes.position);
 
+        const isONode = child.name.includes("O");
+
         child.geometry = applyResizeRule(
           child.geometry.clone(),
           child.name,
           boxWidth, boxLength, boxHeight,
           childBbox,
-          resizeConfig.resizeRules
+          resizeConfig.resizeRules,
+          isONode
         );
+        
+        if(isONode)
+        {
+          let bb = computeLocalMeshBB(child);          
+          const scaleZ = boxLength / (bb.max.z - bb.min.z);
+          child.scale.z = scaleZ;
+          bb = computeLocalMeshBB(child);
+          child.position.z -= bb.min.z;
+        }
       }
     });
     

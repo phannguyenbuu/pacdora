@@ -79,14 +79,10 @@
     }
   },
   "Z": {
-    "A2": {
-      "type": "full",
-      "deltaMultiplier": 0,
-      "offset": "0,0,l"
-    },
     "B2": {
       "type": "pivot",
       "deltaMultiplier": 1,
+      "extent": 0.02,
       "offset": "0,0,l"
     },
 
@@ -99,26 +95,8 @@
 },
 
   "foldPivots": {
-    "A": { "pivot": "A2", "axis": 0 },
-    "B": { "pivot": "B2", "axis": 0 },
-    "C": { "pivot": "C2", "axis": 0 },
-    "F": { "pivot": "F2", "axis": 0, "reversed": true },
-    
-    "D": {
-      "mainPivot": { "x": 3.22, "y": 0, "z": 0 },
-      "stages": [
-        { "progress": 0.3, "pivot": "auto", "group": "dPivot" },
-        { "progress": 0.7, "pivot": "bboxEdge", "group": "d12RotationGroup" },
-        { "progress": 1.0, "pivot": "bboxOffset", "group": "d1RotationGroup", "offset": 0.085 }
-      ]
-    },
-    "E": {
-      "mainPivot": { "x": 0, "y": 0, "z": 0 },
-      "stages": [
-        { "progress": 0.3, "pivot": "auto", "group": "dPivot" },
-        { "progress": 0.7, "pivot": "bboxEdge", "group": "d12RotationGroup" },
-        { "progress": 1.0, "pivot": "bboxOffset", "group": "d1RotationGroup", "offset": 0.085 }
-      ]
-    }
+    "A": { "moveZ": "-l-0.02" },
+    "B": { "moveZ": "-h" },
+    "F": { "moveZ": "l" }
   }
 }

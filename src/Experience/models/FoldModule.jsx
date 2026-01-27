@@ -1,12 +1,12 @@
 import React, { useRef, useEffect } from "react";
-import { useFrame } from "@react-three/fiber";
-import { usePointer, useSelection } from "../../stores/selectionStore";
+import { useSelection } from "../../stores/selectionStore";
 import * as THREE from "three";
-import { getRuleForChild } from "./ResizeModule";
+import { getRuleForChild } from "./modelRules";
 import resizeConfig from "../../json/pointConfig/150010.json";
-import { evaluate, parse } from 'mathjs';
+import { evaluate } from 'mathjs';
 
 import { getCachedPivot,cachePivotPositions , pivotCache } from './pivotCache';
+import { computeLocalMeshBB, computeLocalGroupBB } from "./geometryUtils";
 
 export const restorePivotPositions = () => {
   pivotCache.forEach((data, name) => {
@@ -19,23 +19,19 @@ export const restorePivotPositions = () => {
   });
 };
 
-function computeLocalMaxZ(group) {
+
+export function computeGroup(group, only_main = true) {
   const box = new THREE.Box3();
 
-  group.children.forEach(child => {
+  group.traverse((child) => {
+    // 🔥 Filter trước khi tính
     if (!child.isMesh || !child.geometry) return;
+    if (only_main && child.name[1] !== "2") return;
 
-    child.geometry.computeBoundingBox();
-    const childBox = child.geometry.boundingBox.clone();
-
-    // áp scale local
-    childBox.min.multiply(child.scale);
-    childBox.max.multiply(child.scale);
-
-    // áp position local
-    childBox.translate(child.position);
-
-    box.union(childBox);
+    child.updateMatrixWorld(); // Sync matrix
+    
+    // 🔥 AUTO: scale + position + rotation + children!
+    box.expandByObject(child);
   });
 
   return box;
@@ -43,12 +39,34 @@ function computeLocalMaxZ(group) {
 
 
 
+export function applyMinXPivot(group, reserved = false) {
+  if (!group || !group.children.length) return;
+
+  group.updateWorldMatrix(true, true);
+
+  const box = computeLocalGroupBB(group);
+  const minX = reserved ? box.min.x : box.max.x;
+
+//   group.children.forEach(child => {
+//     child.position.z -= minZ;
+//   });
+
+    group.traverse((child) => {
+    if (child.parent === group) {  // Chỉ direct children
+      child.position.x -= minX;
+    }
+  });
+
+  group.position.z += minX;
+}
+
+
 export function applyMinZPivot(group, reserved = false) {
   if (!group || !group.children.length) return;
 
   group.updateWorldMatrix(true, true);
 
-  const box = computeLocalMaxZ(group);
+  const box = computeLocalGroupBB(group);
   const minZ = reserved ? box.min.z : box.max.z;
 
   group.children.forEach(child => {
@@ -103,13 +121,13 @@ const foldObj = (idx, mesh, rule, size, ax) => {
 
   // 🔥 PARSE OFFSET TỪ JSON VỚI SUBSTITUTE
   if (rule && rule.offset) {
-    if(mesh.name.includes("B2"))
-      console.log("mesh",mesh.name, rule, rule.offset);
+    // if(mesh.name.includes("B2"))
+    //   console.log("mesh",mesh.name, rule, rule.offset);
     const [xStr, yStr, zStr] = rule.offset.split(',');
     
     // Helper function parse với substitute
-    if(mesh.name==="A2_1")
-      console.log("scale_f", ax,  parseOffset(size, zStr));
+    // if(mesh.name==="A2_1")
+    //   console.log("scale_f", ax,  parseOffset(size, zStr));
 
     offsetX += parseOffset(size, xStr);
     offsetY += parseOffset(size, yStr);
@@ -139,10 +157,6 @@ const createFoldGroup = ({
   foldGroup.userData.foldGroup = true;
   foldGroup.name = `FoldGroup_${config.prefix}`;
 
-  // === LẤY PIVOT CACHE (SAU RESIZE) ===
-  const pivotData = getCachedPivot(foldGroup);
-  // ❌ LƯU Ý: lúc này foldGroup CHƯA có child → pivotData có thể null
-  // 👉 pivot thật sẽ tính bằng applyMinZPivot bên dưới
 
   // === THU MESH ===
   const meshes = { left: [], right: [], pivot: [] };
@@ -167,23 +181,50 @@ const createFoldGroup = ({
   });
 
   // === ADD PIVOT MESH ===
-  meshes.pivot.forEach(mesh => {
-    mesh.position.set(0, 0, 0);
-    foldGroup.add(mesh);
-  });
+  meshes.pivot.forEach(mesh => foldGroup.add(mesh));
 
-  // === APPLY moveZ TRƯỚC KHI TÍNH PIVOT ===
-  if (dz !== 0) {
-    foldGroup.children.forEach(c => {
-      c.position.z += dz;
-    });
-  }
 
   // === ÁP PIVOT = MIN.Z (🔥 QUAN TRỌNG NHẤT) ===
   applyMinZPivot(foldGroup, reversed);
+  foldGroup.position.z = dz;
 
   // === ROTATION ===
   const FULL_ANGLE = Math.PI / 2;
+  const chainProgress = Math.min(progress * 6.67, 1);
+
+  const bbox = computeLocalGroupBB(foldGroup);
+  const nz = bbox.max.z - bbox.min.z;
+//   console.log("Round", nz);
+
+//   meshes.left.forEach(mesh => {mesh.rotation.z = -chainProgress * FULL_ANGLE;});
+//   meshes.right.forEach(mesh => {mesh.rotation.z = chainProgress * FULL_ANGLE;});
+
+    meshes.left.forEach(mesh => {
+        mesh.rotation.z = -chainProgress * FULL_ANGLE;
+        
+        // 🔥 SCALE Z = nz
+        const currentZ = mesh.geometry.boundingBox.max.z - mesh.geometry.boundingBox.min.z;
+        const scaleZ = nz / currentZ;
+        mesh.scale.z = scaleZ;
+
+        const bb = computeLocalMeshBB(mesh);
+        mesh.position.z += bbox.min.z - bb.min.z;
+        // console.log(`Left ${mesh.name}: Z ${currentZ.toFixed(2)} → ${nz}`);
+    });
+
+    meshes.right.forEach(mesh => {
+        mesh.rotation.z = chainProgress * FULL_ANGLE;
+        
+        // 🔥 SCALE Z = nz
+        const currentZ = mesh.geometry.boundingBox.max.z - mesh.geometry.boundingBox.min.z;
+        const scaleZ = nz / currentZ;
+        mesh.scale.z = scaleZ;
+
+        const bb = computeLocalMeshBB(mesh);
+        mesh.position.z += bbox.min.z - bb.min.z;
+        // console.log(`Right ${mesh.name}: Z ${currentZ.toFixed(2)} → ${nz}`);
+    });
+
   const groupProgress = Math.max(0, Math.min(1, progress));
 
   if (axis === 1) {
@@ -228,13 +269,13 @@ const createThreeStageFoldGroup = ({
   sceneClone,
   prefixList,
   progress,
-  size = { x: 0, y: 0, z: 0 },     // 🔥 THÊM SIZE
+  size = { x: 0, y: 0, z: 0 },
+  position,
   reversed = false,
   debug = false
 }) => {
   const prefix = prefixList[0];
   const foldConfigData = getFoldConfig(prefix);
-  const mainPivot = foldConfigData.mainPivot;
   const stages = foldConfigData.stages || [];
 
   const meshesList = prefixList.map(prefix =>
@@ -249,13 +290,13 @@ const createThreeStageFoldGroup = ({
 
   const dPivot = new THREE.Group();
   
-  // 🔥 MAIN PIVOT TỪ JSON
-  dPivot.position.set(reversed ? size.x / 2 : size.x/2,size.y, size.z / 2);
+  
+  
 
   const xOffset = reversed ? -size.y : size.y;
-  dPivot.position.add(new THREE.Vector3(xOffset, 0, 0));
+//   dPivot.position.add(new THREE.Vector3(xOffset, 0, 0));
   dPivot.add(mainGroup);
-  mainGroup.position.set(-xOffset, 0, 0);
+//   mainGroup.position.set(0, 0, 0);
 
   // 🔥 DEBUG DPIVOT
   if (debug) {
@@ -330,8 +371,56 @@ const createThreeStageFoldGroup = ({
     }
   }
 
+  let bb = computeLocalGroupBB(dPivot, false);
+  
+  const [real_h, real_l] = getSideRealSize(mainGroup, "3_1");
+  
+  
+  dPivot.scale.x = size.y / real_h;
+  dPivot.scale.z = size.z / real_l;
+//   console.log("BB");
+//   applyMinXPivot(dPivot);
+  bb = computeLocalGroupBB(dPivot, false);
+  const nx = bb.max.x - bb.min.x;
+  // console.log("BB", size.y / real_h, size.y);
+
+  const dx =  size.y / real_h * size.x;
+    mainGroup.position.x += reversed ? real_h : - real_h;
+    
+
+  dPivot.position.set( reversed ? size.x/2 : -size.x/2, 0, size.z / 2);
+  addPivotDebug(dPivot,0.15,0x00ffff);
+  
+
   return dPivot;
 };
+
+const getSideRealSize = (mainGroup, key) => {
+  let real_h = 0, real_l = 0;
+  const keyMeshes = []; // 🔥 Array tất cả meshes
+
+  // 🔥 Tìm TẤT CẢ meshes startsWith key
+  mainGroup.traverse(child => {
+    if (child.isMesh && child.name.includes(key)) {
+      keyMeshes.push(child);
+    }
+  });
+
+  if (keyMeshes.length === 0) {
+    console.warn(`No meshes found for key: ${key}`);
+    return 0;
+  }
+
+  // 🔥 Tính BB của tất cả keyMeshes
+  const bb_group = computeLocalMeshBB(keyMeshes[0], false);
+  real_h = bb_group.max.x - bb_group.min.x;
+  real_l = bb_group.max.z - bb_group.min.z;
+
+//   console.log(`getSideRealHeight(${key}): ${keyMeshes.length} meshes → real_h=${real_h.toFixed(3)}`);
+  
+  return [real_h, real_l];
+};
+
 
 const setTexture = (sceneClone, getCurrentTexture) => {
   const texture = getCurrentTexture();
@@ -381,41 +470,43 @@ export const buildFoldScene = ({
   // 🔥 OBJECT CONFIG - SIÊU DỄ ĐỌC!
   const lidGroupA = createFoldGroup({...common,
     config: { prefix: 'A', pivot: 'A2' }, progress: stage8,
-    moveZ:"-l-h"
+    moveZ:"-l-0.02"
   });
 
 
   const sideGroupB = createFoldGroup({...common,
     config: { prefix: 'B', pivot: 'B2' }, progress: stage7,
-    moveZ:"-l-h"
+    moveZ:"-h"
   });
 
   const sideGroupC = createFoldGroup({...common,
     config: { prefix: 'C', pivot: 'C2' }, progress: stage2,
-    moveZ:"-h"
+    moveZ:""
   });
 
   const sideGroupF = createFoldGroup({...common,
     config: { prefix: 'F', pivot: 'F2' }, progress: stage1,
     reversed: true,
-    moveZ:"l+0.6"
+    moveZ:"l"
   });
 
   const d123Folded = createThreeStageFoldGroup({
     sceneClone,
     prefixList: ['D'],
     progress: stage5,
-    size: boxSize,  // 🔥 SIZE TỪ JSON geometry
+    size: boxSize,
+    // position: {x:-boxSize.x/2, y:0, z:boxSize.z/2},
     reversed: false
   });
 
-const e123Folded = createThreeStageFoldGroup({
-  sceneClone,
-  prefixList: ['E'],
-  progress: stage6,
-  size: boxSize,  // 🔥 SIZE TỪ JSON geometry
-  reversed: false,
-});
+    const e123Folded = createThreeStageFoldGroup({
+    sceneClone,
+    prefixList: ['E'],
+    progress: stage6,
+    size: boxSize,
+    // position: {x:boxSize.x/2, y:0, z:boxSize.z/2},
+    reversed: true,
+    });
 
   // Nesting
   sideGroupB.add(lidGroupA);
@@ -443,74 +534,76 @@ export const animateFoldGroups = (groups, progress) => {
 
 
 
-export const foldAllStages = (sceneClone, progress, boxSize, originalSize, delta) => {
-  const stage1 = getStageProgress(1, progress);
-  const stage2 = getStageProgress(2, progress);
-  const stage5 = getStageProgress(5, progress);
-  const stage6 = getStageProgress(6, progress);
-  const stage7 = getStageProgress(7, progress);
-  const stage8 = getStageProgress(8, progress);
+// export const foldAllStages = (sceneClone, progress, boxSize, originalSize, delta) => {
+//     const foldPivots = resizeConfig.foldPivots;
+//   const stage1 = getStageProgress(1, progress);
+//   const stage2 = getStageProgress(2, progress);
+//   const stage5 = getStageProgress(5, progress);
+//   const stage6 = getStageProgress(6, progress);
+//   const stage7 = getStageProgress(7, progress);
+//   const stage8 = getStageProgress(8, progress);
 
   
-  const common = {sceneClone, originalSize, size: boxSize, axis: 0, reversed: false, delta};
+//   const common = {sceneClone, originalSize, size: boxSize, axis: 0, reversed: false, delta};
 
-  // 🔥 OBJECT CONFIG - SIÊU DỄ ĐỌC!
-  const lidGroupA = createFoldGroup({...common,
-    config: { prefix: 'A', pivot: 'A2' }, progress: stage8,
-    moveZ:"-l-h-6"
-  });
+//   // 🔥 OBJECT CONFIG - SIÊU DỄ ĐỌC!
+//   const lidGroupA = createFoldGroup({...common,
+//     config: { prefix: 'A', pivot: 'A2' }, progress: stage8,
+//     moveZ:foldPivots.A || ""
+//   });
 
 
-  const sideGroupB = createFoldGroup({...common,
-    config: { prefix: 'B', pivot: 'B2' }, progress: stage7,
-    moveZ:"-l-1.5"
-  });
+//   const sideGroupB = createFoldGroup({...common,
+//     config: { prefix: 'B', pivot: 'B2' }, progress: stage7,
+//     moveZ:foldPivots.B || ""
+//   });
 
-  const sideGroupC = createFoldGroup({...common,
-    config: { prefix: 'C', pivot: 'C2' }, progress: stage2,
-    moveZ:""
-  });
+//   const sideGroupC = createFoldGroup({...common,
+//     config: { prefix: 'C', pivot: 'C2' }, progress: stage2,
+//     moveZ:foldPivots.C || ""
+//   });
 
-  const sideGroupF = createFoldGroup({...common,
-    config: { prefix: 'F', pivot: 'F2' }, progress: stage1,
-    reversed: true,
-    moveZ:"l"
-  });
+//   const sideGroupF = createFoldGroup({...common,
+//     config: { prefix: 'F', pivot: 'F2' }, progress: stage1,
+//     reversed: true,
+//     moveZ:foldPivots.F || ""
+//   });
 
-  const d123Folded = createThreeStageFoldGroup({
-    sceneClone,
-    prefixList: ['D'],
-    progress: stage5,
-    size: boxSize,  // 🔥 SIZE TỪ JSON geometry
-    reversed: false,
-    delta
-  });
+//   const d123Folded = createThreeStageFoldGroup({
+//     sceneClone,
+//     prefixList: ['D'],
+//     progress: stage5,
+//     size: boxSize,  // 🔥 SIZE TỪ JSON geometry
+//     reversed: false,
+//     delta
+//   });
 
-const e123Folded = createThreeStageFoldGroup({
-  sceneClone,
-  prefixList: ['E'],
-  progress: stage6,
-  size: boxSize,  // 🔥 SIZE TỪ JSON geometry
-  reversed: false,
-  delta
-});
+// const e123Folded = createThreeStageFoldGroup({
+//   sceneClone,
+//   prefixList: ['E'],
+//   progress: stage6,
+//   size: boxSize,  // 🔥 SIZE TỪ JSON geometry
+//   reversed: false,
+//   delta
+// });
 
-  // Nesting
-  sideGroupB.add(lidGroupA);
-  sideGroupC.add(sideGroupB);
-  lidGroupA.position.z += 0.55;
-  sideGroupB.position.z -= 0.55;
+//   // Nesting
+//   sideGroupB.add(lidGroupA);
+//   sideGroupC.add(sideGroupB);
+//   lidGroupA.position.z += 0.55;
+//   sideGroupB.position.z -= 0.55;
 
-  [sideGroupF, sideGroupC, d123Folded, e123Folded].forEach(group => {
-    if (group) sceneClone.add(group);
-  });
-};
+//   [sideGroupF, sideGroupC, d123Folded, e123Folded].forEach(group => {
+//     if (group) sceneClone.add(group);
+//   });
+// };
 
 export const FoldRenderer = ({ sceneClone, progress, getCurrentTexture, boxSize, originalSize  }) => {
- const group = useRef();
+const group = useRef();
 const foldGroups = useRef([]);
 
 const {setMessage} = useSelection();
+const ADVANCE_DEBUG = false;
 
 // import * as THREE from "three";
 
@@ -560,7 +653,7 @@ function logBBoxOfObjects(scene, names, label = "") {
     // msg += `  max: [${worldBox.max.toArray().map(n => n.toFixed(4)).join(', ')}]\n`;
     // msg += `  size:[${worldBox.getSize(new THREE.Vector3()).toArray().map(n => n.toFixed(4)).join(', ')}]\n`;
 
-    setMessage(msg);
+    if (ADVANCE_DEBUG) setMessage(msg);
 
   });
 }
@@ -589,7 +682,7 @@ useEffect(() => {
 
   group.current.clear();
   group.current.add(working);
-}, [sceneClone, boxSize, originalSize, getCurrentTexture]);
+}, [sceneClone, boxSize, originalSize, getCurrentTexture, progress]);
 
 
 // useFrame(() => {

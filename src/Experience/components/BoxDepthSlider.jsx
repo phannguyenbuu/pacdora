@@ -1,21 +1,28 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { usePointer } from '../../stores/selectionStore';
 import { Space } from 'antd';
 
 function boxDepthSlider() {
   const [sliderValue, setSliderValue] = useState(0);
-  const {boxWidth, boxLength, boxDepth, setBoxDepth} = usePointer();
+  const { boxDepth, setBoxDepth, pulseResize } = usePointer();
   
    useEffect(() => {
-    if (boxDepth !== sliderValue) {
-      setSliderValue(boxDepth);
+    const next = boxDepth / 10;
+    if (next !== sliderValue) {
+      setSliderValue(next);
     }
   }, [boxDepth]);
 
   const onSliderChange = (value) => {
     setSliderValue(value);
-    setBoxDepth(value);
   };
+
+  const commitDepth = () => {
+    setBoxDepth(sliderValue * 10);
+    pulseResize();
+  };
+
+  const depthMm = sliderValue * 10;
 
   return (
     <Space direction='horizontal' style={{ width: '100%' }}>
@@ -23,13 +30,20 @@ function boxDepthSlider() {
       <input
         style={{ width: '100%' }}
         type="range"
-        min={0.2}
-        max={5}
-        step={0.1}
+        min={0.1}
+        max={0.3}
+        step={0.05}
         value={sliderValue}
-        onChange={e => onSliderChange(Math.floor(parseFloat(e.target.value) * 10) / 10)}
+        onChange={(e) => {
+          const raw = parseFloat(e.target.value);
+          const snapped = Math.round(raw / 0.05) * 0.05;
+          onSliderChange(Number(snapped.toFixed(2)));
+        }}
+        onMouseUp={commitDepth}
+        onTouchEnd={commitDepth}
+        onKeyUp={commitDepth}
       />
-      <p>{boxDepth}mm</p>
+      <p>{depthMm}mm</p>
       
     </Space>
   );

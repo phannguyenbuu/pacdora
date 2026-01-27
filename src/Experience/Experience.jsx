@@ -1,81 +1,21 @@
-import * as THREE from "three";
-import { useSelection, usePointer } from "../stores/selectionStore";
-import React, { useRef, useEffect, useState } from "react";
+import React, { useRef, useEffect } from "react";
 import gsap from "gsap";
 import Scene from "./Scene";
 import { Canvas } from "@react-three/fiber";
-import { Html } from '@react-three/drei';
-import { OrthographicCamera, PerspectiveCamera, Box, OrbitControls} from "@react-three/drei";
-import { Environment } from '@react-three/drei';
+import { PerspectiveCamera, OrbitControls, Environment } from "@react-three/drei";
 
 import { useToggleRoomStore } from "../stores/toggleRoomStore";
 import { useResponsiveStore } from "../stores/useResponsiveStore";
 import { useExperienceStore } from "../stores/experienceStore";
-import { useThree } from "@react-three/fiber";
 
-import { Button, notification } from 'antd';
-import WorkspaceConfig from "./components/WorkspaceConfig";
-import ReactDOM from 'react-dom';
-
-
-
-import KonvaTextureEditor from "./components/KonvaTextureEditor";
-
-const isMB = () => {
-  return window.innerWidth < 768;
-}
-
-
-function SaveScreenshotButton({capture, setCapture}) {
-  const { gl, scene, camera } = useThree();
-
-  useEffect(() => {
-    if(capture)
-    {
-      handleSave();
-      setCapture(false);
-    }
-  },[capture]);
-
-  const handleSave = () => {
-    gl.render(scene, camera);
-    const imgData = gl.domElement.toDataURL('image/png');
-    const link = document.createElement('a');
-    link.href = imgData;
-    link.download = 'screenshot.png';
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-  };
-
-  return (
-    <></>
-  );
-}
-
-function NotificationContainer({ children }) {
-  const [container, setContainer] = useState(null);
-
-  useEffect(() => {
-    setContainer(document.getElementById('portal-root'));
-  }, []);
-
-  if (!container) return null;
-
-  return ReactDOM.createPortal(children, container);
-}
-
+import { notification } from 'antd';
 
 const Experience = ({foldProgress}) => {
-  const [api, contextHolder] = notification.useNotification();
+  const [, contextHolder] = notification.useNotification();
   const cameraRef = useRef();
   const pointerRef = useRef({ x: 0, y: 0 });
   const { isExperienceReady } = useExperienceStore();
-  const {setMessage} =  useSelection();
   const { isMobile } = useResponsiveStore();
-  const [capture, setCapture] = useState(false);
-  
-  const {addedHighlights} = usePointer();
 
   const { isDarkRoom, setIsBeforeZooming, setIsTransitioning } =
     useToggleRoomStore();
@@ -200,7 +140,7 @@ const Experience = ({foldProgress}) => {
   return (
     <>
     {contextHolder}
-      <Canvas style={{ background: '#666', position: "fixed", zIndex: 1, top: 0, left: 0 }} shadows gl={{ preserveDrawingBuffer: true }}>
+      <Canvas style={{ background: "#666", width: "100%", height: "100%" }} shadows>
         <Environment 
           preset="studio"
           background={false}

@@ -4,7 +4,8 @@ import { useFrame } from "@react-three/fiber";
 import * as THREE from "three";
 
 import { FoldRenderer } from "./FoldModule";
-import { resizeScene, calculateOriginalBBox } from "./ResizeModule";
+import { resizeScene } from "./ResizeModule";
+import SvgExtrudeMeshes from "./SvgExtrudeMeshes";
 
 import { useUploadTextureStore } from "../../stores/uploadTextureStore";
 import { usePointer } from "../../stores/selectionStore";
@@ -25,7 +26,8 @@ export default function Model({ progress = 0, scale = 0.05, ...props }) {
     setOriginalWidth,
     setOriginalLength,
     setOriginalHeight,
-    originalSize
+    originalSize,
+    resizeRevision
   } = usePointer();
 
   const { getCurrentTexture } = useUploadTextureStore();
@@ -72,7 +74,7 @@ export default function Model({ progress = 0, scale = 0.05, ...props }) {
   const resizedScene = useMemo(() => {
     if (!gltf?.scene) return null;
 
-    const key = `${boxWidth}-${boxLength}-${boxHeight}-${boxDepth}`;
+    const key = `${boxWidth}-${boxLength}-${boxHeight}-${boxDepth}-${resizeRevision}`;
 
     return resizeScene(
       gltf.scene,
@@ -111,6 +113,7 @@ export default function Model({ progress = 0, scale = 0.05, ...props }) {
           originalSize={originalSize}
         />
       )}
+      <SvgExtrudeMeshes svgPath="/box-sample/150010.svg" />
     </group>
   );
 }
