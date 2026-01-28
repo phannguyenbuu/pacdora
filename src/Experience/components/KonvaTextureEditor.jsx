@@ -9,6 +9,7 @@ import { applyTemplateTransforms } from "./konva/templateTransforms";
 import { StageView } from "./konva/StageView";
 import { parsePath, getPathPoints } from "./konva/svgPathUtils";
 import { DEFAULT_TEXTURE_SIZE, TEXTURE_SCALE } from "../../constants/texture";
+import { apiUrl } from "../../constants/api";
 import "./KonvaTextureEditor.css";
 
 const KonvaTextureEditor = ({ svgPath = null, inline = false }) => {
@@ -555,7 +556,7 @@ const KonvaTextureEditor = ({ svgPath = null, inline = false }) => {
     try {
       const pieces = cropPiecesToDataUrls();
       if (!pieces) return;
-      await fetch("http://127.0.0.1:5000/api/pieces", {
+      await fetch(apiUrl("/api/pieces"), {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ pieces }),
@@ -626,7 +627,7 @@ const KonvaTextureEditor = ({ svgPath = null, inline = false }) => {
       `<image href="${dataUrl}" x="0" y="0" width="${width}" height="${height}" />` +
       `</svg>`;
     try {
-      await fetch("http://127.0.0.1:5000/api/export/svg", {
+      await fetch(apiUrl("/api/export/svg"), {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ svg }),
@@ -657,7 +658,7 @@ const KonvaTextureEditor = ({ svgPath = null, inline = false }) => {
       },
     };
     try {
-      const res = await fetch("http://127.0.0.1:5000/api/template/save", {
+      const res = await fetch(apiUrl("/api/template/save"), {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(template),
@@ -672,7 +673,7 @@ const KonvaTextureEditor = ({ svgPath = null, inline = false }) => {
 
   const loadTemplate = useCallback(async () => {
     try {
-      const res = await fetch("http://127.0.0.1:5000/api/template/load");
+      const res = await fetch(apiUrl("/api/template/load"));
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       const data = await res.json();
       if (!data?.ok || !data.template) return;

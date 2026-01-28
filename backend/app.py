@@ -1,6 +1,7 @@
 import base64
 import json
 import os
+import shutil
 from datetime import datetime
 
 from flask import Flask, jsonify, request, send_from_directory
@@ -12,6 +13,23 @@ OUTPUT_DIR = os.path.join(BASE_DIR, "output")
 os.makedirs(OUTPUT_DIR, exist_ok=True)
 TEMPLATE_PATH = os.path.join(OUTPUT_DIR, "template.json")
 SVG_EXPORT_PATH = os.path.join(OUTPUT_DIR, "canvas.svg")
+PROJECT_DIR = os.path.abspath(os.path.join(BASE_DIR, os.pardir))
+PROJECT_STATIC_DIR = os.path.join(PROJECT_DIR, "static")
+BACKEND_STATIC_DIR = os.path.join(BASE_DIR, "static")
+BOX_SAMPLE_DIR = os.path.join(BACKEND_STATIC_DIR, "box-sample")
+
+
+def _ensure_static_assets() -> None:
+    if os.path.isdir(BACKEND_STATIC_DIR) and os.path.isdir(BOX_SAMPLE_DIR):
+        return
+    if not os.path.isdir(PROJECT_STATIC_DIR):
+        return
+    if os.path.isdir(BACKEND_STATIC_DIR):
+        shutil.rmtree(BACKEND_STATIC_DIR)
+    shutil.copytree(PROJECT_STATIC_DIR, BACKEND_STATIC_DIR)
+
+
+_ensure_static_assets()
 
 app = Flask(__name__)
 CORS(app)
@@ -65,6 +83,12 @@ def save_pieces():
 def serve_output_file(filename: str):
     # Serve saved piece textures directly for the frontend.
     return send_from_directory(OUTPUT_DIR, filename)
+
+
+@app.get("/api/box-sample/<path:filename>")
+def serve_box_sample(filename: str):
+    # Serve SVG/GLB samples from the frontend public directory.
+    return send_from_directory(BOX_SAMPLE_DIR, filename)
 
 
 @app.post("/api/template/save")

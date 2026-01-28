@@ -8,7 +8,7 @@ export const useUploadTextureStore = create((set, get) => ({
   currentTexture: null,
   showEditor: false,
   editorImage: null,
-  defaultImageUrl: "/hoasen_03.png",
+  defaultImageUrl: `${import.meta.env.BASE_URL}hoasen_03.png`,
   backgroundColor: "#ffffff",
   insideMode: "Cardboard",
   insideColor: "#c79a63",

@@ -5,6 +5,7 @@ import { useUploadTextureStore } from "../../stores/uploadTextureStore";
 import BoxDepthSlider from "./BoxDepthSlider";
 import BoxSizeSliders from "./BoxSizeSliders";
 import KonvaTextureEditor from "./KonvaTextureEditor";
+import { apiUrl } from "../../constants/api";
 import Experience from "../Experience";
 import "./WorkspaceConfig.css";
 
@@ -297,7 +298,10 @@ const WorkspaceConfig = () => {
           </div>
         </div>
         <div className="center-canvas">
-          <KonvaTextureEditor inline svgPath="/box-sample/150010.svg" />
+          <KonvaTextureEditor
+            inline
+            svgPath={apiUrl("/api/box-sample/150010.svg")}
+          />
         </div>
       </div>
 

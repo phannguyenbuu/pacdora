@@ -3,7 +3,7 @@ import react from '@vitejs/plugin-react'
 import liveReload from 'vite-plugin-live-reload' // 🔥 JSON HOT RELOAD
 
 export default defineConfig(({ mode }) => ({
-  base: '/',
+  base: '/pac/',
   plugins: [
     react(),
     // 🔥 WATCH JSON FILES - HOT RELOAD NGAY!
@@ -13,6 +13,9 @@ export default defineConfig(({ mode }) => ({
       'public/**/*.json'                 // JSON public
     ])
   ],
+  server: {
+    open: '/pac/',
+  },
   // 🔥 TĂNG SPEED JSON IMPORT
   esbuild: {
     target: 'es2020'

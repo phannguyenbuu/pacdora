@@ -6,9 +6,9 @@ import { parsePath, getPathPoints } from "../components/konva/svgPathUtils";
 import { getRuleForChild } from "./modelRules";
 import { usePointer } from "../../stores/selectionStore";
 import { useUploadTextureStore } from "../../stores/uploadTextureStore";
+import { apiUrl } from "../../constants/api";
 
 const MM_TO_SCENE = 0.01;
-const BACKEND_ORIGIN = "http://127.0.0.1:5000";
 const FULL_ANGLE = Math.PI / 2;
 
 const getStageProgress = (stageIndex, progress) => {
@@ -102,7 +102,7 @@ const splitByNormalZ = (geom) => {
 };
 
 export default function SvgExtrudeMeshes({
-  svgPath = "/box-sample/150010.svg",
+  svgPath = apiUrl("/api/box-sample/150010.svg"),
   progress = 0,
 }) {
   const { boxWidth, boxLength, boxHeight, boxDepth, resizeRevision, scaleHeight } = usePointer();
@@ -235,7 +235,7 @@ export default function SvgExtrudeMeshes({
     transformedGroups.forEach((group) => {
       if (!group.id || textureCacheRef.current.has(group.id)) return;
       const bust = textureKey ? `?v=${textureKey}` : "";
-      const url = `${BACKEND_ORIGIN}/output/${group.id}.png${bust}`;
+      const url = `${apiUrl(`/output/${group.id}.png`)}${bust}`;
       loader.load(
         url,
         (tex) => {
