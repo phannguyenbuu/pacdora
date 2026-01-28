@@ -15,18 +15,42 @@ TEMPLATE_PATH = os.path.join(OUTPUT_DIR, "template.json")
 SVG_EXPORT_PATH = os.path.join(OUTPUT_DIR, "canvas.svg")
 PROJECT_DIR = os.path.abspath(os.path.join(BASE_DIR, os.pardir))
 PROJECT_STATIC_DIR = os.path.join(PROJECT_DIR, "static")
+PROJECT_PUBLIC_DIR = os.path.join(PROJECT_DIR, "public")
+ENV_STATIC_DIR = os.environ.get("PACDORA_STATIC_DIR")
+ENV_PUBLIC_DIR = os.environ.get("PACDORA_PUBLIC_DIR")
 BACKEND_STATIC_DIR = os.path.join(BASE_DIR, "static")
 BOX_SAMPLE_DIR = os.path.join(BACKEND_STATIC_DIR, "box-sample")
 
 
+def _resolve_source_dir() -> str | None:
+    if ENV_STATIC_DIR and os.path.isdir(ENV_STATIC_DIR):
+        return ENV_STATIC_DIR
+    if ENV_PUBLIC_DIR and os.path.isdir(ENV_PUBLIC_DIR):
+        return ENV_PUBLIC_DIR
+    if os.path.isdir(PROJECT_STATIC_DIR):
+        return PROJECT_STATIC_DIR
+    if os.path.isdir(PROJECT_PUBLIC_DIR):
+        return PROJECT_PUBLIC_DIR
+    return None
+
+
 def _ensure_static_assets() -> None:
-    if os.path.isdir(BACKEND_STATIC_DIR) and os.path.isdir(BOX_SAMPLE_DIR):
+    source_dir = _resolve_source_dir()
+    if not os.path.isdir(source_dir):
         return
-    if not os.path.isdir(PROJECT_STATIC_DIR):
+    if not os.path.isdir(BACKEND_STATIC_DIR):
+        shutil.copytree(source_dir, BACKEND_STATIC_DIR)
         return
-    if os.path.isdir(BACKEND_STATIC_DIR):
-        shutil.rmtree(BACKEND_STATIC_DIR)
-    shutil.copytree(PROJECT_STATIC_DIR, BACKEND_STATIC_DIR)
+    if not os.path.isdir(BOX_SAMPLE_DIR):
+        src_box_sample = os.path.join(source_dir, "box-sample")
+        if os.path.isdir(src_box_sample):
+            shutil.copytree(src_box_sample, BOX_SAMPLE_DIR)
+        return
+    src_svg = os.path.join(source_dir, "box-sample", "150010.svg")
+    if os.path.isfile(src_svg):
+        dst_svg = os.path.join(BOX_SAMPLE_DIR, "150010.svg")
+        if not os.path.isfile(dst_svg):
+            shutil.copy2(src_svg, dst_svg)
 
 
 _ensure_static_assets()
@@ -36,6 +60,11 @@ API_PREFIX = "/pac-api"
 app = Flask(__name__)
 CORS(app)
 api = Blueprint("api", __name__, url_prefix=API_PREFIX)
+
+
+def _log(msg: str) -> None:
+    timestamp = datetime.utcnow().isoformat(timespec="seconds")
+    print(f"[box-sample] {timestamp}Z {msg}")
 
 
 def _save_data_url(data_url: str, out_path: str) -> None:
@@ -88,10 +117,34 @@ def serve_output_file(filename: str):
     return send_from_directory(OUTPUT_DIR, filename)
 
 
+def _serve_box_sample(filename: str):
+    # Serve SVG/GLB samples from the frontend static directory.
+    candidate_dirs = [BOX_SAMPLE_DIR]
+    source_dir = _resolve_source_dir()
+    if source_dir:
+        candidate_dirs.append(os.path.join(source_dir, "box-sample"))
+    _log(f"request={filename} resolved_source={source_dir} candidates={candidate_dirs}")
+    for directory in candidate_dirs:
+        path = os.path.join(directory, filename)
+        _log(f"check path={path} exists={os.path.isfile(path)}")
+        if os.path.isfile(path):
+            return send_from_directory(directory, filename)
+    _ensure_static_assets()
+    fallback_path = os.path.join(BOX_SAMPLE_DIR, filename)
+    _log(f"post-sync check path={fallback_path} exists={os.path.isfile(fallback_path)}")
+    if os.path.isfile(fallback_path):
+        return send_from_directory(BOX_SAMPLE_DIR, filename)
+    return jsonify({"ok": False, "error": "file not found"}), 404
+
+
 @api.get("/api/box-sample/<path:filename>")
 def serve_box_sample(filename: str):
-    # Serve SVG/GLB samples from the frontend public directory.
-    return send_from_directory(BOX_SAMPLE_DIR, filename)
+    return _serve_box_sample(filename)
+
+
+@app.get("/api/box-sample/<path:filename>")
+def serve_box_sample_root(filename: str):
+    return _serve_box_sample(filename)
 
 
 @api.post("/api/template/save")
