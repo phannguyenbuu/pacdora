@@ -4,7 +4,7 @@ import os
 import shutil
 from datetime import datetime
 
-from flask import Flask, jsonify, request, send_from_directory
+from flask import Flask, Blueprint, jsonify, request, send_from_directory
 from flask_cors import CORS
 
 
@@ -31,8 +31,11 @@ def _ensure_static_assets() -> None:
 
 _ensure_static_assets()
 
+API_PREFIX = "/pac-api"
+
 app = Flask(__name__)
 CORS(app)
+api = Blueprint("api", __name__, url_prefix=API_PREFIX)
 
 
 def _save_data_url(data_url: str, out_path: str) -> None:
@@ -47,7 +50,7 @@ def _save_data_url(data_url: str, out_path: str) -> None:
         f.write(raw)
 
 
-@app.post("/api/pieces")
+@api.post("/api/pieces")
 def save_pieces():
     payload = request.get_json(silent=True) or {}
     pieces = payload.get("pieces") or {}
@@ -79,19 +82,19 @@ def save_pieces():
     return jsonify({"ok": True, "count": len(saved), "dir": batch_dir})
 
 
-@app.get("/output/<path:filename>")
+@api.get("/output/<path:filename>")
 def serve_output_file(filename: str):
     # Serve saved piece textures directly for the frontend.
     return send_from_directory(OUTPUT_DIR, filename)
 
 
-@app.get("/api/box-sample/<path:filename>")
+@api.get("/api/box-sample/<path:filename>")
 def serve_box_sample(filename: str):
     # Serve SVG/GLB samples from the frontend public directory.
     return send_from_directory(BOX_SAMPLE_DIR, filename)
 
 
-@app.post("/api/template/save")
+@api.post("/api/template/save")
 def save_template():
     payload = request.get_json(silent=True) or {}
     with open(TEMPLATE_PATH, "w", encoding="utf-8") as f:
@@ -99,7 +102,7 @@ def save_template():
     return jsonify({"ok": True, "path": TEMPLATE_PATH})
 
 
-@app.get("/api/template/load")
+@api.get("/api/template/load")
 def load_template():
     if not os.path.exists(TEMPLATE_PATH):
         return jsonify({"ok": False, "error": "template not found"}), 404
@@ -108,7 +111,7 @@ def load_template():
     return jsonify({"ok": True, "template": data})
 
 
-@app.post("/api/export/svg")
+@api.post("/api/export/svg")
 def export_svg():
     payload = request.get_json(silent=True) or {}
     svg_text = payload.get("svg")
@@ -117,6 +120,9 @@ def export_svg():
     with open(SVG_EXPORT_PATH, "w", encoding="utf-8") as f:
         f.write(svg_text)
     return jsonify({"ok": True, "path": SVG_EXPORT_PATH})
+
+
+app.register_blueprint(api)
 
 
 if __name__ == "__main__":
