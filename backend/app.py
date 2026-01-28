@@ -10,6 +10,8 @@ from flask_cors import CORS
 BASE_DIR = os.path.dirname(__file__)
 OUTPUT_DIR = os.path.join(BASE_DIR, "output")
 os.makedirs(OUTPUT_DIR, exist_ok=True)
+TEMPLATE_PATH = os.path.join(OUTPUT_DIR, "template.json")
+SVG_EXPORT_PATH = os.path.join(OUTPUT_DIR, "canvas.svg")
 
 app = Flask(__name__)
 CORS(app)
@@ -63,6 +65,34 @@ def save_pieces():
 def serve_output_file(filename: str):
     # Serve saved piece textures directly for the frontend.
     return send_from_directory(OUTPUT_DIR, filename)
+
+
+@app.post("/api/template/save")
+def save_template():
+    payload = request.get_json(silent=True) or {}
+    with open(TEMPLATE_PATH, "w", encoding="utf-8") as f:
+        json.dump(payload, f, indent=2)
+    return jsonify({"ok": True, "path": TEMPLATE_PATH})
+
+
+@app.get("/api/template/load")
+def load_template():
+    if not os.path.exists(TEMPLATE_PATH):
+        return jsonify({"ok": False, "error": "template not found"}), 404
+    with open(TEMPLATE_PATH, "r", encoding="utf-8") as f:
+        data = json.load(f)
+    return jsonify({"ok": True, "template": data})
+
+
+@app.post("/api/export/svg")
+def export_svg():
+    payload = request.get_json(silent=True) or {}
+    svg_text = payload.get("svg")
+    if not svg_text:
+        return jsonify({"ok": False, "error": "missing svg"}), 400
+    with open(SVG_EXPORT_PATH, "w", encoding="utf-8") as f:
+        f.write(svg_text)
+    return jsonify({"ok": True, "path": SVG_EXPORT_PATH})
 
 
 if __name__ == "__main__":

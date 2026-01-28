@@ -48,7 +48,7 @@ const BoxSizeSliders = () => {
     <div style={{display: 'flex', flexDirection: 'column', gap: 5, marginTop: 20}}>
       {/* Width Slider */}
       <Space direction='horizontal' style={{ width: '100%' }}>
-        {/* <p>Width</p> */}
+        <p style={{ minWidth: 60, margin: 0 }}>Width</p>
         <input
           type="range"
           min="0.2"
@@ -66,7 +66,7 @@ const BoxSizeSliders = () => {
 
       {/* Length Slider */}
       <Space direction='horizontal' style={{ width: '100%' }}>
-        {/* <p>Length</p> */}
+        <p style={{ minWidth: 60, margin: 0 }}>Length</p>
         <input
           type="range"
           min="0.2"
@@ -85,8 +85,8 @@ const BoxSizeSliders = () => {
       
 
       {/* Height Slider */}
-      <Space direction='horizontal' style={{vwidth: '100%' }}>
-        {/* <p>Height</p> */}
+      <Space direction='horizontal' style={{ width: '100%' }}>
+        <p style={{ minWidth: 60, margin: 0 }}>Height</p>
         <input
           type="range"
           min="0.20"

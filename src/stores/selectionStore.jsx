@@ -47,6 +47,8 @@ export function PointerProvider({ children }) {
   const deltaLength = boxLength - originalLength;
   const deltaHeight = boxHeight - originalHeight;
   const deltaDepth = boxDepth - 0;  // Original door=0?
+  const scaleHeight = originalHeight ? boxHeight / originalHeight : 1;
+  const scaleLength = originalLength ? boxLength / originalLength : 1;
 
   return (
     <PointerContext.Provider value={{
@@ -78,6 +80,8 @@ export function PointerProvider({ children }) {
       deltaLength,
       deltaHeight,
       deltaDepth,
+      scaleHeight,
+      scaleLength,
       
       // 🔥 Computed boxSize/originalSize helpers
       boxSize: { width: boxWidth, length: boxLength, height: boxHeight, depth: boxDepth },

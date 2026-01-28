@@ -7,7 +7,8 @@ import { getRuleForChild } from "../models/modelRules";
 import { fetchSvgData } from "./konva/svgLoader";
 import { applyTemplateTransforms } from "./konva/templateTransforms";
 import { StageView } from "./konva/StageView";
-import { computeGroupBounds, parsePath, getPathPoints } from "./konva/svgPathUtils";
+import { parsePath, getPathPoints } from "./konva/svgPathUtils";
+import { DEFAULT_TEXTURE_SIZE, TEXTURE_SCALE } from "../../constants/texture";
 import "./KonvaTextureEditor.css";
 
 const KonvaTextureEditor = ({ svgPath = null, inline = false }) => {
@@ -17,10 +18,13 @@ const KonvaTextureEditor = ({ svgPath = null, inline = false }) => {
     updateTextureFromCanvas,
     initDefaultImage,
     backgroundColor,
+    setBackgroundColor,
+    setEditorActions,
+    set3dBusy,
   } =
     useUploadTextureStore();
   const { setMessage } = useSelection();
-  const { boxWidth, boxLength, boxHeight, boxDepth } = usePointer();
+  const { boxWidth, boxLength, boxHeight, boxDepth, scaleHeight, scaleLength } = usePointer();
   const stageRef = useRef();
   const imageRef = useRef();
   const trRef = useRef();
@@ -31,17 +35,23 @@ const KonvaTextureEditor = ({ svgPath = null, inline = false }) => {
   const svgFitRef = useRef({ scale: 1, offsetX: 0, offsetY: 0 });
   const svgBoundsRef = useRef({ width: 0, height: 0, minX: 0, minY: 0 });
   const transformedGroupsRef = useRef([]);
-  const stageSizeRef = useRef({ width: 512, height: 512 });
+  const stageSizeRef = useRef({ width: DEFAULT_TEXTURE_SIZE, height: DEFAULT_TEXTURE_SIZE });
   const sendPiecesToBackendRef = useRef(null);
+  const drawImageToCanvasRef = useRef(null);
+  const updateTextureRef = useRef(null);
   const exportTimerRef = useRef(0);
+  const initialImageAttrsRef = useRef(null);
 
-  const [stageSize, setStageSize] = useState({ width: 512, height: 512 });
+  const [stageSize, setStageSize] = useState({
+    width: DEFAULT_TEXTURE_SIZE,
+    height: DEFAULT_TEXTURE_SIZE,
+  });
   const [stageScale, setStageScale] = useState(1);
   const [stagePos, setStagePos] = useState({ x: 0, y: 0 });
   const [svgGroups, setSvgGroups] = useState([]);
   const [svgBounds, setSvgBounds] = useState({
-    width: 512,
-    height: 512,
+    width: DEFAULT_TEXTURE_SIZE,
+    height: DEFAULT_TEXTURE_SIZE,
     minX: 0,
     minY: 0,
   });
@@ -50,27 +60,8 @@ const KonvaTextureEditor = ({ svgPath = null, inline = false }) => {
   const stageScaleRef = useRef(1);
 
   const handleTransformEnd = useCallback(() => {
-    const stage = stageRef.current;
-    const imageNode = imageRef.current;
-    if (!stage || !imageNode) return;
-
-    const bbox = imageNode.getClientRect();
-    const x = Math.floor(bbox.x);
-    const y = Math.floor(bbox.y);
-    const w = Math.floor(bbox.width);
-    const h = Math.floor(bbox.height);
-
-    const stageCanvas = stage.toCanvas();
-    const croppedCanvas = document.createElement("canvas");
-    croppedCanvas.width = 512;
-    croppedCanvas.height = 512;
-    const ctx = croppedCanvas.getContext("2d");
-
-    ctx.fillStyle = "transparent";
-    ctx.fillRect(0, 0, 512, 512);
-    ctx.drawImage(stageCanvas, x, y, w, h, x, y, w, h);
-
-    updateTextureFromCanvas(croppedCanvas);
+    const canvas = drawImageToCanvasRef.current?.();
+    if (canvas) updateTextureFromCanvas(canvas);
     sendPiecesToBackendRef.current?.();
   }, [updateTextureFromCanvas]);
 
@@ -95,7 +86,12 @@ const KonvaTextureEditor = ({ svgPath = null, inline = false }) => {
       loadSvgFromPath();
     } else {
       setSvgGroups([]);
-      setSvgBounds({ width: 512, height: 512, minX: 0, minY: 0 });
+      setSvgBounds({
+        width: DEFAULT_TEXTURE_SIZE,
+        height: DEFAULT_TEXTURE_SIZE,
+        minX: 0,
+        minY: 0,
+      });
     }
   }, [svgPath, loadSvgFromPath]);
 
@@ -124,6 +120,7 @@ const KonvaTextureEditor = ({ svgPath = null, inline = false }) => {
     // Re-attach the transformer after scene/layout updates.
     if (!editorImage || !imageRef.current || !trRef.current) return;
     const raf = requestAnimationFrame(() => {
+      if (!trRef.current || !imageRef.current) return;
       trRef.current.nodes([imageRef.current]);
       trRef.current.getLayer()?.batchDraw();
     });
@@ -224,9 +221,21 @@ const KonvaTextureEditor = ({ svgPath = null, inline = false }) => {
       scaleY: 1,
       rotation: 0,
     });
+    initialImageAttrsRef.current = {
+      x,
+      y,
+      width,
+      height,
+      scaleX: 1,
+      scaleY: 1,
+      rotation: 0,
+    };
 
     trRef.current?.nodes([imageNode]);
     stageRef.current?.container()?.focus();
+    const canvas = drawImageToCanvasRef.current?.();
+    if (canvas) updateTextureRef.current?.(canvas);
+    sendPiecesToBackendRef.current?.();
   }, [editorImage, stageSize, svgBounds]);
 
   useEffect(() => {
@@ -380,14 +389,14 @@ const KonvaTextureEditor = ({ svgPath = null, inline = false }) => {
         boxLength,
         boxHeight,
         boxDepth,
+        scaleHeight,
         getRuleForChild,
+        setMessage,
       }),
-    [svgGroups, boxWidth, boxLength, boxHeight, boxDepth]
+    [svgGroups, boxWidth, boxLength, boxHeight, boxDepth, scaleHeight, setMessage]
   );
 
-  const debugMarkers = useMemo(() => {
-    return [];
-  }, []);
+  const debugMarkers = useMemo(() => [], []);
 
   useEffect(() => {
     svgFitRef.current = svgFit;
@@ -406,24 +415,41 @@ const KonvaTextureEditor = ({ svgPath = null, inline = false }) => {
     if (!imageNode || !editorImage) return null;
     const { width, height } = stageSizeRef.current;
     const canvas = document.createElement("canvas");
-    canvas.width = width;
-    canvas.height = height;
+    const exportWidth = Math.max(1, Math.round(width * TEXTURE_SCALE));
+    const exportHeight = Math.max(1, Math.round(height * TEXTURE_SCALE));
+    canvas.width = exportWidth;
+    canvas.height = exportHeight;
     const ctx = canvas.getContext("2d");
     if (!ctx) return null;
 
     // White background so transparent areas export as white.
     ctx.fillStyle = backgroundColor || "#ffffff";
-    ctx.fillRect(0, 0, width, height);
+    ctx.fillRect(0, 0, exportWidth, exportHeight);
 
     // Apply the node's absolute transform (includes stage pan/zoom + node transform)
     // and draw only the image to avoid exporting transformer outlines.
     const [a, b, c, d, e, f] = imageNode.getAbsoluteTransform().getMatrix();
     ctx.save();
-    ctx.setTransform(a, b, c, d, e, f);
+    ctx.setTransform(
+      a * TEXTURE_SCALE,
+      b * TEXTURE_SCALE,
+      c * TEXTURE_SCALE,
+      d * TEXTURE_SCALE,
+      e * TEXTURE_SCALE,
+      f * TEXTURE_SCALE
+    );
     ctx.drawImage(editorImage, 0, 0, imageNode.width(), imageNode.height());
     ctx.restore();
     return canvas;
   }, [editorImage, backgroundColor]);
+
+  useEffect(() => {
+    drawImageToCanvasRef.current = drawImageToCanvas;
+  }, [drawImageToCanvas]);
+
+  useEffect(() => {
+    updateTextureRef.current = updateTextureFromCanvas;
+  }, [updateTextureFromCanvas]);
 
   const svgToCanvasPoint = useCallback((x, y) => {
     const fit = svgFitRef.current;
@@ -472,33 +498,37 @@ const KonvaTextureEditor = ({ svgPath = null, inline = false }) => {
     const baseCanvas = drawImageToCanvas();
     if (!baseCanvas) return null;
     const { width, height } = stageSizeRef.current;
+    const exportWidth = Math.max(1, Math.round(width * TEXTURE_SCALE));
+    const exportHeight = Math.max(1, Math.round(height * TEXTURE_SCALE));
     const groups = transformedGroupsRef.current;
     const pieces = {};
 
     groups.forEach((group) => {
       if (!group.id) return;
       const pieceCanvas = document.createElement("canvas");
-      pieceCanvas.width = width;
-      pieceCanvas.height = height;
+      pieceCanvas.width = exportWidth;
+      pieceCanvas.height = exportHeight;
       const ctx = pieceCanvas.getContext("2d");
       if (!ctx) return;
 
       // White background so clipped transparency becomes white.
       ctx.fillStyle = backgroundColor || "#ffffff";
-      ctx.fillRect(0, 0, width, height);
+      ctx.fillRect(0, 0, exportWidth, exportHeight);
       ctx.save();
       ctx.beginPath();
+      ctx.scale(TEXTURE_SCALE, TEXTURE_SCALE);
       const bbox = buildCanvasPathFromGroup(ctx, group);
       if (!bbox) {
         ctx.restore();
         return;
       }
       ctx.clip();
+      ctx.setTransform(1, 0, 0, 1, 0, 0);
       ctx.drawImage(baseCanvas, 0, 0);
       ctx.restore();
 
-      const cropW = Math.max(1, Math.ceil(bbox.maxX - bbox.minX));
-      const cropH = Math.max(1, Math.ceil(bbox.maxY - bbox.minY));
+      const cropW = Math.max(1, Math.ceil((bbox.maxX - bbox.minX) * TEXTURE_SCALE));
+      const cropH = Math.max(1, Math.ceil((bbox.maxY - bbox.minY) * TEXTURE_SCALE));
       const cropCanvas = document.createElement("canvas");
       cropCanvas.width = cropW;
       cropCanvas.height = cropH;
@@ -506,8 +536,8 @@ const KonvaTextureEditor = ({ svgPath = null, inline = false }) => {
       if (!cropCtx) return;
       cropCtx.drawImage(
         pieceCanvas,
-        bbox.minX,
-        bbox.minY,
+        bbox.minX * TEXTURE_SCALE,
+        bbox.minY * TEXTURE_SCALE,
         cropW,
         cropH,
         0,
@@ -541,53 +571,150 @@ const KonvaTextureEditor = ({ svgPath = null, inline = false }) => {
   }, [sendPiecesToBackend]);
 
   const scheduleBackendExport = useCallback(() => {
+    set3dBusy(true);
     clearTimeout(exportTimerRef.current);
     exportTimerRef.current = setTimeout(() => {
+      const canvas = drawImageToCanvasRef.current?.();
+      if (canvas) updateTextureRef.current?.(canvas);
       sendPiecesToBackendRef.current?.();
+      setTimeout(() => set3dBusy(false), 180);
     }, 120);
-  }, []);
+  }, [set3dBusy]);
 
   useEffect(() => () => clearTimeout(exportTimerRef.current), []);
 
   useEffect(() => {
     // Background changes should also update exported pieces.
     if (!editorImage) return;
+    const canvas = drawImageToCanvas();
+    if (canvas) updateTextureFromCanvas(canvas);
     sendPiecesToBackendRef.current?.();
-  }, [backgroundColor, editorImage]);
+  }, [backgroundColor, drawImageToCanvas, editorImage, updateTextureFromCanvas]);
 
   useEffect(() => {
-    if (!transformedGroups.length) {
-      setMessage("Advance debug: no transformed groups");
-      return;
+    // Resizing the box changes piece shapes; re-export textures.
+    if (!editorImage) return;
+    scheduleBackendExport();
+  }, [boxWidth, boxLength, boxHeight, boxDepth, editorImage, scheduleBackendExport]);
+
+  useEffect(() => {
+    // On first open/load, push textures immediately so SVG meshes are textured.
+    if (!editorImage || !svgGroups.length) return;
+    const canvas = drawImageToCanvasRef.current?.();
+    if (canvas) updateTextureRef.current?.(canvas);
+    sendPiecesToBackendRef.current?.();
+  }, [editorImage, svgGroups.length]);
+
+  const resetImage = useCallback(() => {
+    const imageNode = imageRef.current;
+    if (!imageNode || !initialImageAttrsRef.current) return;
+    imageNode.setAttrs(initialImageAttrsRef.current);
+    trRef.current?.nodes([imageNode]);
+    trRef.current?.getLayer()?.batchDraw();
+    const canvas = drawImageToCanvas();
+    if (canvas) updateTextureFromCanvas(canvas);
+    sendPiecesToBackendRef.current?.();
+  }, [drawImageToCanvas, updateTextureFromCanvas]);
+
+  const exportCanvasSvg = useCallback(async () => {
+    const canvas = drawImageToCanvas();
+    if (!canvas) return;
+    const dataUrl = canvas.toDataURL("image/png");
+    const { width, height } = canvas;
+    const svg = `<?xml version="1.0" encoding="UTF-8"?>\n` +
+      `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="0 0 ${width} ${height}">` +
+      `<image href="${dataUrl}" x="0" y="0" width="${width}" height="${height}" />` +
+      `</svg>`;
+    try {
+      await fetch("http://127.0.0.1:5000/api/export/svg", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ svg }),
+      });
+    } catch (err) {
+      console.warn("svg export failed:", err);
     }
-    const withBounds = transformedGroups.map((g) => ({
-      id: g.id || "",
-      bounds: computeGroupBounds(g.paths),
-    }));
-    const fmt = (n) => (Number.isFinite(n) ? n.toFixed(3) : "NaN");
-    const fmtBox = (label, b) =>
-      `${label}: min=(${fmt(b.minX)}, ${fmt(b.minY)}) max=(${fmt(b.maxX)}, ${fmt(
-        b.maxY
-      )})`;
-    const listByPrefix = (prefix) =>
-      withBounds
-        .filter((g) => g.id.startsWith(prefix))
-        .sort((a, b) => a.bounds.minX - b.bounds.minX)
-        .map((g, i) => fmtBox(`${prefix}[${i}]`, g.bounds));
+  }, [drawImageToCanvas]);
 
-    const sections = [
-      ...["D1", "D2", "D3"].flatMap((p) => {
-        const rows = listByPrefix(p);
-        return rows.length ? rows : [`${p}: missing`];
-      }),
-      ...["E1", "E2", "E3"].flatMap((p) => {
-        const rows = listByPrefix(p);
-        return rows.length ? rows : [`${p}: missing`];
-      }),
-    ];
+  const saveTemplate = useCallback(async () => {
+    const imageNode = imageRef.current;
+    if (!imageNode) return;
+    const template = {
+      backgroundColor: backgroundColor || "#ffffff",
+      stage: {
+        x: stagePosRef.current.x,
+        y: stagePosRef.current.y,
+        scale: stageScaleRef.current,
+      },
+      image: {
+        x: imageNode.x(),
+        y: imageNode.y(),
+        width: imageNode.width(),
+        height: imageNode.height(),
+        scaleX: imageNode.scaleX(),
+        scaleY: imageNode.scaleY(),
+        rotation: imageNode.rotation(),
+      },
+    };
+    try {
+      const res = await fetch("http://127.0.0.1:5000/api/template/save", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(template),
+      });
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      setMessage("Template saved");
+    } catch (err) {
+      console.warn("template save failed:", err);
+      setMessage("Template save failed");
+    }
+  }, [backgroundColor, setMessage]);
 
-    setMessage(sections.join("\n"));
-  }, [transformedGroups, setMessage]);
+  const loadTemplate = useCallback(async () => {
+    try {
+      const res = await fetch("http://127.0.0.1:5000/api/template/load");
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const data = await res.json();
+      if (!data?.ok || !data.template) return;
+      const tpl = data.template;
+      if (tpl.backgroundColor) setBackgroundColor(tpl.backgroundColor);
+      if (tpl.stage) {
+        applyStageTransform({ x: tpl.stage.x || 0, y: tpl.stage.y || 0 }, tpl.stage.scale || 1);
+        syncStageState();
+      }
+      if (tpl.image && imageRef.current) {
+        imageRef.current.setAttrs(tpl.image);
+        trRef.current?.nodes([imageRef.current]);
+        trRef.current?.getLayer()?.batchDraw();
+      }
+      const canvas = drawImageToCanvas();
+      if (canvas) updateTextureFromCanvas(canvas);
+      sendPiecesToBackendRef.current?.();
+      setMessage("Template loaded");
+    } catch (err) {
+      console.warn("template load failed:", err);
+      setMessage("Template load failed");
+    }
+  }, [
+    applyStageTransform,
+    drawImageToCanvas,
+    setBackgroundColor,
+    setMessage,
+    syncStageState,
+    updateTextureFromCanvas,
+  ]);
+
+
+
+  useEffect(() => {
+    setEditorActions({
+      resetImage,
+      exportCanvasSvg,
+      saveTemplate,
+      loadTemplate,
+    });
+    return () => setEditorActions({});
+  }, [exportCanvasSvg, loadTemplate, resetImage, saveTemplate, setEditorActions]);
 
   if (!inline && (!showEditor || !editorImage)) return null;
 
@@ -618,8 +745,13 @@ const KonvaTextureEditor = ({ svgPath = null, inline = false }) => {
             handleTransformEnd={handleTransformEnd}
             handleTransformLive={scheduleBackendExport}
             transformedGroups={transformedGroups}
-            debugMarkers={debugMarkers}
+            debugMarkers={[]}
             trRef={trRef}
+            boxWidth={boxWidth}
+            boxLength={boxLength}
+            boxHeight={boxHeight}
+            scaleHeight={scaleHeight}
+            scaleLength={scaleLength}
           />
         </div>
       </div>

@@ -1,6 +1,7 @@
 // uploadTextureStore.js
 import { create } from 'zustand';
 import * as THREE from 'three';
+import { DEFAULT_TEXTURE_SIZE, TEXTURE_SCALE } from "../constants/texture";
 
 export const useUploadTextureStore = create((set, get) => ({
   currentImage: null,
@@ -9,6 +10,10 @@ export const useUploadTextureStore = create((set, get) => ({
   editorImage: null,
   defaultImageUrl: "/hoasen_03.png",
   backgroundColor: "#ffffff",
+  insideMode: "Cardboard",
+  insideColor: "#c79a63",
+  is3dBusy: false,
+  editorActions: {},
 
   // 🔥 GETTER cho BoxSample
   getCurrentTexture: () => get().currentTexture,
@@ -43,6 +48,14 @@ export const useUploadTextureStore = create((set, get) => ({
   },
 
   setBackgroundColor: (color) => set({ backgroundColor: color || "#ffffff" }),
+  setInsideMode: (mode) => {
+    const nextMode = mode === "Cardboard" ? "Cardboard" : "White";
+    const nextColor = nextMode === "Cardboard" ? "#c79a63" : "#ffffff";
+    set({ insideMode: nextMode, insideColor: nextColor });
+  },
+  setInsideColor: (color) => set({ insideColor: color || "#ffffff" }),
+  set3dBusy: (busy) => set({ is3dBusy: !!busy }),
+  setEditorActions: (actions) => set({ editorActions: actions || {} }),
 
   // 🔥 UPDATE từ Konva canvas
   updateTextureFromCanvas: (canvas) => {
@@ -70,10 +83,11 @@ export const useUploadTextureStore = create((set, get) => ({
 // 🔥 HELPER (ngoài store)
 const createTextureFromImage = (img, set) => {
   const canvas = document.createElement('canvas');
-  canvas.width = 512;
-  canvas.height = 512;
+  const size = DEFAULT_TEXTURE_SIZE * TEXTURE_SCALE;
+  canvas.width = size;
+  canvas.height = size;
   const ctx = canvas.getContext('2d');
-  ctx.drawImage(img, 0, 0, 512, 512);
+  ctx.drawImage(img, 0, 0, size, size);
   
   const texture = new THREE.CanvasTexture(canvas);
   texture.flipY = false;

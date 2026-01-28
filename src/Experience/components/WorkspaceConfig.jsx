@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Slider } from "antd";
 import { useSelection } from "../../stores/selectionStore";
 import { useUploadTextureStore } from "../../stores/uploadTextureStore";
@@ -10,12 +10,26 @@ import "./WorkspaceConfig.css";
 
 const WorkspaceConfig = () => {
   const { message } = useSelection();
-  const { uploadImage, backgroundColor, setBackgroundColor } = useUploadTextureStore();
+  const {
+    uploadImage,
+    backgroundColor,
+    setBackgroundColor,
+    insideMode,
+    setInsideMode,
+    is3dBusy,
+    editorActions,
+  } = useUploadTextureStore();
   const [foldProgress, setFoldProgress] = useState(20);
+  const foldMax = 150;
+  const [isFoldPlaying, setIsFoldPlaying] = useState(false);
+  const foldDirRef = useRef(1);
+  const lastTickRef = useRef(0);
   const [isSizeOpen, setIsSizeOpen] = useState(true);
   const [is3dOpen, setIs3dOpen] = useState(true);
+  const [is3dExpanded, setIs3dExpanded] = useState(false);
   const [isAdvanceOpen, setIsAdvanceOpen] = useState(true);
   const [isBgOpen, setIsBgOpen] = useState(false);
+  const [isInsideOpen, setIsInsideOpen] = useState(false);
   const bgSwatches = [
     "#ffffff",
     "#f8f9fa",
@@ -64,10 +78,42 @@ const WorkspaceConfig = () => {
     "#94d82d",
     "#d8f5a2",
   ];
+  const insideOptions = [
+    { label: "White", value: "White", color: "#ffffff" },
+    { label: "Cardboard", value: "Cardboard", color: "#c79a63" },
+  ];
+
+  useEffect(() => {
+    if (!isFoldPlaying) return;
+    let raf = 0;
+    const tick = (t) => {
+      if (!lastTickRef.current) lastTickRef.current = t;
+      const dt = (t - lastTickRef.current) / 1000;
+      lastTickRef.current = t;
+      const speed = 35; // units per second
+      setFoldProgress((prev) => {
+        let next = prev + foldDirRef.current * speed * dt;
+        if (next >= foldMax) {
+          next = foldMax;
+          foldDirRef.current = -1;
+        } else if (next <= 0) {
+          next = 0;
+          foldDirRef.current = 1;
+        }
+        return next;
+      });
+      raf = requestAnimationFrame(tick);
+    };
+    raf = requestAnimationFrame(tick);
+    return () => {
+      cancelAnimationFrame(raf);
+      lastTickRef.current = 0;
+    };
+  }, [isFoldPlaying, foldMax]);
 
   return (
     <div className="workspace">
-      <div className="workspace-left">
+      <div className={`workspace-left ${is3dExpanded ? "is-expanded" : ""}`}>
         <div className={`left-section size ${isSizeOpen ? "is-open" : ""}`}>
           <button
             type="button"
@@ -97,24 +143,43 @@ const WorkspaceConfig = () => {
             </svg>
           </button>
           <div className="section-body">
-            <div className="right-viewport">
-              <Experience foldProgress={Math.min(1, Math.max(0, foldProgress / 100))} />
+            <div className={`right-viewport ${is3dExpanded ? "is-expanded" : ""}`}>
+              <button
+                type="button"
+                className="viewport-toggle"
+                onClick={() => setIs3dExpanded((v) => !v)}
+                aria-label={is3dExpanded ? "Collapse 3D view" : "Expand 3D view"}
+                title={is3dExpanded ? "Collapse" : "Expand"}
+              >
+                {is3dExpanded ? "↩" : "↗"}
+              </button>
+              <div className={`right-viewport-shell ${is3dBusy ? "is-busy" : ""}`}>
+                <Experience foldProgress={Math.min(1.5, Math.max(0, foldProgress / 100))} />
+              </div>
             </div>
             <div className="right-fold">
               <h4>Fold</h4>
-              <Slider
-                defaultValue={0}
-                value={foldProgress}
-                onChange={(value) => setFoldProgress(value)}
-                min={0}
-                max={100}
-                step={1}
-                marks={{
-                  0: "0 deg",
-                  50: "45 deg",
-                  100: "90 deg",
-                }}
-              />
+              <div className="fold-row">
+                <Slider
+                  defaultValue={0}
+                  value={foldProgress}
+                  onChange={(value) => setFoldProgress(value)}
+                  min={0}
+                  max={foldMax}
+                  step={1}
+                />
+                <div className="fold-controls">
+                  <button
+                    type="button"
+                    className="fold-btn"
+                    onClick={() => setIsFoldPlaying((v) => !v)}
+                    aria-label={isFoldPlaying ? "Pause" : "Play"}
+                    title={isFoldPlaying ? "Pause" : "Play"}
+                  >
+                    {isFoldPlaying ? "❚❚" : "▶"}
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -145,86 +210,90 @@ const WorkspaceConfig = () => {
 
       <div className="workspace-center">
         <div className="center-toolbar">
-          <label className="btn file-btn">
-            Upload Image
-            <input
-              type="file"
-              accept="image/*"
-              onChange={(e) => {
-                const file = e.target.files?.[0];
-                if (file) uploadImage(file);
-              }}
-            />
-          </label>
-          <div
-            className="btn"
-            style={{ position: "relative", paddingRight: 10, overflow: "visible", zIndex: 20 }}
-          >
-            <button
-              type="button"
-              onClick={() => setIsBgOpen((v) => !v)}
-              style={{
-                display: "inline-flex",
-                alignItems: "center",
-                gap: 8,
-                border: "none",
-                background: "transparent",
-                padding: 0,
-                cursor: "pointer",
-              }}
-            >
-              <span>Background</span>
-              <span
-                style={{
-                  width: 18,
-                  height: 18,
-                  borderRadius: 999,
-                  border: "1px solid #999",
-                  background: backgroundColor || "#ffffff",
-                  display: "inline-block",
+          <div className="toolbar-surface">
+            <label className="toolbar-btn toolbar-upload">
+              Upload
+              <input
+                type="file"
+                accept="image/*"
+                onChange={(e) => {
+                  const file = e.target.files?.[0];
+                  if (file) uploadImage(file);
                 }}
               />
-            </button>
-            {isBgOpen && (
-              <div
-                style={{
-                  position: "absolute",
-                  top: "110%",
-                  left: 0,
-                  background: "#fff",
-                  border: "1px solid #ddd",
-                  borderRadius: 8,
-                  padding: 8,
-                  display: "grid",
-                  gridTemplateColumns: "repeat(10, 20px)",
-                  gap: 6,
-                  boxShadow: "0 8px 20px rgba(0,0,0,0.12)",
-                  zIndex: 30,
-                  maxWidth: 240,
-                }}
+            </label>
+
+            <div className="toolbar-btn toolbar-pop" style={{ overflow: "visible" }}>
+              <button type="button" className="toolbar-trigger" onClick={() => setIsBgOpen((v) => !v)}>
+                <span>Background</span>
+                <span className="toolbar-swatch" style={{ background: backgroundColor || "#ffffff" }} />
+              </button>
+              {isBgOpen && (
+                <div className="toolbar-popover">
+                  {bgSwatches.map((c) => (
+                    <button
+                      key={c}
+                      type="button"
+                      onClick={() => {
+                        setBackgroundColor(c);
+                        setIsBgOpen(false);
+                      }}
+                      title={c}
+                      className={`toolbar-swatch-btn ${c === backgroundColor ? "is-active" : ""}`}
+                      style={{ background: c }}
+                    />
+                  ))}
+                </div>
+              )}
+            </div>
+
+            <div className="toolbar-btn toolbar-pop" style={{ overflow: "visible" }}>
+              <button
+                type="button"
+                className="toolbar-trigger"
+                onClick={() => setIsInsideOpen((v) => !v)}
               >
-                {bgSwatches.map((c) => (
-                  <button
-                    key={c}
-                    type="button"
-                    onClick={() => {
-                      setBackgroundColor(c);
-                      setIsBgOpen(false);
-                    }}
-                    title={c}
-                    style={{
-                      width: 20,
-                      height: 20,
-                      borderRadius: 999,
-                      border: c === backgroundColor ? "2px solid #111" : "1px solid #999",
-                      background: c,
-                      padding: 0,
-                      cursor: "pointer",
-                    }}
-                  />
-                ))}
-              </div>
-            )}
+                <span>Inside</span>
+                <span
+                  className="toolbar-swatch"
+                  style={{
+                    background:
+                      insideOptions.find((o) => o.value === insideMode)?.color || "#ffffff",
+                  }}
+                />
+              </button>
+              {isInsideOpen && (
+                <div className="toolbar-popover" style={{ gridTemplateColumns: "repeat(2, auto)" }}>
+                  {insideOptions.map((opt) => (
+                    <button
+                      key={opt.value}
+                      type="button"
+                      onClick={() => {
+                        setInsideMode(opt.value);
+                        setIsInsideOpen(false);
+                      }}
+                      className={`toolbar-chip ${opt.value === insideMode ? "is-active" : ""}`}
+                    >
+                      <span className="toolbar-swatch" style={{ background: opt.color }} />
+                      <span>{opt.label}</span>
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            <button type="button" className="toolbar-btn" onClick={() => editorActions?.resetImage?.()}>
+              Reset
+            </button>
+            <button type="button" className="toolbar-btn" onClick={() => editorActions?.exportCanvasSvg?.()}>
+              Export SVG
+            </button>
+            <button type="button" className="toolbar-btn" onClick={() => editorActions?.saveTemplate?.()}>
+              Save
+            </button>
+            <button type="button" className="toolbar-btn" onClick={() => editorActions?.loadTemplate?.()}>
+              Load
+            </button>
           </div>
         </div>
         <div className="center-canvas">

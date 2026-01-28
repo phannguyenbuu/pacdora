@@ -4,6 +4,7 @@ import {
   parseTransformOps,
   computePathBounds,
 } from "./svgPathUtils";
+import { DEFAULT_TEXTURE_SIZE } from "../../../constants/texture";
 
 export const fetchSvgData = async (svgPath) => {
   const response = await fetch(svgPath);
@@ -16,8 +17,8 @@ export const fetchSvgData = async (svgPath) => {
   const outerGroup = svgEl?.querySelector("svg > g");
   const outerOps = parseTransformOps(outerGroup?.getAttribute("transform") || "");
   const viewBox = svgEl?.getAttribute("viewBox");
-  let width = Number(svgEl?.getAttribute("width")) || 512;
-  let height = Number(svgEl?.getAttribute("height")) || 512;
+  let width = Number(svgEl?.getAttribute("width")) || DEFAULT_TEXTURE_SIZE;
+  let height = Number(svgEl?.getAttribute("height")) || DEFAULT_TEXTURE_SIZE;
   let minX = 0;
   let minY = 0;
 

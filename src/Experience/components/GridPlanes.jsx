@@ -5,7 +5,7 @@ import { useToggleRoomStore } from "../../stores/toggleRoomStore";
 
 import gsap from "gsap";
 import { useFrame, useThree } from "@react-three/fiber";
-import { OrthographicCamera, Box, useGLTF, ContactShadows, useTexture, Decal } from '@react-three/drei';
+import { OrthographicCamera, Box, ContactShadows, useTexture, Decal } from '@react-three/drei';
 import PointerHighlight from "../PointerHightlight";
 
 import { useSelection, usePointer } from "../../stores/selectionStore";

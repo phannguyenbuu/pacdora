@@ -1,4 +1,5 @@
 // SVG path and geometry utilities for Konva SVG rendering
+import polygonClipping from "polygon-clipping";
 
 export const tokenizePath = (d) =>
   d.match(/[a-zA-Z]|-?\d*\.?\d+(?:e[-+]?\d+)?/g) || [];
@@ -163,6 +164,286 @@ export const pointsToPath = (points, close = true) => {
   if (close) parts.push("Z");
   return parts.join(" ");
 };
+
+const polygonArea = (points) => {
+  let area = 0;
+  for (let i = 0; i < points.length; i += 1) {
+    const p1 = points[i];
+    const p2 = points[(i + 1) % points.length];
+    area += p1.x * p2.y - p2.x * p1.y;
+  }
+  return area / 2;
+};
+
+const lineIntersection = (p1, d1, p2, d2) => {
+  const denom = d1.x * d2.y - d1.y * d2.x;
+  if (Math.abs(denom) < 1e-6) return null;
+  const t = ((p2.x - p1.x) * d2.y - (p2.y - p1.y) * d2.x) / denom;
+  return { x: p1.x + d1.x * t, y: p1.y + d1.y * t };
+};
+
+const offsetPolygonPoints = (points, offset) => {
+  if (points.length < 3) return points;
+  const area = polygonArea(points);
+  const isCCW = area > 0;
+  const edges = points.map((p, i) => {
+    const p2 = points[(i + 1) % points.length];
+    const dx = p2.x - p.x;
+    const dy = p2.y - p.y;
+    const len = Math.hypot(dx, dy) || 1;
+    const dir = { x: dx / len, y: dy / len };
+    const nx = dy / len;
+    const ny = -dx / len;
+    const normal = isCCW ? { x: nx, y: ny } : { x: -nx, y: -ny };
+    return { dir, normal };
+  });
+
+  const result = [];
+  points.forEach((p, i) => {
+    const prevEdge = edges[(i - 1 + edges.length) % edges.length];
+    const nextEdge = edges[i];
+    const p1 = { x: p.x + prevEdge.normal.x * offset, y: p.y + prevEdge.normal.y * offset };
+    const p2 = { x: p.x + nextEdge.normal.x * offset, y: p.y + nextEdge.normal.y * offset };
+
+    const inter = lineIntersection(p1, prevEdge.dir, p2, nextEdge.dir);
+    if (inter) {
+      result.push(inter);
+      return;
+    }
+
+    const mx = prevEdge.normal.x + nextEdge.normal.x;
+    const my = prevEdge.normal.y + nextEdge.normal.y;
+    const mLen = Math.hypot(mx, my) || 1;
+    result.push({ x: p.x + (mx / mLen) * offset, y: p.y + (my / mLen) * offset });
+  });
+
+  return result;
+};
+
+const getPathVertices = (d) => {
+  const segments = parsePath(d);
+  const points = [];
+  let current = { x: 0, y: 0 };
+  let start = { x: 0, y: 0 };
+  segments.forEach((seg) => {
+    const { cmd, values } = seg;
+    if (cmd === "M") {
+      current = { x: values[0], y: values[1] };
+      start = { ...current };
+      points.push({ ...current });
+      return;
+    }
+    if (cmd === "L" || cmd === "T") {
+      current = { x: values[0], y: values[1] };
+      points.push({ ...current });
+      return;
+    }
+    if (cmd === "H") {
+      current = { x: values[0], y: current.y };
+      points.push({ ...current });
+      return;
+    }
+    if (cmd === "V") {
+      current = { x: current.x, y: values[0] };
+      points.push({ ...current });
+      return;
+    }
+    if (cmd === "C") {
+      current = { x: values[4], y: values[5] };
+      points.push({ ...current });
+      return;
+    }
+    if (cmd === "S" || cmd === "Q") {
+      current = { x: values[2], y: values[3] };
+      points.push({ ...current });
+      return;
+    }
+    if (cmd === "A") {
+      current = { x: values[5], y: values[6] };
+      points.push({ ...current });
+      return;
+    }
+    if (cmd === "Z") {
+      if (points.length && (current.x !== start.x || current.y !== start.y)) {
+        points.push({ ...start });
+      }
+    }
+  });
+  return points;
+};
+
+const convexHull = (points) => {
+  if (points.length < 3) return points;
+  const pts = [...points]
+    .map((p) => ({ x: p.x, y: p.y }))
+    .sort((a, b) => (a.x === b.x ? a.y - b.y : a.x - b.x));
+  const cross = (o, a, b) => (a.x - o.x) * (b.y - o.y) - (a.y - o.y) * (b.x - o.x);
+  const lower = [];
+  pts.forEach((p) => {
+    while (lower.length >= 2 && cross(lower[lower.length - 2], lower[lower.length - 1], p) <= 0) {
+      lower.pop();
+    }
+    lower.push(p);
+  });
+  const upper = [];
+  for (let i = pts.length - 1; i >= 0; i -= 1) {
+    const p = pts[i];
+    while (upper.length >= 2 && cross(upper[upper.length - 2], upper[upper.length - 1], p) <= 0) {
+      upper.pop();
+    }
+    upper.push(p);
+  }
+  upper.pop();
+  lower.pop();
+  return lower.concat(upper);
+};
+
+export const buildOffsetPath = (d, offset) => {
+  const segments = parsePath(d);
+  const points = [];
+  let current = { x: 0, y: 0 };
+  let start = { x: 0, y: 0 };
+
+  segments.forEach((seg) => {
+    const { cmd, values } = seg;
+    if (cmd === "M") {
+      current = { x: values[0], y: values[1] };
+      start = { ...current };
+      points.push({ ...current });
+      return;
+    }
+    if (cmd === "L" || cmd === "T") {
+      current = { x: values[0], y: values[1] };
+      points.push({ ...current });
+      return;
+    }
+    if (cmd === "H") {
+      current = { x: values[0], y: current.y };
+      points.push({ ...current });
+      return;
+    }
+    if (cmd === "V") {
+      current = { x: current.x, y: values[0] };
+      points.push({ ...current });
+      return;
+    }
+    if (cmd === "C") {
+      current = { x: values[4], y: values[5] };
+      points.push({ ...current });
+      return;
+    }
+    if (cmd === "S" || cmd === "Q") {
+      current = { x: values[2], y: values[3] };
+      points.push({ ...current });
+      return;
+    }
+    if (cmd === "A") {
+      current = { x: values[5], y: values[6] };
+      points.push({ ...current });
+      return;
+    }
+    if (cmd === "Z") {
+      if (points.length && (current.x !== start.x || current.y !== start.y)) {
+        points.push({ ...start });
+      }
+    }
+  });
+
+  if (points.length < 3) return "";
+  const deduped = [];
+  points.forEach((p) => {
+    const last = deduped[deduped.length - 1];
+    if (!last || last.x !== p.x || last.y !== p.y) deduped.push(p);
+  });
+  if (deduped.length > 1) {
+    const first = deduped[0];
+    const last = deduped[deduped.length - 1];
+    if (first.x === last.x && first.y === last.y) {
+      deduped.pop();
+    }
+  }
+  if (deduped.length < 3) return "";
+  const cleaned = [];
+  for (let i = 0; i < deduped.length; i += 1) {
+    const prev = deduped[(i - 1 + deduped.length) % deduped.length];
+    const curr = deduped[i];
+    const next = deduped[(i + 1) % deduped.length];
+    const v1x = curr.x - prev.x;
+    const v1y = curr.y - prev.y;
+    const v2x = next.x - curr.x;
+    const v2y = next.y - curr.y;
+    const cross = v1x * v2y - v1y * v2x;
+    if (Math.abs(cross) > 1e-6) cleaned.push(curr);
+  }
+  if (cleaned.length < 3) return "";
+  const offsetPts = offsetPolygonPoints(cleaned, offset);
+  return pointsToPath(offsetPts, true);
+};
+
+export const buildUnionOutlinePath = (groups, offset) => {
+  if (!groups?.length) return "";
+  const polygons = [];
+  groups.forEach((group) => {
+    group.paths.forEach((p) => {
+      const offsetPath = buildOffsetPath(p.d, offset);
+      if (!offsetPath) return;
+      const pts = getPathVertices(offsetPath);
+      if (pts.length < 3) return;
+      const ring = [];
+      pts.forEach((pt) => {
+        const last = ring[ring.length - 1];
+        if (!last || last[0] !== pt.x || last[1] !== pt.y) {
+          ring.push([pt.x, pt.y]);
+        }
+      });
+      if (ring.length > 2) {
+        const first = ring[0];
+        const last = ring[ring.length - 1];
+        if (first[0] === last[0] && first[1] === last[1]) {
+          ring.pop();
+        }
+      }
+      if (ring.length >= 3) {
+        polygons.push([ring]);
+      }
+    });
+  });
+  if (!polygons.length) return "";
+
+  const ringArea = (ring) => {
+    let area = 0;
+    for (let i = 0; i < ring.length; i += 1) {
+      const [x1, y1] = ring[i];
+      const [x2, y2] = ring[(i + 1) % ring.length];
+      area += x1 * y2 - x2 * y1;
+    }
+    return area / 2;
+  };
+
+  try {
+    const unioned = polygonClipping.union(...polygons);
+    if (!unioned?.length) return "";
+    let bestRing = null;
+    let bestArea = -Infinity;
+    unioned.forEach((poly) => {
+      if (!poly?.length) return;
+      const outer = poly[0];
+      if (!outer || outer.length < 3) return;
+      const area = Math.abs(ringArea(outer));
+      if (area > bestArea) {
+        bestArea = area;
+        bestRing = outer;
+      }
+    });
+    if (!bestRing) return "";
+    const pts = bestRing.map(([x, y]) => ({ x, y }));
+    return pointsToPath(pts, true);
+  } catch (err) {
+    console.warn("outline union failed:", err);
+    return "";
+  }
+};
+
 
 export const parseTransformOps = (transform) => {
   if (!transform) return [];

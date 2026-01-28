@@ -97,3 +97,71 @@ Project nay la mot cong cu cau hinh hop 3D: dieu chinh kich thuoc, gap hop theo 
 asset_base_id:d9eb0dc3-7266-47f7-9f85-15525a8398b3 asset_type:scene
 asset_base_id:5fa7966c-0957-4e99-bb32-c30f40479394 asset_type:scene
 asset_base_id:02d29819-dad1-4520-b106-80a7cf814009 asset_type:scene
+
+
+
+
+
+
+Dưới đây là “xương sống” của folding GLB trong project bạn, dựa đúng code hiện tại.
+
+1) Từ lúc load file
+
+GLB được load ở BoxSample.jsx.
+Khi slider đổi size, scene được “resize” qua resizeScene(...), rồi clone(true) để đưa sang folding.
+Folding thật sự diễn ra trong FoldRenderer ở FoldModule.jsx.
+2) Cách chia các “mốc thời gian” (stage)
+
+Mỗi stage chiếm 1/8 timeline: hàm getStageProgress(stageIndex, progress) trong FoldModule.jsx.
+Trong buildFoldScene(...), các stage được lấy như:
+stage1, stage2, stage5, stage6, stage7, stage8
+Mapping stage → nhóm:
+F dùng stage1
+C dùng stage2
+D dùng stage5
+E dùng stage6
+B dùng stage7
+A dùng stage8
+3) Xác định group & pivot (tâm xoay)
+Có 2 kiểu:
+
+A) Nhóm thường A/B/C/F: createFoldGroup(...)
+
+Thu mesh theo prefix:
+trái: prefix + "1"
+phải: prefix + "3"
+pivot: prefix + "2"
+Sau đó:
+đặt vị trí theo rule resize (foldObj(...))
+gom vào foldGroup
+áp “pivot tại minZ / maxZ” bằng applyMinZPivot(...)
+xoay group theo trục X hoặc Z (thường là X) với góc tối đa 90°.
+B) Nhóm đặc biệt D/E: createThreeStageFoldGroup(...)
+
+Đây là folding nhiều cấp (3 stage trong 1 nhóm).
+Ý tưởng:
+Tạo dPivot (pivot ngoài cùng)
+Stage 2: tạo d12RotationGroup (xoay D1+D2 quanh mép)
+Stage 3: tạo d1RotationGroup (xoay D1 quanh mép nhỏ hơn)
+Pivot được tính từ bbox world/local của các mesh con.
+4) Quan hệ giữa các group (nesting)
+Trong buildFoldScene(...):
+
+B chứa A: sideGroupB.add(lidGroupA)
+C chứa B: sideGroupC.add(sideGroupB)
+Rồi add vào scene:
+F, C, D, E
+Tức là: A ⊂ B ⊂ C, còn D/E/F là nhánh riêng.
+5) Thời điểm xoay (ai xoay khi nào)
+
+Theo stage như mục (2):
+F bắt đầu sớm (stage1)
+C tiếp theo (stage2)
+D/E ở giữa (stage5/6)
+B gần cuối (stage7)
+A cuối cùng (stage8)
+Mỗi nhóm xoay tối đa 90° (Math.PI / 2).
+Nếu bạn muốn, mình có thể:
+
+liệt kê “pivot cụ thể” theo từng nhóm A/B/C/F/D/E ngay từ bbox, và
+vẽ sơ đồ stage theo trục thời gian (0→1) để bạn bám sang SVG.

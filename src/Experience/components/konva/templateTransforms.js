@@ -248,7 +248,9 @@ export const applyTemplateTransforms = ({
   boxLength,
   boxHeight,
   boxDepth,
+  scaleHeight: scaleHeightOverride,
   getRuleForChild,
+  setMessage,
 }) => {
   if (!svgGroups.length) return [];
 
@@ -278,11 +280,11 @@ export const applyTemplateTransforms = ({
   const scaleLengthBase = baseOriginal2d.z > 0 ? boxLength / baseOriginal2d.z : 1;
   const baseDeltaX = (boxWidth - baseOriginal2d.x) * MM_FACTOR;
   const baseDeltaLen = (boxLength - baseOriginal2d.z) * MM_FACTOR;
-  const baseDeltaHeight = (boxHeight - baseOriginal2d.y) * MM_FACTOR;
 
   const scaleWidth = baseOriginal2d.x > 0 ? boxWidth / baseOriginal2d.x : 1;
   const scaleLength = baseOriginal2d.z > 0 ? boxLength / baseOriginal2d.z : 1;
-  const scaleHeight = baseOriginal2d.y > 0 ? boxHeight / baseOriginal2d.y : 1;
+  const computedScaleHeight = baseOriginal2d.y > 0 ? boxHeight / baseOriginal2d.y : 1;
+  const scaleHeight = scaleHeightOverride ?? computedScaleHeight;
   const baseDepth = defaultConfig?.room?.door ?? 1;
   const depthTarget = (boxDepth ?? baseDepth) * 3;
   const scaleDepth = baseDepth > 0 ? depthTarget / baseDepth : 1;
@@ -300,12 +302,12 @@ export const applyTemplateTransforms = ({
 
     const deltaX = baseDeltaX;
     const deltaLen = baseDeltaLen;
-    const deltaHeight = baseDeltaHeight;
-    const deltaY = isHeightFoldPanel(group.id) ? deltaHeight : deltaLen;
+    const deltaY = isHeightFoldPanel(group.id) ? 0 : deltaLen;
     const centerX = baseCenterX;
     const centerY = isHeightFoldPanel(group.id) ? heightCenter : baseCenterY;
     const rules = getRuleForChild(group.id || "", resizeConfig.resizeRules);
     const ruleZ = isHeightFoldPanel(group.id) ? rules.Y : rules.Z;
+    const heightScalePivot = resolvePivot(group.id, group.bounds, baseCenterX);
 
     const oBehavior = templateRules.behaviors?.O || {};
     const effectiveDeltaY = group.id === "O" && oBehavior.disableDeltaY ? 0 : deltaY;
@@ -314,7 +316,7 @@ export const applyTemplateTransforms = ({
     const nextPaths = group.paths.map((path) => {
       if (group.id === "B2") {
         const baseAvgY = (group.bounds.minY + group.bounds.maxY) / 2;
-        const shiftY = deltaHeight;
+        const shiftY = (scaleHeight - 1) * heightBaseSvg;
         return {
           ...path,
           d: transformPathWithAdjust(
@@ -340,61 +342,25 @@ export const applyTemplateTransforms = ({
         };
       }
 
-      if (group.id === "A2") {
-        const baseAvgY = (group.bounds.minY + group.bounds.maxY) / 2;
+      const baseTransformed = transformPath(path.d, {
+        transformOps: group.transformOps || [],
+        centerX,
+        centerY,
+        deltaX,
+        deltaY: effectiveDeltaY,
+        ruleX: rules.X,
+        ruleZ: effectiveRuleZ,
+        invertZ: isHeightFoldPanel(group.id),
+      });
+
+      if (isHeightFoldPanel(group.id)) {
         return {
           ...path,
-          d: transformPathWithAdjust(
-            path.d,
-            {
-              transformOps: group.transformOps || [],
-              centerX,
-              centerY,
-              deltaX,
-              deltaY: 0,
-              ruleX: rules.X,
-              ruleZ: null,
-              invertZ: false,
-            },
-            (pt) => (pt.y < baseAvgY ? { x: pt.x, y: pt.y - deltaHeight } : pt)
-          ),
+          d: scalePath(baseTransformed, 1, scaleHeight, heightScalePivot.x, heightScalePivot.y),
         };
       }
 
-      if (group.id === "F2") {
-        const baseAvgY = (group.bounds.minY + group.bounds.maxY) / 2;
-        return {
-          ...path,
-          d: transformPathWithAdjust(
-            path.d,
-            {
-              transformOps: group.transformOps || [],
-              centerX,
-              centerY,
-              deltaX,
-              deltaY: 0,
-              ruleX: rules.X,
-              ruleZ: null,
-              invertZ: false,
-            },
-            (pt) => (pt.y > baseAvgY ? { x: pt.x, y: pt.y + deltaHeight } : pt)
-          ),
-        };
-      }
-
-      return {
-        ...path,
-        d: transformPath(path.d, {
-          transformOps: group.transformOps || [],
-          centerX,
-          centerY,
-          deltaX,
-          deltaY: effectiveDeltaY,
-          ruleX: rules.X,
-          ruleZ: effectiveRuleZ,
-          invertZ: isHeightFoldPanel(group.id),
-        }),
-      };
+      return { ...path, d: baseTransformed };
     });
 
     if (group.id === "O" && scaleLengthBase !== 1) {
@@ -420,11 +386,35 @@ export const applyTemplateTransforms = ({
 
   const b2Bounds = boundsById.B2;
   const oBoundsAfter = boundsById.O;
-  const a2AlignDy = b2Bounds && boundsById.A2 ? b2Bounds.minY - boundsById.A2.maxY : 0;
+  const a2TopY = boundsById.A2
+    ? boundsById.A2.maxY + (b2Bounds ? b2Bounds.minY - boundsById.A2.maxY : 0)
+    : null;
+  const c2TopY = boundsById.C2 ? boundsById.C2.maxY : null;
+  const c2BottomY = boundsById.C2 ? boundsById.C2.minY : null;
+  if (boundsById.A2 || boundsById.A1) {
+    const lines = [];
+    if (a2TopY !== null) {
+      const value = Number.isFinite(a2TopY) ? a2TopY.toFixed(4) : a2TopY;
+      lines.push(`A2.top=${value}`);
+    }
+    if (boundsById.A1) {
+      const value = Number.isFinite(boundsById.A1.minY) ? boundsById.A1.minY.toFixed(4) : boundsById.A1.minY;
+      lines.push(`A1.bottom=${value}`);
+    }
+    if (lines.length) {
+      const msg = lines.join("\n");
+      if (typeof setMessage === "function") {
+        setMessage((prev) => (prev ? `${prev}\n${msg}` : msg));
+      } else {
+        console.log(msg);
+      }
+    }
+  }
   const f2Dy = oBoundsAfter && boundsById.F2 ? oBoundsAfter.maxY - boundsById.F2.minY : 0;
   const f2TargetCenterY = boundsById.F2
     ? (boundsById.F2.minY + boundsById.F2.maxY) / 2 + f2Dy
     : null;
+  const f2TopY = boundsById.F2 ? boundsById.F2.maxY + f2Dy : null;
 
   const dBehavior = templateRules.behaviors?.D || {};
   const eBehavior = templateRules.behaviors?.E || {};
@@ -456,13 +446,16 @@ export const applyTemplateTransforms = ({
       const pivot = resolvePivot(group.id, bounds, baseCenterX);
       const { sx, sy } = resolveScales(group.id, scaleRefs);
       const dx = group.id === "A1" ? -baseDeltaX / 2 : baseDeltaX / 2;
-      const dy = a2AlignDy;
+      const scaledPaths = group.paths.map((p) => ({
+        ...p,
+        d: scalePath(p.d, sx, sy, pivot.x, pivot.y),
+      }));
+      const scaledBounds = computeGroupBounds(scaledPaths);
+      const dy =
+        a2TopY !== null ? a2TopY - 0.677 * scaleHeight - scaledBounds.maxY : 0;
       return {
         ...group,
-        paths: group.paths.map((p) => {
-          const scaled = scalePath(p.d, sx, sy, pivot.x, pivot.y);
-          return { ...p, d: translatePath(scaled, dx, dy) };
-        }),
+        paths: scaledPaths.map((p) => ({ ...p, d: translatePath(p.d, dx, dy) })),
       };
     }
 
@@ -525,12 +518,16 @@ export const applyTemplateTransforms = ({
       const pivot = resolvePivot(group.id, bounds, baseCenterX);
       const { sx, sy } = resolveScales(group.id, scaleRefs);
       const dx = group.id === "C1" ? -baseDeltaX / 2 : baseDeltaX / 2;
+      const scaledPaths = group.paths.map((p) => ({
+        ...p,
+        d: scalePath(p.d, sx, sy, pivot.x, pivot.y),
+      }));
+      const scaledBounds = computeGroupBounds(scaledPaths);
+      const dy =
+        c2BottomY !== null ? c2BottomY + 0.677 * scaleHeight - scaledBounds.minY : 0;
       return {
         ...group,
-        paths: group.paths.map((p) => {
-          const scaled = scalePath(p.d, sx, sy, pivot.x, pivot.y);
-          return { ...p, d: translatePath(scaled, dx, 0) };
-        }),
+        paths: scaledPaths.map((p) => ({ ...p, d: translatePath(p.d, dx, dy) })),
       };
     }
 
@@ -544,8 +541,7 @@ export const applyTemplateTransforms = ({
         d: scalePath(p.d, sx, sy, pivot.x, pivot.y),
       }));
       const scaledBounds = computeGroupBounds(scaledPaths);
-      const scaledCenterY = (scaledBounds.minY + scaledBounds.maxY) / 2;
-      const dy = f2TargetCenterY !== null ? f2TargetCenterY - scaledCenterY : f2Dy;
+      const dy = f2TopY !== null ? f2TopY - scaledBounds.maxY : f2Dy;
       return {
         ...group,
         paths: scaledPaths.map((p) => ({ ...p, d: translatePath(p.d, dx, dy) })),
