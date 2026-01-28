@@ -22,6 +22,7 @@ const KonvaTextureEditor = ({ svgPath = null, inline = false }) => {
     setBackgroundColor,
     setEditorActions,
     set3dBusy,
+    setPiecesDataUrls,
   } =
     useUploadTextureStore();
   const { setMessage } = useSelection();
@@ -556,16 +557,18 @@ const KonvaTextureEditor = ({ svgPath = null, inline = false }) => {
     try {
       const pieces = cropPiecesToDataUrls();
       if (!pieces) return;
-      await fetch(apiUrl("/api/pieces"), {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ pieces }),
-      });
+      // Backend save disabled: use in-memory piece textures instead.
+      // await fetch(apiUrl("/api/pieces"), {
+      //   method: "POST",
+      //   headers: { "Content-Type": "application/json" },
+      //   body: JSON.stringify({ pieces }),
+      // });
+      setPiecesDataUrls(pieces);
     } catch (err) {
       // Backend is optional during dev; avoid breaking interaction.
       console.warn("piece export failed:", err);
     }
-  }, [cropPiecesToDataUrls]);
+  }, [cropPiecesToDataUrls, setPiecesDataUrls]);
 
   useEffect(() => {
     sendPiecesToBackendRef.current = sendPiecesToBackend;

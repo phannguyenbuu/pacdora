@@ -14,6 +14,7 @@ export const useUploadTextureStore = create((set, get) => ({
   insideColor: "#c79a63",
   is3dBusy: false,
   editorActions: {},
+  piecesDataUrls: {},
 
   // 🔥 GETTER cho BoxSample
   getCurrentTexture: () => get().currentTexture,
@@ -56,6 +57,11 @@ export const useUploadTextureStore = create((set, get) => ({
   setInsideColor: (color) => set({ insideColor: color || "#ffffff" }),
   set3dBusy: (busy) => set({ is3dBusy: !!busy }),
   setEditorActions: (actions) => set({ editorActions: actions || {} }),
+  setPiecesDataUrls: (pieces) =>
+    set({
+      piecesDataUrls: pieces || {},
+      textureKey: Date.now(),
+    }),
 
   // 🔥 UPDATE từ Konva canvas
   updateTextureFromCanvas: (canvas) => {

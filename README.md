@@ -1,3 +1,7 @@
+scp -r dist/* root@31.97.76.62:/var/www/pacdora
+@baoLong0511
+
+
 # Pacdora - 3D Box Configurator (Vite + React + R3F)
 
 Project nay la mot cong cu cau hinh hop 3D: dieu chinh kich thuoc, gap hop theo "fold progress", va gan texture tu anh upload. UI gom 3 cot: thong so kich thuoc (left), texture editor 2D (center), va view 3D (right).

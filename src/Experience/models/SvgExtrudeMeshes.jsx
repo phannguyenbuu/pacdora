@@ -110,6 +110,7 @@ export default function SvgExtrudeMeshes({
   const textureKey = useUploadTextureStore((s) => s.textureKey);
   const backgroundColor = useUploadTextureStore((s) => s.backgroundColor);
   const insideColor = useUploadTextureStore((s) => s.insideColor);
+  const piecesDataUrls = useUploadTextureStore((s) => s.piecesDataUrls);
   const [svgGroups, setSvgGroups] = useState([]);
   const textureCacheRef = useRef(new Map());
   const materialCacheRef = useRef(new Map());
@@ -234,10 +235,10 @@ export default function SvgExtrudeMeshes({
     const loader = new THREE.TextureLoader();
     transformedGroups.forEach((group) => {
       if (!group.id || textureCacheRef.current.has(group.id)) return;
-      const bust = textureKey ? `?v=${textureKey}` : "";
-      const url = `${apiUrl(`/output/${group.id}.png`)}${bust}`;
+      const dataUrl = piecesDataUrls?.[group.id];
+      if (!dataUrl) return;
       loader.load(
-        url,
+        dataUrl,
         (tex) => {
           const img = tex.image;
           if (img?.width && img?.height) {
@@ -268,7 +269,7 @@ export default function SvgExtrudeMeshes({
         }
       );
     });
-  }, [textureKey, transformedGroups, backgroundColor]);
+  }, [textureKey, transformedGroups, backgroundColor, piecesDataUrls]);
 
   const getMaterialForId = (id) => {
     const tex =
